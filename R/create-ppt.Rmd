@@ -1,0 +1,111 @@
+---
+params:
+  save_params_as: "params.Rds"
+
+  # Introduction
+  title: TRUE
+
+  # People and place
+  title_people_and_place: TRUE
+
+  # Best start in life
+  title_best_start_in_life: TRUE
+  
+  # Living well
+  title_living_well: TRUE
+  
+  # Healthy ageing
+  title_health_ageing: TRUE
+  
+  # Healthy places
+  title_ageing_well: TRUE
+---
+
+```{r settings}
+
+# set working directory
+setwd(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/projects_git/JHWBS-profiles/R"))
+
+# Save dataset
+save_dataset <- TRUE
+
+# Do you want to load the lookup and data files
+load_files <- TRUE
+
+ward_name <- NULL
+ward_code <- NULL
+
+# Version number
+version_num <- 0.1
+
+# Load required packages
+library(officer)
+
+# Warning options
+options(warn = 1) ## Show warnings as they occur, useful for finding and dealing with them.
+options(scipen = 999) # Turn scientific notion off
+
+# System time
+t1 <- Sys.time()
+
+# ---- PowerPoint template ----
+
+# Open connection to pptx file
+mydoc <- read_pptx(path = paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/References/Templates/RBWM-PHI-profiles-template.pptx"))
+
+# slide number
+slide_num <- 0
+
+ph_copyright <- paste0("Version ", format(version_num, nsmall = 1), " \uA9 RBWM Public Health Team, ", format(Sys.Date(), "%d/%m/%Y"))
+
+## Save the parameters in case we want to use them in a script
+save_params_as <- params$save_params_as
+saveRDS(params, file = save_params_as)
+
+report_params <- params
+
+## Choose which slides to include
+
+# Introduction
+incl_title <- report_params$title
+
+# Create empty data frame for summary table
+summary <- data.frame(indicator = character(), 
+                      comparison = character(), 
+                      slide = numeric(), stringsAsFactors = FALSE) 
+
+# Create empty data frame for dataset
+dataset <- data.frame()
+
+```
+
+```{r title, eval = incl_title}
+
+slide_num <- slide_num + 1
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = paste0("The Royal Borough of Windsor \u0026 Maidenhead Health and Wellbeing profile"))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "subtitle"),
+                 value = paste0("Public Health ", format(Sys.Date(), "%d/%m/%Y")))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
+          value = paste0("Version ", format(version_num, nsmall = 1)))
+  
+```
+
+``` {r finish.code}
+
+outfile <- paste0("../output/RBWM-HWB-profile-", format(version_num, nsmall = 1), ".pptx")
+print(mydoc, target = outfile)
+
+# Save dataset
+if(save_dataset == TRUE){
+  saveRDS(dataset, paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/Profiles/JHWBS profile/RBWM-JWHBS-data-", format(version_num, nsmall = 1),".Rds"))
+}
+
+t2 <- Sys.time()
+duration <- difftime(t2, t1, units = "secs")
+status.log(paste("This took", duration, "seconds"))
+
+```
