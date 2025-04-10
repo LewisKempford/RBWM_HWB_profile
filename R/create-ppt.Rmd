@@ -80,6 +80,9 @@ summary <- data.frame(indicator = character(),
 # Create empty data frame for dataset
 dataset <- data.frame()
 
+# ---- Data ----
+pop_la <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Population/Population estimates/Local authority/processed data/ons-la-pop.Rds"))
+
 ```
 
 ```{r title, eval = incl_title}
