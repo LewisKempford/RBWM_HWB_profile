@@ -87,7 +87,7 @@ dataset <- data.frame()
 slide_num <- slide_num + 1
 
 # Add slide
-mydoc <- add_slide(mydoc, layout = "title", master = "PHI profiles")
+mydoc <- add_slide(mydoc, layout = "title logo", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
                  value = paste0("The Royal Borough of Windsor \u0026 Maidenhead Health and Wellbeing profile"))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "subtitle"),
