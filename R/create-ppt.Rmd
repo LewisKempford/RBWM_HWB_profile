@@ -69,6 +69,9 @@ report_params <- params
 # Introduction
 incl_title <- report_params$title
 
+# People and place
+incl_title_people_and_place<- report_params$title_people_and_place
+
 # Create empty data frame for summary table
 summary <- data.frame(indicator = character(), 
                       comparison = character(), 
@@ -89,8 +92,30 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
                  value = paste0("The Royal Borough of Windsor \u0026 Maidenhead Health and Wellbeing profile"))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "subtitle"),
                  value = paste0("Public Health ", format(Sys.Date(), "%d/%m/%Y")))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
-          value = paste0("Version ", format(version_num, nsmall = 1)))
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+  
+```
+
+```{r title.people.and.place, eval = incl_title.people.and.place}
+
+# ---- People and place ----
+slide_num <- slide_num + 1
+theme <- NULL
+title <- paste0("People and Place")
+short_title <- NULL
+
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
   
 ```
 
@@ -106,6 +131,6 @@ if(save_dataset == TRUE){
 
 t2 <- Sys.time()
 duration <- difftime(t2, t1, units = "secs")
-status.log(paste("This took", duration, "seconds"))
+# status.log(paste("This took", duration, "seconds"))
 
 ```
