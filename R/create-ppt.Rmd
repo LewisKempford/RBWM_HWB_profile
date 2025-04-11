@@ -135,6 +135,7 @@ short_title <- NULL
 
 # Outputs
 pop_pyramid <- plot_pop_pyramid(data = pop_la)
+pop_comp <- plot_pop_area_comp_eng(data = pop_la)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "two content", master = "PHI profiles")
@@ -146,6 +147,8 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"),
                  value = copyright)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content left"), 
                  value = pop_pyramid$plot, alt_text = pop_pyramid$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right"), 
+                 value = pop_comp$plot, alt_text = pop_comp$alt_text)
 
 ```
 
