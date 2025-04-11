@@ -7,6 +7,7 @@ params:
 
   # People and place
   title_people_and_place: TRUE
+  population: TRUE
 
   # Best start in life
   title_best_start_in_life: TRUE
@@ -40,6 +41,7 @@ version_num <- 0.1
 
 # Load required packages
 library(officer)
+library(phiTools)
 
 # Warning options
 options(warn = 1) ## Show warnings as they occur, useful for finding and dealing with them.
@@ -56,7 +58,7 @@ mydoc <- read_pptx(path = paste0("C:/Users/", Sys.getenv("username"), "/OneDrive
 # slide number
 slide_num <- 0
 
-ph_copyright <- paste0("Version ", format(version_num, nsmall = 1), " \uA9 RBWM Public Health Team, ", format(Sys.Date(), "%d/%m/%Y"))
+copyright <- paste0("Version ", format(version_num, nsmall = 1), " \uA9 RBWM Public Health Team, ", format(Sys.Date(), "%d/%m/%Y"))
 
 ## Save the parameters in case we want to use them in a script
 save_params_as <- params$save_params_as
@@ -71,6 +73,7 @@ incl_title <- report_params$title
 
 # People and place
 incl_title_people_and_place<- report_params$title_people_and_place
+incl_population <- report_params$population
 
 # Create empty data frame for summary table
 summary <- data.frame(indicator = character(), 
@@ -102,7 +105,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"),
   
 ```
 
-```{r title.people.and.place, eval = incl_title.people.and.place}
+```{r title_people_and_place, eval = incl_title_people_and_place}
 
 # ---- People and place ----
 slide_num <- slide_num + 1
@@ -120,6 +123,30 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
   
+```
+
+```{r population, eval = incl_population}
+
+# ---- People and place ----
+slide_num <- slide_num + 1
+theme <- NULL
+title <- paste0("Population")
+short_title <- NULL
+
+# Outputs
+pop_pyramid <- plot_pop_pyramid(data = pop_la)
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "two content", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
+                 value = copyright)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content left"), 
+                 value = pop_pyramid$plot, alt_text = pop_pyramid$alt_text)
+
 ```
 
 ``` {r finish.code}
