@@ -84,7 +84,11 @@ summary <- data.frame(indicator = character(),
 dataset <- data.frame()
 
 # ---- Data ----
+# ONS LA pop estimates
 pop_la <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Population/Population estimates/Local authority/processed data/ons-la-pop.Rds"))
+
+# ONS lsoa pop estimates
+pop_lsoa <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Population/Population estimates/lsoa/processed data/ons-lsoa-pop.Rds"))
 
 ```
 
