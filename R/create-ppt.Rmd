@@ -20,7 +20,7 @@ params:
   title_health_ageing: TRUE
   
   # Healthy places
-  title_ageing_well: TRUE
+  title_healthy_place: TRUE
 ---
 
 ```{r settings}
@@ -78,6 +78,19 @@ incl_title_people_and_place<- report_params$title_people_and_place
 incl_population <- report_params$population
 incl_deprivation <- report_params$deprivation
 
+# Best start in life
+incl_title_best_start_in_life <- report_params$title_best_start_in_life
+
+# Living well
+incl_title_living_well <- report_params$title_living_well
+
+# Healthy ageing
+incl_title_health_ageing <- report_params$title_health_ageing
+
+# Healthy place
+incl_title_healthy_place <- report_params$title_healthy_place
+
+
 # Create empty data frame for summary table
 summary <- data.frame(indicator = character(), 
                       comparison = character(), 
@@ -133,7 +146,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"),
 # ---- People and place ----
 slide_num <- slide_num + 1
 theme <- NULL
-title <- paste0("People and Place")
+title <- paste0("People and place")
 short_title <- NULL
 
 
@@ -150,7 +163,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"),
 
 ```{r population, eval = incl_population}
 
-# ---- People and place ----
 slide_num <- slide_num + 1
 theme <- NULL
 title <- paste0("Population")
@@ -177,7 +189,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right")
 
 ```{r deprivation, eval = incl_deprivation}
 
-# ---- People and place ----
 slide_num <- slide_num + 1
 theme <- NULL
 title <- paste0("Deprivation")
@@ -201,6 +212,86 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content left"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right"), 
                  value = dep_map$ggplot, alt_text = dep_map$alt_text)
 
+```
+
+```{r title_best_start_in_life, eval = incl_title_best_start_in_life}
+
+# ---- Best start in life ----
+slide_num <- slide_num + 1
+theme <- NULL
+title <- paste0("Best start in life")
+short_title <- NULL
+
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+  
+```
+
+```{r title_living_well, eval = incl_title_living_well}
+
+# ---- Living well ----
+slide_num <- slide_num + 1
+theme <- NULL
+title <- paste0("Living well")
+short_title <- NULL
+
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+  
+```
+
+```{r title_health_ageing, eval = incl_title_health_ageing}
+
+# ---- Healthy ageing ----
+slide_num <- slide_num + 1
+theme <- NULL
+title <- paste0("Healthy ageing")
+short_title <- NULL
+
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+  
+```
+
+```{r title_healthy_place, eval = incl_title_healthy_place}
+
+# ---- Healthy ageing ----
+slide_num <- slide_num + 1
+theme <- NULL
+title <- paste0("Healthy place")
+short_title <- NULL
+
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+  
 ```
 
 ``` {r finish.code}
