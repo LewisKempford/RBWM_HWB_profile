@@ -12,6 +12,7 @@ params:
 
   # Best start in life
   title_best_start_in_life: TRUE
+  obesity_reception: TRUE
   
   # Living well
   title_living_well: TRUE
@@ -77,6 +78,7 @@ incl_title <- report_params$title
 incl_title_people_and_place<- report_params$title_people_and_place
 incl_population <- report_params$population
 incl_deprivation <- report_params$deprivation
+incl_obesity_reception <- report_params$obesity_reception
 
 # Best start in life
 incl_title_best_start_in_life <- report_params$title_best_start_in_life
@@ -117,6 +119,9 @@ pop_lsoa <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Roy
 
 # LSOA deprivation
 dep <- data_deprivation_pop(population = pop_lsoa)
+
+#### Fingertips data ####
+fingertips_msoa <- data_fingertips_msoa()
 
 #---- Shape files ----
 #### RBWM LSOAs ####
@@ -232,6 +237,35 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
   
+```
+
+```{r obesity_reception, eval = incl_obesity_reception}
+
+slide_num <- slide_num + 1
+theme <- "TH1"
+
+# https://fingertips.phe.org.uk/profile/local-health/data#page/3/gid/1938133183/pat/402/par/E06000035/ati/8/are/E05002249/iid/93108/age/201/sex/4/cat/-1/ctp/-1/yrr/3/cid/4/tbm/1/page-options/car-do-0
+
+# Metadata
+ind_ID <- 93105
+ind_sex <- "Persons"
+ind_age <- "4-5 yrs"
+title <- paste0("Reception: Prevalence of obesity, ", tolower(ind_sex), ", ", tolower(ind_age))
+short_title <- "Reception: Prevalence of obesity"
+additional_text <- "Obesity: including severe obesity.\n\n"
+notes <- "\nNotes: Due to the impact of COVID-19 on the NCMP data collection, data was not published for the 2018/19-20/21 time period."
+
+value_type <- "Proportion (%)"
+value_type_short <- "%"
+original_geography <- "MSOA"
+CI_level <- 0.95
+confidence_interval_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
+source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+copyright <- "\nCopyright: NHS Digital."
+
+
+
+
 ```
 
 ```{r title_living_well, eval = incl_title_living_well}
