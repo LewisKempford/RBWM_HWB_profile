@@ -39,7 +39,7 @@ ward_name <- NULL
 ward_code <- NULL
 
 # Version number
-version_num <- 0.3
+version_num <- 0.4.1
 
 # Load required packages
 library(officer)
@@ -242,7 +242,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"),
 ```{r obesity_reception, eval = incl_obesity_reception}
 
 slide_num <- slide_num + 1
-theme <- "TH1"
+theme <- NULL
 
 # https://fingertips.phe.org.uk/profile/local-health/data#page/3/gid/1938133183/pat/402/par/E06000035/ati/8/are/E05002249/iid/93108/age/201/sex/4/cat/-1/ctp/-1/yrr/3/cid/4/tbm/1/page-options/car-do-0
 
@@ -261,10 +261,25 @@ original_geography <- "MSOA"
 CI_level <- 0.95
 confidence_interval_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
-copyright <- "\nCopyright: NHS Digital."
 
+x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x <- create_comp_rag(data = x)
 
+latest_value <- plot_latest_value(data = x, value_type = "Proportion (%)")
+latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 
+# Add slide
+mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
+                 value = copyright)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
+                 value = latest_value$plot, alt_text = latest_value$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
+                 value = latest_period, alt_text = latest_period)
 
 ```
 
