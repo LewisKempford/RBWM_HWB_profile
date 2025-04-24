@@ -39,7 +39,7 @@ ward_name <- NULL
 ward_code <- NULL
 
 # Version number
-version_num <- "0.4.2"
+version_num <- "0.4.5"
 
 # Load required packages
 library(officer)
@@ -102,12 +102,19 @@ dataset <- data.frame()
 #---- Data ----
 rbwm_code <- "E06000040"
 
-# england and wales LSOA to ward to las
+# england and wales LSOA to ward to lad
 lsoa_ward_lad <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/References/Geography/ONS Open Geography Portal/Lookups/LSOA to Ward to LAD/LSOA_(2021)_to_Electoral_Ward_(2024)_to_LAD_(2024)_Best_Fit_Lookup_in_EW.csv"))
 
 # RBWM lsoas
 i <- lsoa_ward_lad$LAD24CD == rbwm_code
 rbwm_lsoas <- lsoa_ward_lad$LSOA21CD[i]
+
+# England and Wales MSOA to ward to LAD
+msoa_ward_lad <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/References/Geography/ONS Open Geography Portal/Lookups/MSOA to Ward to LAD/MSOA_(2021)_to_Ward_(2024)_to_LAD_(2024)_Best_Fit_Lookup_in_EW.csv"))
+
+# RBWM MSOAs
+i <- msoa_ward_lad$LAD24CD == rbwm_code
+rbwm_msoas <- msoa_ward_lad$MSOA21CD[i]
 
 # ONS LA pop estimates
 pop_la <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Population/Population estimates/Local authority/processed data/ons-la-pop.Rds"))
@@ -124,6 +131,9 @@ fingertips_msoa <- data_fingertips_msoa()
 #---- Shape files ----
 #### RBWM LSOAs ####
 shp_lsoa <- data_shape_lsoa()
+
+#### MSOAs ####
+shp_msoa <- data_shape_msoa()
 
 ```
 
@@ -268,6 +278,12 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
+area_comp <- plot_area_comparison(data = x, value_type = value_type,
+                                  show_legend = FALSE)
+map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+                         areas_to_map = rbwm_msoas)
+
+metadata <- paste0(text_metadata(value_type, original_geography, confidence_interval_method, source))
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -282,7 +298,11 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
                  value = latest_period, alt_text = latest_period)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$ggplot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
+                 value = area_comp$plot, alt_text = area_comp$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
+                 value = map$plot, alt_text = map$alt_text)
 
 ```
 
