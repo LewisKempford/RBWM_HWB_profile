@@ -39,7 +39,7 @@ ward_name <- NULL
 ward_code <- NULL
 
 # Version number
-version_num <- 0.4.1
+version_num <- "0.4.2"
 
 # Load required packages
 library(officer)
@@ -60,8 +60,6 @@ mydoc <- read_pptx(path = paste0("C:/Users/", Sys.getenv("username"), "/OneDrive
 
 # slide number
 slide_num <- 0
-
-copyright <- paste0("Version ", format(version_num, nsmall = 1), " \uA9 RBWM Public Health Team, ", format(Sys.Date(), "%d/%m/%Y"))
 
 ## Save the parameters in case we want to use them in a script
 save_params_as <- params$save_params_as
@@ -141,7 +139,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "subtitle"),
                  value = paste0("Public Health ", format(Sys.Date(), "%d/%m/%Y")))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
                  value = slide_num)
-mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
   
 ```
@@ -161,7 +159,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
                  value = title)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
                  value = slide_num)
-mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
   
 ```
@@ -183,8 +181,8 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
                  value = title)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
                  value = slide_num)
-mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
-                 value = copyright)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content left"), 
                  value = pop_pyramid$plot, alt_text = pop_pyramid$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right"), 
@@ -210,8 +208,8 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
                  value = title)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
                  value = slide_num)
-mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
-                 value = copyright)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content left"), 
                  value = pop_dep_bar_plot$plot, alt_text = pop_dep_bar_plot$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right"), 
@@ -234,7 +232,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
                  value = title)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
                  value = slide_num)
-mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
   
 ```
@@ -267,19 +265,24 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value(data = x, value_type = "Proportion (%)")
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
+trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+                                   show_comp_legend = FALSE, 
+                                   timeperiod_format = "periods")
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
-                 value = title)
+                 value = short_title)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
                  value = slide_num)
-mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
-                 value = copyright)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
                  value = latest_value$plot, alt_text = latest_value$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
                  value = latest_period, alt_text = latest_period)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
+                 value = trend_plot$ggplot, alt_text = trend_plot$alt_text)
 
 ```
 
@@ -298,7 +301,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
                  value = title)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
                  value = slide_num)
-mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
   
 ```
@@ -318,7 +321,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
                  value = title)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
                  value = slide_num)
-mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
   
 ```
@@ -338,7 +341,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
                  value = title)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
                  value = slide_num)
-mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "copyright"), 
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
   
 ```
