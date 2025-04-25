@@ -12,7 +12,8 @@ params:
 
   # Best start in life
   title_best_start_in_life: TRUE
-  obesity_reception: TRUE
+  reception_obesity: TRUE
+  reception_overweight: TRUE
   
   # Living well
   title_living_well: TRUE
@@ -39,7 +40,7 @@ ward_name <- NULL
 ward_code <- NULL
 
 # Version number
-version_num <- "0.4.6"
+version_num <- 0.5
 
 # Load required packages
 library(officer)
@@ -76,7 +77,8 @@ incl_title <- report_params$title
 incl_title_people_and_place<- report_params$title_people_and_place
 incl_population <- report_params$population
 incl_deprivation <- report_params$deprivation
-incl_obesity_reception <- report_params$obesity_reception
+incl_reception_obesity <- report_params$reception_obesity
+incl_reception_overweight <- report_params$reception_overweight
 
 # Best start in life
 incl_title_best_start_in_life <- report_params$title_best_start_in_life
@@ -247,12 +249,10 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
   
 ```
 
-```{r obesity_reception, eval = incl_obesity_reception}
+```{r reception_obesity, eval = incl_reception_obesity}
 
 slide_num <- slide_num + 1
 theme <- NULL
-
-# https://fingertips.phe.org.uk/profile/local-health/data#page/3/gid/1938133183/pat/402/par/E06000035/ati/8/are/E05002249/iid/93108/age/201/sex/4/cat/-1/ctp/-1/yrr/3/cid/4/tbm/1/page-options/car-do-0
 
 # Metadata
 ind_ID <- 93105
@@ -287,6 +287,74 @@ metadata <- text_metadata(value_type = value_type,
                           original_geography = original_geography, 
                           ci_method = confidence_interval_method,
                           source = source)
+
+# add indicator to master dataset
+dataset <- rbind(dataset, x)
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = short_title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
+                 value = latest_value$plot, alt_text = latest_value$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
+                 value = latest_period, alt_text = latest_period)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
+                 value = area_comp$plot, alt_text = area_comp$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
+                 value = map$plot, alt_text = map$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
+                 value = metadata) 
+
+```
+
+```{r reception_overweight, eval = incl_reception_overweight}
+
+slide_num <- slide_num + 1
+theme <- NULL
+
+# Metadata
+ind_ID <- 93106
+ind_sex <- "Persons"
+ind_age <- "4-5 yrs"
+title <- paste0("Reception: Prevalence of overweight, ", tolower(ind_sex), ", ", tolower(ind_age))
+short_title <- paste0("Reception: Prevalence of overweight (", ind_age, ")")
+additional_text <- "Obesity: including severe overweight\n\n"
+notes <- "\nNotes: Due to the impact of COVID-19 on the NCMP data collection, data was not published for the 2018/19-20/21 time period."
+
+value_type <- "Proportion (%)"
+value_type_short <- "%"
+original_geography <- "MSOA"
+CI_level <- 0.95
+confidence_interval_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
+source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+
+x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x <- create_comp_rag(data = x)
+
+latest_value <- plot_latest_value(data = x, value_type = "Proportion (%)")
+latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
+trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+                                   show_comp_legend = FALSE, 
+                                   timeperiod_format = "periods")
+area_comp <- plot_area_comparison(data = x, value_type = value_type,
+                                  show_legend = FALSE)
+map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+                         areas_to_map = rbwm_msoas)
+
+metadata <- text_metadata(value_type = value_type, 
+                          original_geography = original_geography, 
+                          ci_method = confidence_interval_method,
+                          source = source)
+
+# add indicator to master dataset
+dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
