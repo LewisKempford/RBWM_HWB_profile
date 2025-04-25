@@ -2299,7 +2299,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 
 ``` {r finish.code}
 
-outfile <- paste0("../output/RBWM-HWB-profile-", format(version_num, nsmall = 1), ".pptx")
+outfile <- paste0("../output/RBWM-JLHWB-profile-", format(version_num, nsmall = 1), ".pptx")
 print(mydoc, target = outfile)
 
 # Save dataset
