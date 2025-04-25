@@ -38,6 +38,7 @@ params:
   title_health_ageing: TRUE
   emergency_admiss_hip_fracture: TRUE
   deaths_all_causes: TRUE
+  deaths_under_75: TRUE
   
   # Healthy places
   title_healthy_place: TRUE
@@ -58,7 +59,7 @@ ward_name <- NULL
 ward_code <- NULL
 
 # Version number
-version_num <- 0.22
+version_num <- 0.23
 
 # Load required packages
 library(officer)
@@ -124,6 +125,7 @@ incl_emergency_admiss_self_harm <- report_params$emergency_admiss_self_harm
 incl_title_health_ageing <- report_params$title_health_ageing
 incl_emergency_admiss_hip_fracture <- report_params$emergency_admiss_hip_fracture
 incl_deaths_all_causes <- report_params$deaths_all_causes
+incl_deaths_under_75 <- report_params$deaths_under_75
 
 # Healthy place
 incl_title_healthy_place <- report_params$title_healthy_place
@@ -1601,6 +1603,73 @@ ind_age <- "All ages"
 title <- paste0("Deaths from all causes, ", tolower(ind_sex), ", ",
                 tolower(ind_age))
 short_title <- paste0("Deaths from all causes")
+additional_text <- NULL
+notes <- NULL
+
+value_type <- "Indirectly standardised ratio"
+value_type_short <- "per 100"
+timeperiod <- "periods"
+original_geography <- "MSOA"
+CI_level <- 0.95
+confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+
+x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x <- create_comp_rag(data = x)
+
+latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
+trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+                                   show_comp_legend = FALSE, 
+                                   timeperiod_format = "periods")
+area_comp <- plot_area_comparison(data = x, value_type = value_type,
+                                  show_legend = FALSE)
+map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+                         areas_to_map = rbwm_msoas)
+
+metadata <- text_metadata(value_type = value_type, 
+                          original_geography = original_geography, 
+                          ci_method = confidence_interval_method,
+                          source = source)
+
+# add indicator to master dataset
+dataset <- rbind(dataset, x)
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = short_title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
+                 value = latest_value$plot, alt_text = latest_value$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
+                 value = latest_period, alt_text = latest_period)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
+                 value = area_comp$plot, alt_text = area_comp$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
+                 value = map$plot, alt_text = map$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
+                 value = metadata) 
+
+```
+
+```{r deaths_under_75, eval = incl_deaths_under_75}
+
+slide_num <- slide_num + 1
+theme <- NULL
+
+# Metadata
+ind_ID <- 93252
+ind_sex <- "Persons"
+ind_age <- "Under 75 yrs"
+title <- paste0("Deaths from all causes, ", tolower(ind_sex), ", ",
+                tolower(ind_age))
+short_title <- paste0("Deaths from all causes (", ind_age, ")")
 additional_text <- NULL
 notes <- NULL
 
