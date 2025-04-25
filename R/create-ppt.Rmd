@@ -39,7 +39,7 @@ ward_name <- NULL
 ward_code <- NULL
 
 # Version number
-version_num <- "0.4.5"
+version_num <- "0.4.6"
 
 # Load required packages
 library(officer)
@@ -259,7 +259,7 @@ ind_ID <- 93105
 ind_sex <- "Persons"
 ind_age <- "4-5 yrs"
 title <- paste0("Reception: Prevalence of obesity, ", tolower(ind_sex), ", ", tolower(ind_age))
-short_title <- "Reception: Prevalence of obesity"
+short_title <- paste0("Reception: Prevalence of obesity (", ind_age, ")")
 additional_text <- "Obesity: including severe obesity.\n\n"
 notes <- "\nNotes: Due to the impact of COVID-19 on the NCMP data collection, data was not published for the 2018/19-20/21 time period."
 
@@ -283,7 +283,10 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- paste0(text_metadata(value_type, original_geography, confidence_interval_method, source))
+metadata <- text_metadata(value_type = value_type, 
+                          original_geography = original_geography, 
+                          ci_method = confidence_interval_method,
+                          source = source)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -303,6 +306,8 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas")
                  value = area_comp$plot, alt_text = area_comp$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
                  value = map$plot, alt_text = map$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
+                 value = metadata) 
 
 ```
 
