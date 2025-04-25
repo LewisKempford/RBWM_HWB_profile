@@ -24,6 +24,7 @@ params:
   # Living well
   title_living_well: TRUE
   life_expectancy_females: TRUE
+  life_expectancy_males: TRUE
   unemployment: TRUE
   long_term_unemployment: TRUE
   emergency_admiss_all: TRUE
@@ -56,7 +57,7 @@ ward_name <- NULL
 ward_code <- NULL
 
 # Version number
-version_num <- "0.20"
+version_num <- 0.21
 
 # Load required packages
 library(officer)
@@ -108,6 +109,7 @@ incl_year_6_overweight <- report_params$year_6_overweight
 # Living well
 incl_title_living_well <- report_params$title_living_well
 incl_life_expectancy_females <- report_params$life_expectancy_females
+incl_life_expectancy_males <- report_params$life_expectancy_males
 incl_unemployment <- report_params$unemployment
 incl_long_term_unemployment <- report_params$long_term_unemployment
 incl_emergency_admiss_all <- report_params$emergency_admiss_all
@@ -836,6 +838,74 @@ theme <- NULL
 # Metadata
 ind_ID <- 93283
 ind_sex <- "Female"
+ind_age <- NULL
+title <- paste0("Life expectancy at birth, upper age band 90 and over (",
+                tolower(ind_sex), ")")
+short_title <- paste0("Life expectancy at birth (", ind_sex, ")")
+additional_text <- NULL
+notes <- NULL
+
+value_type <- "Life expetancy (years)"
+value_type_short <- "Years"
+timeperiod <- "periods"
+original_geography <- "MSOA"
+CI_level <- 0.95
+confidence_interval_method <- paste0("Chiang CL (", CI_level * 100,"%)")
+source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+
+x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID & 
+                       fingertips_msoa$Sex == ind_sex, ]
+x <- create_comp_rag(data = x, low_is_good = FALSE)
+
+latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
+trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+                                   show_comp_legend = FALSE, 
+                                   timeperiod_format = timeperiod)
+area_comp <- plot_area_comparison(data = x, value_type = value_type,
+                                  show_legend = FALSE)
+map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+                         areas_to_map = rbwm_msoas)
+
+metadata <- text_metadata(value_type = value_type, 
+                          original_geography = original_geography, 
+                          ci_method = confidence_interval_method,
+                          source = source)
+
+# add indicator to master dataset
+dataset <- rbind(dataset, x)
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
+                 value = latest_value$plot, alt_text = latest_value$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
+                 value = latest_period, alt_text = latest_period)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
+                 value = area_comp$plot, alt_text = area_comp$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
+                 value = map$plot, alt_text = map$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
+                 value = metadata) 
+
+```
+
+```{r life_expectancy_males, eval = incl_life_expectancy_males}
+
+slide_num <- slide_num + 1
+theme <- NULL
+
+# Metadata
+ind_ID <- 93283
+ind_sex <- "Male"
 ind_age <- NULL
 title <- paste0("Life expectancy at birth, upper age band 90 and over (",
                 tolower(ind_sex), ")")
