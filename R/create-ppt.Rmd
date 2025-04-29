@@ -865,7 +865,7 @@ short_title <- paste0("Life expectancy at birth (", ind_sex, ")")
 additional_text <- NULL
 notes <- NULL
 
-value_type <- "Life expetancy (years)"
+value_type <- "Life expectancy (years)"
 value_type_short <- "Years"
 timeperiod <- "periods"
 original_geography <- "MSOA"
