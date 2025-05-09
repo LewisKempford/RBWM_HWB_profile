@@ -2327,7 +2327,7 @@ value_type_short <- "%"
 # timeperiod <- "periods"
 original_geography <- "MSOA"
 #CI_level <- 0.95
-#confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+confidence_interval_method <- paste0("Sample quantiles")
 source <- paste0("Office for National Statistics. Access to gardens and public green space in Great Britain")
 
 x <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/Access to gardens and public green space in Great Britain/MSOA-gardens.csv"))
@@ -2567,14 +2567,14 @@ title <- paste0("Access to public green space (within a five-minute walk)")
 short_title <- paste0("Access to public green space")
 additional_text <- NULL
 notes <- NULL
-caveats <- paste0("Public green space access indicator is restricted to built up areas postcodes only.")
+caveats <- paste0("Public green space access indicator is restricted to built up areas postcodes only")
 
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 # timeperiod <- "periods"
 original_geography <- "Postcode"
 #CI_level <- 0.95
-#confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+confidence_interval_method <- paste0("Sample quantiles")
 source <- paste0("Office for National Statistics. Access to gardens and public green space in Great Britain")
 
 x <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/Access to gardens and public green space in Great Britain/LSOA-Parks-and-Playing-Fields.csv"))
