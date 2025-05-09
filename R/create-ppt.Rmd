@@ -50,8 +50,8 @@ params:
   
   # Healthy places
   title_healthy_place: TRUE
-  access_public_greenspace: TRUE
   access_gardenspace: TRUE
+  access_public_greenspace: TRUE
 ---
 
 ```{r settings}
@@ -69,7 +69,7 @@ ward_name <- NULL
 ward_code <- NULL
 
 # Version number
-version_num <- "0.30"
+version_num <- 0.31
 
 # Load required packages
 library(officer)
@@ -148,8 +148,8 @@ incl_deaths_respiratory <- report_params$deaths_respiratory
 
 # Healthy place
 incl_title_healthy_place <- report_params$title_healthy_place
-incl_access_public_greenspace <- report_params$access_public_greenspace
 incl_access_gardenspace <- report_params$access_gardenspace
+incl_access_public_greenspace <- report_params$access_public_greenspace
 
 
 # Create empty data frame for summary table
@@ -2316,55 +2316,61 @@ theme <- NULL
 # ind_ID <- 
 # ind_sex <- 
 # ind_age <- 
-title <- paste0("Access to public green space (within a five-minute walk)")
-short_title <- paste0("Access to public green space")
+title <- paste0("Access to garden space")
+short_title <- paste0("Access to garden space")
 additional_text <- NULL
 notes <- NULL
-caveats <- paste0("Public green space access indicator is restricted to built up areas postcodes only.")
+#caveats <- NULL
 
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 # timeperiod <- "periods"
-original_geography <- "Postcode"
+original_geography <- "MSOA"
 #CI_level <- 0.95
 #confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for National Statistics. Access to gardens and public green space in Great Britain")
 
-x <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/Access to gardens and public green space in Great Britain/LSOA-Parks-and-Playing-Fields.csv"))
+x <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/Access to gardens and public green space in Great Britain/MSOA-gardens.csv"))
 
-x <- merge(x = x, y = lsoa_ward_lad, by.x = "LSOA.code", by.y = "LSOA21CD", 
-           all.x = TRUE)
-
-ward <- aggregate(cbind(Number.of.built.up.area.postcodes..within.300m.of.a.Park..Public.Garden..or.Playing.Field,
-                        Number.of.postcodes.within.built.up.area) ~ 
-                    WD24CD + WD24NM,
-                  data = x, FUN = sum)
-colnames(ward) <- c("AreaCode", "AreaName", "Count", "Denominator")
-ward$AreaType <- "Ward"
+colnames(x) <- gsub("^X.*", NA, colnames(x))
 
 
-LA <- aggregate(cbind(Number.of.built.up.area.postcodes..within.300m.of.a.Park..Public.Garden..or.Playing.Field,
-                      Number.of.postcodes.within.built.up.area) ~ 
+# Function to fill NA values with the preceding non-NA value
+for (i in 2:ncol(x)) {
+  if (is.na(colnames(x)[i])) {
+    colnames(x)[i] <- colnames(x)[i - 1]
+  }
+}
+
+colnames(x) <- paste0(colnames(x), x[1, ])
+
+x <- x[-1, ]
+
+x$`Property.type..TotalAddress count` <- as.numeric(x$`Property.type..TotalAddress count`)
+x$`Property.type..TotalAdress with private outdoor space count` <- as.numeric(x$`Property.type..TotalAdress with private outdoor space count`)
+
+LA <- aggregate(cbind(`Property.type..TotalAdress with private outdoor space count`,
+                      `Property.type..TotalAddress count`) ~ 
                   LAD.code + LAD.name,
                 data = x, FUN = sum)
 colnames(LA) <- c("AreaCode", "AreaName", "Count", "Denominator")
 LA$AreaType <- "Local authority"
 
 i <- x$Country.code == eng_code
-eng <- aggregate(cbind(Number.of.built.up.area.postcodes..within.300m.of.a.Park..Public.Garden..or.Playing.Field,
-                       Number.of.postcodes.within.built.up.area) ~ 
+eng <- aggregate(cbind(`Property.type..TotalAdress with private outdoor space count`,
+                      `Property.type..TotalAddress count`) ~ 
                    Country.code + Country.name,
                  data = x[i, ], FUN = sum)
 colnames(eng) <- c("AreaCode", "AreaName", "Count", "Denominator")
 eng$AreaType <- "England"
 
-x <- x[, c("LSOA.code", "LSOA.name", 
-           "Number.of.built.up.area.postcodes..within.300m.of.a.Park..Public.Garden..or.Playing.Field",
-           "Number.of.postcodes.within.built.up.area")]
+x <- x[, c("MSOA.code", "MSOA.name", 
+           "Property.type..TotalAdress with private outdoor space count",
+           "Property.type..TotalAddress count")]
 colnames(x) <- c("AreaCode", "AreaName", "Count", "Denominator")
-x$AreaType <- "LSOA"
+x$AreaType <- "MSOA"
 
-x <- rbind(x, ward, LA, eng)
+x <- rbind(x, LA, eng)
 
 x$Value <- x$Count / x$Denominator * 100
 x$Timeperiod <- 2020
@@ -2417,8 +2423,8 @@ x$Colour <- factor(x$Colour, c("#b3c7f7", "#8babf1", "#0073e6", "#0461cf",
 latest_value <- plot_latest_value_quint(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 
-#### RBWM wards ###
-i <- data$AreaCode %in% rbwm_wards
+#### RBWM MSOAs ###
+i <- data$AreaCode %in% rbwm_msoas
 x <- data[i, ]
 
 # Create quintiles for all LSOA data
@@ -2450,51 +2456,29 @@ x$Colour[x$Quintile == "Not compared"] <- "grey"
 x$Colour <- factor(x$Colour, c("#b3c7f7", "#8babf1", "#0073e6", "#0461cf",
                                "#054fb9", "grey"))
 
+i <- fingertips_msoa$AreaType == "MSOA"
+msoa_names <- fingertips_msoa[i, c("AreaCode", "AreaName")]
+msoa_names <- unique(msoa_names)
+colnames(msoa_names) <- c("AreaCode", "MSOAName")
+
+x <- merge(x = x, y = msoa_names, by = "AreaCode", all.x = TRUE)
+
+x$AreaName[x$AreaType == "MSOA"] <- x$MSOAName[x$AreaType == "MSOA"]
+
 area_comp <- plot_area_comparison_quint(data = x, value_type = value_type,
                                         show_ci = FALSE)
 
-#### RBWM lsoas ###
-i <- data$AreaCode %in% rbwm_lsoas
-x <- data[i, ]
-
-# Create quintiles for all LSOA data
-quintiles <- quantile(x$Value, probs = seq(0, 1, by = 0.2), na.rm = TRUE) 
-quintiles[1] <- round_any(quintiles[1], 0.1, f = floor)
-quintiles[2:5] <- round_any(quintiles[2:5], 0.1, f = round)
-quintiles[6] <- round_any(quintiles[6], 0.1, f = ceiling)
-
-x$Quintile <- with(x, cut(Value, breaks = quintiles, include.lowest = TRUE, 
-                          labels = 1:5))
-levels(x$Quintile) <- gsub(",", " - ", levels(x$Quintile))
-# The notation (a - b] means ">a and <=b".
-
-levels(x$Quintile) <- c(levels(x$Quintile), "Not compared")
-x$Quintile[is.na(x$Value)] <- "Not compared"
-
-x$Quintile[x$AreaCode == eng_code] <- "Not compared"
-
-x$Colour <- NA
-x$Colour[x$Quintile == 1] <- "#b3c7f7"
-x$Colour[x$Quintile == 2] <- "#8babf1"
-x$Colour[x$Quintile == 3] <- "#0073e6"
-x$Colour[x$Quintile == 4] <- "#0461cf"
-x$Colour[x$Quintile == 5] <- "#054fb9"
-x$Colour[x$Quintile == "Not compared"] <- "grey"
-
-x$Colour <- factor(x$Colour, c("#b3c7f7", "#8babf1", "#0073e6", "#0461cf",
-                               "#054fb9", "grey"))
-
-
-map <- map_quintile_indicator(data = x, shape_file = shp_lsoa, 
-                              areas_to_map = rbwm_lsoas)
+map <- map_quintile_indicator(data = x, shape_file = shp_msoa, 
+                              areas_to_map = rbwm_msoas)
 
 trend_plot <- paste0("No trend data available.")
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
                           ci_method = confidence_interval_method,
-                          source = source,
-                          caveats = caveats)
+                          source = source)
+metadata <- paste0("Definition: Addresses with a private outdoor space or shared garden.\n",
+                   metadata)
 
 # add indicator to master dataset
 #dataset <- rbind(dataset, x)
