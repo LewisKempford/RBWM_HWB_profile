@@ -50,6 +50,8 @@ params:
   
   # Healthy places
   title_healthy_place: TRUE
+  access_public_greenspace: TRUE
+  access_gardenspace: TRUE
 ---
 
 ```{r settings}
@@ -67,12 +69,13 @@ ward_name <- NULL
 ward_code <- NULL
 
 # Version number
-version_num <- 0.29
+version_num <- "0.30"
 
 # Load required packages
 library(officer)
 library(phiTools)
 library(sf)
+library(plyr)
 
 # Warning options
 options(warn = 1) ## Show warnings as they occur, useful for finding and dealing with them.
@@ -145,6 +148,8 @@ incl_deaths_respiratory <- report_params$deaths_respiratory
 
 # Healthy place
 incl_title_healthy_place <- report_params$title_healthy_place
+incl_access_public_greenspace <- report_params$access_public_greenspace
+incl_access_gardenspace <- report_params$access_gardenspace
 
 
 # Create empty data frame for summary table
@@ -157,6 +162,7 @@ dataset <- data.frame()
 
 #---- Data ----
 rbwm_code <- "E06000040"
+eng_code <- "E92000001"
 
 # england and wales LSOA to ward to lad
 lsoa_ward_lad <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/References/Geography/ONS Open Geography Portal/Lookups/LSOA to Ward to LAD/LSOA_(2021)_to_Electoral_Ward_(2024)_to_LAD_(2024)_Best_Fit_Lookup_in_EW.csv"))
@@ -164,6 +170,10 @@ lsoa_ward_lad <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive
 # RBWM lsoas
 i <- lsoa_ward_lad$LAD24CD == rbwm_code
 rbwm_lsoas <- lsoa_ward_lad$LSOA21CD[i]
+
+# rbwm wards
+i <- lsoa_ward_lad$LAD24CD == rbwm_code
+rbwm_wards <- unique(lsoa_ward_lad$WD24CD[i])
 
 # England and Wales MSOA to ward to LAD
 msoa_ward_lad <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/References/Geography/ONS Open Geography Portal/Lookups/MSOA to Ward to LAD/MSOA_(2021)_to_Ward_(2024)_to_LAD_(2024)_Best_Fit_Lookup_in_EW.csv"))
@@ -2279,7 +2289,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 ```{r title_healthy_place, eval = incl_title_healthy_place}
 
-# ---- Healthy ageing ----
+# ---- Healthy place ----
 slide_num <- slide_num + 1
 theme <- NULL
 title <- paste0("Healthy place")
@@ -2295,6 +2305,436 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
   
+```
+
+```{r access_gardenspace, eval = incl_access_gardenspace}
+
+slide_num <- slide_num + 1
+theme <- NULL
+
+# Metadata
+# ind_ID <- 
+# ind_sex <- 
+# ind_age <- 
+title <- paste0("Access to public green space (within a five-minute walk)")
+short_title <- paste0("Access to public green space")
+additional_text <- NULL
+notes <- NULL
+caveats <- paste0("Public green space access indicator is restricted to built up areas postcodes only.")
+
+value_type <- "Proportion (%)"
+value_type_short <- "%"
+# timeperiod <- "periods"
+original_geography <- "Postcode"
+#CI_level <- 0.95
+#confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+source <- paste0("Office for National Statistics. Access to gardens and public green space in Great Britain")
+
+x <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/Access to gardens and public green space in Great Britain/LSOA-Parks-and-Playing-Fields.csv"))
+
+x <- merge(x = x, y = lsoa_ward_lad, by.x = "LSOA.code", by.y = "LSOA21CD", 
+           all.x = TRUE)
+
+ward <- aggregate(cbind(Number.of.built.up.area.postcodes..within.300m.of.a.Park..Public.Garden..or.Playing.Field,
+                        Number.of.postcodes.within.built.up.area) ~ 
+                    WD24CD + WD24NM,
+                  data = x, FUN = sum)
+colnames(ward) <- c("AreaCode", "AreaName", "Count", "Denominator")
+ward$AreaType <- "Ward"
+
+
+LA <- aggregate(cbind(Number.of.built.up.area.postcodes..within.300m.of.a.Park..Public.Garden..or.Playing.Field,
+                      Number.of.postcodes.within.built.up.area) ~ 
+                  LAD.code + LAD.name,
+                data = x, FUN = sum)
+colnames(LA) <- c("AreaCode", "AreaName", "Count", "Denominator")
+LA$AreaType <- "Local authority"
+
+i <- x$Country.code == eng_code
+eng <- aggregate(cbind(Number.of.built.up.area.postcodes..within.300m.of.a.Park..Public.Garden..or.Playing.Field,
+                       Number.of.postcodes.within.built.up.area) ~ 
+                   Country.code + Country.name,
+                 data = x[i, ], FUN = sum)
+colnames(eng) <- c("AreaCode", "AreaName", "Count", "Denominator")
+eng$AreaType <- "England"
+
+x <- x[, c("LSOA.code", "LSOA.name", 
+           "Number.of.built.up.area.postcodes..within.300m.of.a.Park..Public.Garden..or.Playing.Field",
+           "Number.of.postcodes.within.built.up.area")]
+colnames(x) <- c("AreaCode", "AreaName", "Count", "Denominator")
+x$AreaType <- "LSOA"
+
+x <- rbind(x, ward, LA, eng)
+
+x$Value <- x$Count / x$Denominator * 100
+x$Timeperiod <- 2020
+
+x$LowerCI95Limit <- PHEindicatormethods:::wilson_lower(x = x$Count, n = x$Denominator) * 100
+x$LowerCI99.8Limit <- NA
+x$UpperCI95Limit <- PHEindicatormethods:::wilson_upper(x = x$Count, n = x$Denominator) * 100
+x$UpperCI99.8Limit <- NA
+
+x <- create_comp_rag(data = x, low_is_good = FALSE)
+
+data <- x
+eng <- data[data$AreaCode == eng_code, ]
+rbwm <- data[data$AreaCode == rbwm_code, ]
+
+#### Local Authorities ####
+x <- data[data$AreaType == "Local authority", ]
+
+# Create quintiles for all LSOA data
+quintiles <- quantile(x$Value, probs = seq(0, 1, by = 0.2), na.rm = TRUE) 
+quintiles[1] <- round_any(quintiles[1], 0.1, f = floor)
+quintiles[2:5] <- round_any(quintiles[2:5], 0.1, f = round)
+quintiles[6] <- round_any(quintiles[6], 0.1, f = ceiling)
+
+x <- rbind(x, eng)
+
+x$Quintile <- with(x, cut(Value, breaks = quintiles, include.lowest = TRUE, 
+                          labels = 1:5))
+levels(x$Quintile) <- gsub(",", " - ", levels(x$Quintile))
+# The notation (a - b] means ">a and <=b".
+
+levels(x$Quintile) <- c(levels(x$Quintile), "Not compared")
+x$Quintile[is.na(x$Value)] <- "Not compared"
+
+x$Quintile[x$AreaCode == eng_code] <- "Not compared"
+
+x$Colour <- NA
+x$Colour[x$Quintile == 1] <- "#b3c7f7"
+x$Colour[x$Quintile == 2] <- "#8babf1"
+x$Colour[x$Quintile == 3] <- "#0073e6"
+x$Colour[x$Quintile == 4] <- "#0461cf"
+x$Colour[x$Quintile == 5] <- "#054fb9"
+x$Colour[x$Quintile == "Not compared"] <- "grey"
+
+x$Colour <- factor(x$Colour, c("#b3c7f7", "#8babf1", "#0073e6", "#0461cf",
+                               "#054fb9", "grey"))
+
+
+
+latest_value <- plot_latest_value_quint(data = x, value_type = value_type)
+latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
+
+#### RBWM wards ###
+i <- data$AreaCode %in% rbwm_wards
+x <- data[i, ]
+
+# Create quintiles for all LSOA data
+quintiles <- quantile(x$Value, probs = seq(0, 1, by = 0.2), na.rm = TRUE) 
+quintiles[1] <- round_any(quintiles[1], 0.1, f = floor)
+quintiles[2:5] <- round_any(quintiles[2:5], 0.1, f = round)
+quintiles[6] <- round_any(quintiles[6], 0.1, f = ceiling)
+
+x <- rbind(x, rbwm, eng)
+
+x$Quintile <- with(x, cut(Value, breaks = quintiles, include.lowest = TRUE, 
+                          labels = 1:5))
+levels(x$Quintile) <- gsub(",", " - ", levels(x$Quintile))
+# The notation (a - b] means ">a and <=b".
+
+levels(x$Quintile) <- c(levels(x$Quintile), "Not compared")
+x$Quintile[is.na(x$Value)] <- "Not compared"
+
+x$Quintile[x$AreaCode == eng_code] <- "Not compared"
+
+x$Colour <- NA
+x$Colour[x$Quintile == 1] <- "#b3c7f7"
+x$Colour[x$Quintile == 2] <- "#8babf1"
+x$Colour[x$Quintile == 3] <- "#0073e6"
+x$Colour[x$Quintile == 4] <- "#0461cf"
+x$Colour[x$Quintile == 5] <- "#054fb9"
+x$Colour[x$Quintile == "Not compared"] <- "grey"
+
+x$Colour <- factor(x$Colour, c("#b3c7f7", "#8babf1", "#0073e6", "#0461cf",
+                               "#054fb9", "grey"))
+
+area_comp <- plot_area_comparison_quint(data = x, value_type = value_type,
+                                        show_ci = FALSE)
+
+#### RBWM lsoas ###
+i <- data$AreaCode %in% rbwm_lsoas
+x <- data[i, ]
+
+# Create quintiles for all LSOA data
+quintiles <- quantile(x$Value, probs = seq(0, 1, by = 0.2), na.rm = TRUE) 
+quintiles[1] <- round_any(quintiles[1], 0.1, f = floor)
+quintiles[2:5] <- round_any(quintiles[2:5], 0.1, f = round)
+quintiles[6] <- round_any(quintiles[6], 0.1, f = ceiling)
+
+x$Quintile <- with(x, cut(Value, breaks = quintiles, include.lowest = TRUE, 
+                          labels = 1:5))
+levels(x$Quintile) <- gsub(",", " - ", levels(x$Quintile))
+# The notation (a - b] means ">a and <=b".
+
+levels(x$Quintile) <- c(levels(x$Quintile), "Not compared")
+x$Quintile[is.na(x$Value)] <- "Not compared"
+
+x$Quintile[x$AreaCode == eng_code] <- "Not compared"
+
+x$Colour <- NA
+x$Colour[x$Quintile == 1] <- "#b3c7f7"
+x$Colour[x$Quintile == 2] <- "#8babf1"
+x$Colour[x$Quintile == 3] <- "#0073e6"
+x$Colour[x$Quintile == 4] <- "#0461cf"
+x$Colour[x$Quintile == 5] <- "#054fb9"
+x$Colour[x$Quintile == "Not compared"] <- "grey"
+
+x$Colour <- factor(x$Colour, c("#b3c7f7", "#8babf1", "#0073e6", "#0461cf",
+                               "#054fb9", "grey"))
+
+
+map <- map_quintile_indicator(data = x, shape_file = shp_lsoa, 
+                              areas_to_map = rbwm_lsoas)
+
+trend_plot <- paste0("No trend data available.")
+
+metadata <- text_metadata(value_type = value_type, 
+                          original_geography = original_geography, 
+                          ci_method = confidence_interval_method,
+                          source = source,
+                          caveats = caveats)
+
+# add indicator to master dataset
+#dataset <- rbind(dataset, x)
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
+                 value = latest_value$plot, alt_text = latest_value$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
+                 value = latest_period, alt_text = latest_period)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
+                 value = trend_plot, alt_text = trend_plot)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
+                 value = area_comp$plot, alt_text = area_comp$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
+                 value = map$plot, alt_text = map$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
+                 value = metadata) 
+
+```
+
+```{r access_public_greenspace, eval = incl_access_public_greenspace}
+
+slide_num <- slide_num + 1
+theme <- NULL
+
+# Metadata
+# ind_ID <- 
+# ind_sex <- 
+# ind_age <- 
+title <- paste0("Access to public green space (within a five-minute walk)")
+short_title <- paste0("Access to public green space")
+additional_text <- NULL
+notes <- NULL
+caveats <- paste0("Public green space access indicator is restricted to built up areas postcodes only.")
+
+value_type <- "Proportion (%)"
+value_type_short <- "%"
+# timeperiod <- "periods"
+original_geography <- "Postcode"
+#CI_level <- 0.95
+#confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+source <- paste0("Office for National Statistics. Access to gardens and public green space in Great Britain")
+
+x <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/Access to gardens and public green space in Great Britain/LSOA-Parks-and-Playing-Fields.csv"))
+
+x <- merge(x = x, y = lsoa_ward_lad, by.x = "LSOA.code", by.y = "LSOA21CD", 
+           all.x = TRUE)
+
+ward <- aggregate(cbind(Number.of.built.up.area.postcodes..within.300m.of.a.Park..Public.Garden..or.Playing.Field,
+                        Number.of.postcodes.within.built.up.area) ~ 
+                    WD24CD + WD24NM,
+                  data = x, FUN = sum)
+colnames(ward) <- c("AreaCode", "AreaName", "Count", "Denominator")
+ward$AreaType <- "Ward"
+
+
+LA <- aggregate(cbind(Number.of.built.up.area.postcodes..within.300m.of.a.Park..Public.Garden..or.Playing.Field,
+                      Number.of.postcodes.within.built.up.area) ~ 
+                  LAD.code + LAD.name,
+                data = x, FUN = sum)
+colnames(LA) <- c("AreaCode", "AreaName", "Count", "Denominator")
+LA$AreaType <- "Local authority"
+
+i <- x$Country.code == eng_code
+eng <- aggregate(cbind(Number.of.built.up.area.postcodes..within.300m.of.a.Park..Public.Garden..or.Playing.Field,
+                       Number.of.postcodes.within.built.up.area) ~ 
+                   Country.code + Country.name,
+                 data = x[i, ], FUN = sum)
+colnames(eng) <- c("AreaCode", "AreaName", "Count", "Denominator")
+eng$AreaType <- "England"
+
+x <- x[, c("LSOA.code", "LSOA.name", 
+           "Number.of.built.up.area.postcodes..within.300m.of.a.Park..Public.Garden..or.Playing.Field",
+           "Number.of.postcodes.within.built.up.area")]
+colnames(x) <- c("AreaCode", "AreaName", "Count", "Denominator")
+x$AreaType <- "LSOA"
+
+x <- rbind(x, ward, LA, eng)
+
+x$Value <- x$Count / x$Denominator * 100
+x$Timeperiod <- 2020
+
+x$LowerCI95Limit <- PHEindicatormethods:::wilson_lower(x = x$Count, n = x$Denominator) * 100
+x$LowerCI99.8Limit <- NA
+x$UpperCI95Limit <- PHEindicatormethods:::wilson_upper(x = x$Count, n = x$Denominator) * 100
+x$UpperCI99.8Limit <- NA
+
+x <- create_comp_rag(data = x, low_is_good = FALSE)
+
+data <- x
+eng <- data[data$AreaCode == eng_code, ]
+rbwm <- data[data$AreaCode == rbwm_code, ]
+
+#### Local Authorities ####
+x <- data[data$AreaType == "Local authority", ]
+
+# Create quintiles for all LSOA data
+quintiles <- quantile(x$Value, probs = seq(0, 1, by = 0.2), na.rm = TRUE) 
+quintiles[1] <- round_any(quintiles[1], 0.1, f = floor)
+quintiles[2:5] <- round_any(quintiles[2:5], 0.1, f = round)
+quintiles[6] <- round_any(quintiles[6], 0.1, f = ceiling)
+
+x <- rbind(x, eng)
+
+x$Quintile <- with(x, cut(Value, breaks = quintiles, include.lowest = TRUE, 
+                          labels = 1:5))
+levels(x$Quintile) <- gsub(",", " - ", levels(x$Quintile))
+# The notation (a - b] means ">a and <=b".
+
+levels(x$Quintile) <- c(levels(x$Quintile), "Not compared")
+x$Quintile[is.na(x$Value)] <- "Not compared"
+
+x$Quintile[x$AreaCode == eng_code] <- "Not compared"
+
+x$Colour <- NA
+x$Colour[x$Quintile == 1] <- "#b3c7f7"
+x$Colour[x$Quintile == 2] <- "#8babf1"
+x$Colour[x$Quintile == 3] <- "#0073e6"
+x$Colour[x$Quintile == 4] <- "#0461cf"
+x$Colour[x$Quintile == 5] <- "#054fb9"
+x$Colour[x$Quintile == "Not compared"] <- "grey"
+
+x$Colour <- factor(x$Colour, c("#b3c7f7", "#8babf1", "#0073e6", "#0461cf",
+                               "#054fb9", "grey"))
+
+
+
+latest_value <- plot_latest_value_quint(data = x, value_type = value_type)
+latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
+
+#### RBWM wards ###
+i <- data$AreaCode %in% rbwm_wards
+x <- data[i, ]
+
+# Create quintiles for all LSOA data
+quintiles <- quantile(x$Value, probs = seq(0, 1, by = 0.2), na.rm = TRUE) 
+quintiles[1] <- round_any(quintiles[1], 0.1, f = floor)
+quintiles[2:5] <- round_any(quintiles[2:5], 0.1, f = round)
+quintiles[6] <- round_any(quintiles[6], 0.1, f = ceiling)
+
+x <- rbind(x, rbwm, eng)
+
+x$Quintile <- with(x, cut(Value, breaks = quintiles, include.lowest = TRUE, 
+                          labels = 1:5))
+levels(x$Quintile) <- gsub(",", " - ", levels(x$Quintile))
+# The notation (a - b] means ">a and <=b".
+
+levels(x$Quintile) <- c(levels(x$Quintile), "Not compared")
+x$Quintile[is.na(x$Value)] <- "Not compared"
+
+x$Quintile[x$AreaCode == eng_code] <- "Not compared"
+
+x$Colour <- NA
+x$Colour[x$Quintile == 1] <- "#b3c7f7"
+x$Colour[x$Quintile == 2] <- "#8babf1"
+x$Colour[x$Quintile == 3] <- "#0073e6"
+x$Colour[x$Quintile == 4] <- "#0461cf"
+x$Colour[x$Quintile == 5] <- "#054fb9"
+x$Colour[x$Quintile == "Not compared"] <- "grey"
+
+x$Colour <- factor(x$Colour, c("#b3c7f7", "#8babf1", "#0073e6", "#0461cf",
+                               "#054fb9", "grey"))
+
+area_comp <- plot_area_comparison_quint(data = x, value_type = value_type,
+                                        show_ci = FALSE)
+
+#### RBWM lsoas ###
+i <- data$AreaCode %in% rbwm_lsoas
+x <- data[i, ]
+
+# Create quintiles for all LSOA data
+quintiles <- quantile(x$Value, probs = seq(0, 1, by = 0.2), na.rm = TRUE) 
+quintiles[1] <- round_any(quintiles[1], 0.1, f = floor)
+quintiles[2:5] <- round_any(quintiles[2:5], 0.1, f = round)
+quintiles[6] <- round_any(quintiles[6], 0.1, f = ceiling)
+
+x$Quintile <- with(x, cut(Value, breaks = quintiles, include.lowest = TRUE, 
+                          labels = 1:5))
+levels(x$Quintile) <- gsub(",", " - ", levels(x$Quintile))
+# The notation (a - b] means ">a and <=b".
+
+levels(x$Quintile) <- c(levels(x$Quintile), "Not compared")
+x$Quintile[is.na(x$Value)] <- "Not compared"
+
+x$Quintile[x$AreaCode == eng_code] <- "Not compared"
+
+x$Colour <- NA
+x$Colour[x$Quintile == 1] <- "#b3c7f7"
+x$Colour[x$Quintile == 2] <- "#8babf1"
+x$Colour[x$Quintile == 3] <- "#0073e6"
+x$Colour[x$Quintile == 4] <- "#0461cf"
+x$Colour[x$Quintile == 5] <- "#054fb9"
+x$Colour[x$Quintile == "Not compared"] <- "grey"
+
+x$Colour <- factor(x$Colour, c("#b3c7f7", "#8babf1", "#0073e6", "#0461cf",
+                               "#054fb9", "grey"))
+
+
+map <- map_quintile_indicator(data = x, shape_file = shp_lsoa, 
+                              areas_to_map = rbwm_lsoas)
+
+trend_plot <- paste0("No trend data available.")
+
+metadata <- text_metadata(value_type = value_type, 
+                          original_geography = original_geography, 
+                          ci_method = confidence_interval_method,
+                          source = source,
+                          caveats = caveats)
+
+# add indicator to master dataset
+#dataset <- rbind(dataset, x)
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
+                 value = latest_value$plot, alt_text = latest_value$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
+                 value = latest_period, alt_text = latest_period)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
+                 value = trend_plot, alt_text = trend_plot)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
+                 value = area_comp$plot, alt_text = area_comp$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
+                 value = map$plot, alt_text = map$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
+                 value = metadata) 
+
 ```
 
 ``` {r finish.code}
