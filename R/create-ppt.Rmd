@@ -27,6 +27,7 @@ params:
   life_expectancy_males: TRUE
   unemployment: TRUE
   long_term_unemployment: TRUE
+  qof_learning_disability: TRUE
   emergency_admiss_all: TRUE
   emergency_admiss_chd: TRUE
   emergency_admiss_stroke: TRUE
@@ -53,6 +54,7 @@ params:
   fuel_poverty: TRUE
   access_gardenspace: TRUE
   access_public_greenspace: TRUE
+  access_secondary_school: TRUE
 ---
 
 ```{r settings}
@@ -70,7 +72,7 @@ ward_name <- NULL
 ward_code <- NULL
 
 # Version number
-version_num <- 0.32
+version_num <- 0.33
 
 # Load required packages
 library(officer)
@@ -153,6 +155,7 @@ incl_title_healthy_place <- report_params$title_healthy_place
 incl_fuel_poverty <- report_params$fuel_poverty
 incl_access_gardenspace <- report_params$access_gardenspace
 incl_access_public_greenspace <- report_params$access_public_greenspace
+incl_access_secondary_school <- report_params$access_secondary_school
 
 
 # Create empty data frame for summary table
@@ -169,6 +172,9 @@ eng_code <- "E92000001"
 
 # england and wales LSOA to ward to lad
 lsoa_ward_lad <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/References/Geography/ONS Open Geography Portal/Lookups/LSOA to Ward to LAD/LSOA_(2021)_to_Electoral_Ward_(2024)_to_LAD_(2024)_Best_Fit_Lookup_in_EW.csv"))
+
+# RBWM postcodes
+rbwm_pcodes <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/References/Geography/ONS Open Geography Portal/NSPL/processed-data/nspl-rbwm-postcodes.Rds"))
 
 # RBWM lsoas
 i <- lsoa_ward_lad$LAD24CD == rbwm_code
@@ -194,8 +200,22 @@ pop_lsoa <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Roy
 # LSOA deprivation
 dep <- data_deprivation_pop(population = pop_lsoa)
 
+# RBWM GPs
+epraccur <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/NHS Digital/GP and GP practice related data/processed-data/epraccur.Rds"))
+
+rbwm_gp <- merge(x = epraccur, y = rbwm_pcodes, by = "pcdNoSpaces")
+rbwm_gp <- rbwm_gp[, c("Organisation Code", "lat", "long")]
+
 #### Fingertips data ####
 fingertips_msoa <- data_fingertips_msoa()
+fingertips_gp <- data_fingertips_gp()
+
+# remove non_rbwm gps but keep england
+fingertips_gp <- fingertips_gp[fingertips_gp$AreaCode %in% 
+                                 c(rbwm_gp$`Organisation Code`, eng_code), ]
+
+fingertips_gp <- merge(x = fingertips_gp, y = rbwm_gp, by.x = "AreaCode",
+                       by.y = "Organisation Code", all.x = TRUE)
 
 #---- Shape files ----
 #### RBWM LSOAs ####
@@ -1019,6 +1039,72 @@ timeperiod <- "financial years"
 original_geography <- "MSOA"
 CI_level <- 0.95
 confidence_interval_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
+source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+
+x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x <- create_comp_rag(data = x)
+
+latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
+trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+                                   show_comp_legend = FALSE, 
+                                   timeperiod_format = timeperiod)
+area_comp <- plot_area_comparison(data = x, value_type = value_type,
+                                  show_legend = FALSE)
+map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+                         areas_to_map = rbwm_msoas)
+
+metadata <- text_metadata(value_type = value_type, 
+                          original_geography = original_geography, 
+                          ci_method = confidence_interval_method,
+                          source = source)
+
+# add indicator to master dataset
+dataset <- rbind(dataset, x)
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = short_title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
+                 value = latest_value$plot, alt_text = latest_value$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
+                 value = latest_period, alt_text = latest_period)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
+                 value = area_comp$plot, alt_text = area_comp$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
+                 value = map$plot, alt_text = map$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
+                 value = metadata) 
+
+```
+
+```{r long_term_unemployment, eval = incl_long_term_unemployment}
+
+slide_num <- slide_num + 1
+theme <- NULL
+
+# Metadata
+ind_ID <- 93098
+ind_sex <- "Persons"
+ind_age <- "16-64 yrs"
+title <- paste0("Long-Term Unemployment (", tolower(ind_sex), "), (", tolower(ind_age), ")")
+short_title <- paste0("Long-Term Unemployment (", ind_age, ")")
+additional_text <- NULL
+notes <- NULL
+
+value_type <- "Crude rate per 1,000"
+value_type_short <- "per 1,000"
+timeperiod <- "financial years"
+original_geography <- "MSOA"
+CI_level <- 0.95
+confidence_interval_method <- paste0("Byar's method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
@@ -2999,6 +3085,98 @@ x$Colour <- factor(x$Colour, c("#342346FF", "#40498EFF", "#357BA2FF", "#38AAACFF
 
 map <- map_quintile_indicator(data = x, shape_file = shp_lsoa, 
                               areas_to_map = rbwm_lsoas)
+
+trend_plot <- paste0("No trend data available.")
+
+metadata <- text_metadata(value_type = value_type, 
+                          original_geography = original_geography, 
+                          ci_method = confidence_interval_method,
+                          source = source,
+                          caveats = caveats)
+
+# add indicator to master dataset
+#dataset <- rbind(dataset, x)
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
+                 value = latest_value$plot, alt_text = latest_value$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
+                 value = latest_period, alt_text = latest_period)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
+                 value = trend_plot, alt_text = trend_plot)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
+                 value = area_comp$plot, alt_text = area_comp$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
+                 value = map$plot, alt_text = map$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
+                 value = metadata) 
+
+```
+
+```{r access_secondary_school, eval = incl_access_secondary_school}
+
+slide_num <- slide_num + 1
+theme <- NULL
+
+# Metadata
+# ind_ID <- 
+# ind_sex <- 
+# ind_age <- 
+title <- paste0("Access to secondary school within 30 minutes by public transport or walking")
+short_title <- "Access to secondary school"
+additional_text <- NULL
+notes <- NULL
+caveats <- paste0("Public green space access indicator is restricted to built up areas postcodes only")
+
+value_type <- "Proportion (%)"
+value_type_short <- "%"
+# timeperiod <- "periods"
+original_geography <- "Postcode"
+CI_level <- 0.95
+confidence_interval_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
+source <- "Department for Transport. Journey time statistics"
+notes <- "Definition: Service users able to access a secondary school within 30-minutes by public transport or walking.\n"
+
+x <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/gov.uk/Journey time statistics data tables (JTS)/lower super output area (JTS05)/JTS0503/processed-data/secondary-school-30min-travel.Rds"))
+
+ward <- merge(x = x, y = lsoa_ward_lad, by.x = "AreaCode", by.y = "LSOA21CD", 
+              all.x = TRUE)
+
+ward <- aggregate(cbind(Count, Denominator) ~ WD24CD + WD24NM, data = ward,
+                  FUN = sum)
+colnames(ward) <- c("AreaCode", "AreaName", "Count", "Denominator")
+ward$AreaType <- "Ward"
+
+ward$Value <- ward$Count / ward$Denominator * 100
+
+x <- rbind(x, ward)
+
+x$Timeperiod <- 2019
+
+x$Count <- round(x$Count)
+
+x$LowerCI95Limit <- PHEindicatormethods:::wilson_lower(x = x$Count, n = x$Denominator) * 100
+x$LowerCI99.8Limit <- NA
+x$UpperCI95Limit <- PHEindicatormethods:::wilson_upper(x = x$Count, n = x$Denominator) * 100
+x$UpperCI99.8Limit <- NA
+
+x <- create_comp_rag(data = x, low_is_good = FALSE)
+
+latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
+
+i <- x$AreaCode %in% c(eng_code, rbwm_code, rbwm_wards)
+area_comp <- plot_area_comparison(data = x[i, ], value_type = value_type,
+                                  show_legend = FALSE)
+map <- map_rag_indicator(data = x, shape_file = shp_lsoa,
+                         areas_to_map = rbwm_lsoas)
 
 trend_plot <- paste0("No trend data available.")
 
