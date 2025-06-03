@@ -30,6 +30,7 @@ params:
   qof_learning_disability: TRUE
   qof_hypertension: TRUE
   qof_epilepsy: TRUE
+  qof_diabetes: TRUE
   emergency_admiss_all: TRUE
   emergency_admiss_chd: TRUE
   emergency_admiss_stroke: TRUE
@@ -135,6 +136,7 @@ incl_long_term_unemployment <- report_params$long_term_unemployment
 incl_qof_learning_disability <- report_params$qof_learning_disability
 incl_qof_hypertension <- report_params$qof_hypertension
 incl_qof_epilepsy <- report_params$qof_epilepsy
+incl_qof_diabetes <- report_params$qof_diabetes
 incl_emergency_admiss_all <- report_params$emergency_admiss_all
 incl_emergency_admiss_chd <- report_params$emergency_admiss_chd
 incl_emergency_admiss_stroke <- report_params$emergency_admiss_stroke
@@ -1372,6 +1374,76 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"),
                  value = map$plot, alt_text = map$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
+
+```
+
+```{r qof_diabetes, eval = incl_qof_diabetes}
+
+slide_num <- slide_num + 1
+theme <- NULL
+
+# Metadata
+ind_ID <- 241
+ind_sex <- "Persons"
+ind_age <- "17+ yrs"
+title <- paste0("Diabetes: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
+short_title <- paste0("Diabetes: QOF prevalence")
+additional_text <- NULL
+notes <- NULL
+
+value_type <- "Proportion (%)"
+value_type_short <- "%"
+timeperiod <- "financial years"
+original_geography <- "GP"
+CI_level <- 0.95
+confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+
+x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x <- create_comp_bob(data = x)
+
+latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
+trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+                                   show_comp_legend = FALSE, 
+                                   timeperiod_format = timeperiod)
+area_comp <- plot_area_comparison(data = x, value_type = value_type,
+                                  show_legend = FALSE)
+map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
+                          locations_to_map = rbwm_gp$`Organisation Code`)
+
+metadata <- text_metadata(value_type = value_type, 
+                          original_geography = original_geography, 
+                          ci_method = confidence_interval_method,
+                          source = source)
+
+# drop eastings and northings for bind
+x$oseast1m <- NULL
+x$osnrth1m <- NULL
+
+# add indicator to master dataset
+dataset <- rbind(dataset, x)
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = short_title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
+                 value = latest_value$plot, alt_text = latest_value$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
+                 value = latest_period, alt_text = latest_period)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
+                 value = area_comp$plot, alt_text = area_comp$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
+                 value = map$plot, alt_text = map$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
+                 value = metadata)
 
 ```
 
