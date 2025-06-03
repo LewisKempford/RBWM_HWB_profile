@@ -36,6 +36,7 @@ params:
   qof_chd: TRUE
   qof_cancer: TRUE
   qof_af: TRUE
+  gp_caring_responsibility: TRUE
   emergency_admiss_all: TRUE
   emergency_admiss_chd: TRUE
   emergency_admiss_stroke: TRUE
@@ -149,6 +150,7 @@ incl_qof_hf <- report_params$qof_hf
 incl_qof_chd <- report_params$qof_chd
 incl_qof_cancer <- report_params$qof_cancer
 incl_qof_af <- report_params$qof_af
+incl_gp_caring_responsibility <- report_params$gp_caring_responsibility
 incl_emergency_admiss_all <- report_params$emergency_admiss_all
 incl_emergency_admiss_chd <- report_params$emergency_admiss_chd
 incl_emergency_admiss_stroke <- report_params$emergency_admiss_stroke
@@ -1810,6 +1812,113 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"),
                  value = map$plot, alt_text = map$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata)
+
+```
+
+```{r gp_caring_responsibility, eval = incl_gp_caring_responsibility}
+
+slide_num <- slide_num + 1
+theme <- NULL
+
+# Metadata
+ind_ID <- 352
+ind_sex <- "Persons"
+ind_age <- "16+ yrs"
+title <- paste0("% with caring responsibility (", tolower(ind_sex), "), (", tolower(ind_age), ")")
+short_title <- paste0("% with caring responsibility")
+additional_text <- NULL
+notes <- NULL
+
+value_type <- "Proportion (%)"
+value_type_short <- "%"
+timeperiod <- "financial years"
+original_geography <- "GP"
+CI_level <- 0.95
+confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+
+x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+
+data <- x
+eng <- data[data$AreaCode == eng_code, ]
+
+x <- data[data$AreaType == "GPs", ]
+
+# Create quintiles for all LSOA data
+quintiles <- quantile(x$Value, probs = seq(0, 1, by = 0.2), na.rm = TRUE) 
+quintiles[1] <- round_any(quintiles[1], 0.1, f = floor)
+quintiles[2:5] <- round_any(quintiles[2:5], 0.1, f = round)
+quintiles[6] <- round_any(quintiles[6], 0.1, f = ceiling)
+
+x <- rbind(x, eng)
+
+x$Quintile <- with(x, cut(Value, breaks = quintiles, include.lowest = TRUE, 
+                          labels = 1:5))
+levels(x$Quintile) <- gsub(",", " - ", levels(x$Quintile))
+# The notation (a - b] means ">a and <=b".
+
+levels(x$Quintile) <- c(levels(x$Quintile), "Not compared")
+x$Quintile[is.na(x$Value)] <- "Not compared"
+
+x$Quintile[x$AreaCode == eng_code] <- "Not compared"
+
+x$Colour <- NA
+x$Colour[x$Quintile == 1] <- "#342346FF"
+x$Colour[x$Quintile == 2] <- "#40498EFF"
+x$Colour[x$Quintile == 3] <- "#357BA2FF"
+x$Colour[x$Quintile == 4] <- "#38AAACFF"
+x$Colour[x$Quintile == 5] <- "#78D6AEFF"
+x$Colour[x$Quintile == "Not compared"] <- "grey"
+
+x$Colour <- factor(x$Colour, c("#342346FF", "#40498EFF", "#357BA2FF", "#38AAACFF",
+                               "#78D6AEFF", "grey"))
+x$Compared <- x$Quintile
+
+#latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
+# trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+#                                    show_comp_legend = FALSE, 
+#                                    timeperiod_format = timeperiod)
+area_comp <- plot_area_comparison_quint(data = x, value_type = value_type,
+                                        show_ci = FALSE)
+map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
+                          legend_title = "Quintiles",
+                          locations_to_map = rbwm_gp$`Organisation Code`)
+
+metadata <- text_metadata(value_type = value_type, 
+                          original_geography = original_geography, 
+                          ci_method = confidence_interval_method,
+                          source = source)
+
+# drop eastings and northings for bind
+x$oseast1m <- NULL
+x$osnrth1m <- NULL
+
+# add indicator to master dataset
+#dataset <- rbind(dataset, x)
+
+unavailable_note <- paste0("Data unavailable for counties & UAs")
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = short_title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
+                 value = unavailable_note)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
+                 value = latest_period, alt_text = latest_period)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
+                 value = unavailable_note)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
+                 value = area_comp$plot, alt_text = area_comp$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
+                 value = map$plot, alt_text = map$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
+                 value = metadata) 
 
 ```
 
