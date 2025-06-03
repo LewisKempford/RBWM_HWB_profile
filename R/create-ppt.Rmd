@@ -129,6 +129,7 @@ incl_life_expectancy_females <- report_params$life_expectancy_females
 incl_life_expectancy_males <- report_params$life_expectancy_males
 incl_unemployment <- report_params$unemployment
 incl_long_term_unemployment <- report_params$long_term_unemployment
+incl_qof_learning_disability <- report_params$qof_learning_disability
 incl_emergency_admiss_all <- report_params$emergency_admiss_all
 incl_emergency_admiss_chd <- report_params$emergency_admiss_chd
 incl_emergency_admiss_stroke <- report_params$emergency_admiss_stroke
@@ -204,7 +205,7 @@ dep <- data_deprivation_pop(population = pop_lsoa)
 epraccur <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/NHS Digital/GP and GP practice related data/processed-data/epraccur.Rds"))
 
 rbwm_gp <- merge(x = epraccur, y = rbwm_pcodes, by = "pcdNoSpaces")
-rbwm_gp <- rbwm_gp[, c("Organisation Code", "lat", "long")]
+rbwm_gp <- rbwm_gp[, c("Organisation Code", "oseast1m", "osnrth1m")]
 
 #### Fingertips data ####
 fingertips_msoa <- data_fingertips_msoa()
@@ -212,14 +213,19 @@ fingertips_gp <- data_fingertips_gp()
 
 # remove non_rbwm gps but keep england
 fingertips_gp <- fingertips_gp[fingertips_gp$AreaCode %in% 
-                                 c(rbwm_gp$`Organisation Code`, eng_code), ]
+                                 c(rbwm_gp$`Organisation Code`, rbwm_code, 
+                                   eng_code), ]
 
 fingertips_gp <- merge(x = fingertips_gp, y = rbwm_gp, by.x = "AreaCode",
                        by.y = "Organisation Code", all.x = TRUE)
 
 #---- Shape files ----
-#### RBWM LSOAs ####
+#### LSOAs ####
 shp_lsoa <- data_shape_lsoa()
+
+# RBWM LSOAs
+i <- shp_lsoa$AreaCode %in% rbwm_lsoas
+shp_lsoa_rbwm <- shp_lsoa[i, ]
 
 #### MSOAs ####
 shp_msoa <- data_shape_msoa()
@@ -1151,30 +1157,30 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 ```
 
-```{r long_term_unemployment, eval = incl_long_term_unemployment}
+```{r qof_learning_disability, eval = incl_qof_learning_disability}
 
 slide_num <- slide_num + 1
 theme <- NULL
 
 # Metadata
-ind_ID <- 93098
+ind_ID <- 200
 ind_sex <- "Persons"
-ind_age <- "16-64 yrs"
-title <- paste0("Long-Term Unemployment (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("Long-Term Unemployment (", ind_age, ")")
+ind_age <- "All ages"
+title <- paste0("Learning disability: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
+short_title <- paste0("Learning disability")
 additional_text <- NULL
 notes <- NULL
 
-value_type <- "Crude rate per 1,000"
-value_type_short <- "per 1,000"
+value_type <- "Proportion (%)"
+value_type_short <- "%"
 timeperiod <- "financial years"
-original_geography <- "MSOA"
+original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method (", CI_level * 100,"%)")
+confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -1183,13 +1189,17 @@ trend_plot <- plot_indicator_trend(data = x, value_type = value_type,
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
-                         areas_to_map = rbwm_msoas)
+map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
+                          locations_to_map = rbwm_gp$`Organisation Code`)
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
                           ci_method = confidence_interval_method,
                           source = source)
+
+# drop eastings and northings for bind
+x$oseast1m <- NULL
+x$osnrth1m <- NULL
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
