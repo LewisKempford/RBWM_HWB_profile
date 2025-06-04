@@ -89,7 +89,7 @@ ward_name <- NULL
 ward_code <- NULL
 
 # Version number
-version_num <- "0.50"
+version_num <- 0.51
 
 # Load required packages
 library(officer)
