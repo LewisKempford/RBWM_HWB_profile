@@ -405,7 +405,7 @@ title <- paste0("MMR vaccination for one dose - registered population (",
                 tolower(ind_sex), "), (", tolower(ind_age), ")")
 short_title <- paste0("MMR vaccination for one dose (", (ind_age), ")")
 
-context <- paste0("MMR is the combined vaccine that protects against measles, mumps and rubella. The Department of Health have adoped the World Health Organisation's 95% target for vaccination coverage at national and local levels")
+context <- paste0("MMR is the combined vaccine that protects against measles, mumps and rubella. The Department of Health have adopted the World Health Organisation's 95% target for vaccination coverage at national and local levels")
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
@@ -487,7 +487,7 @@ title <- paste0("Dtap/ IPV/ Hib vaccination - registered population (",
                 tolower(ind_sex), "), (", tolower(ind_age), ")")
 short_title <- paste0("Dtap/ IPV/ Hib vaccination (", ind_age, ")")
 
-context <- paste0("The combined DTaP/IPV/Hib is the first in a course of vaccines offered to babies to protect them against diphtheria, pertussis (whooping cough), tetanus, Haemophilus influenzae type b and polio. The Department of Health have adoped the World Health Organisation's 95% target for vaccination coverage at national and local levels")
+context <- paste0("The combined DTaP/IPV/Hib is the first in a course of vaccines offered to babies to protect them against diphtheria, pertussis (whooping cough), tetanus, Haemophilus influenzae type b and polio. The Department of Health have adopted the World Health Organisation's 95% target for vaccination coverage at national and local levels")
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
