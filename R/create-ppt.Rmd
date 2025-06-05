@@ -45,7 +45,7 @@ params:
   qof_obesity: TRUE
   cervical_screening_25_49: TRUE
   cervical_screening_50_64: TRUE
-  gp_caring_responsibility: TRUE
+  gp_caring_responsibility: FALSE
   emergency_admiss_all: TRUE
   emergency_admiss_chd: TRUE
   emergency_admiss_stroke: TRUE
@@ -553,7 +553,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"),
 # gotta make font size smaller as too much metadata
 formatted_metadata <- fpar(ftext(metadata, prop = fp_text(font.size = 8)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
-                 value = formatted_metadata) 
+                 value = formatted_metadata)
 
 ```
 
@@ -566,18 +566,18 @@ theme <- NULL
 ind_ID <- 93115
 ind_sex <- "Persons"
 ind_age <- "Under 5 yrs"
-title <- paste0("Emergency hospital admissions in under 5 years old, ", tolower(ind_sex), ", ", tolower(ind_age))
-short_title <- paste0("Emergency hospital admissions (", ind_age, ")")
-additional_text <- NULL
-notes <- NULL
-
+title <- paste0("Emergency hospital admissions, ", tolower(ind_sex), ", ", tolower(ind_age))
+short_title <- paste0("Emergency admissions (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Crude rate per 1,000"
 value_type_short <- "per 1,000"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -592,10 +592,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -634,17 +635,18 @@ ind_sex <- "Persons"
 ind_age <- "Under 5 yrs"
 title <- paste0("Emergency hospital admissions for injuries, ",
                 tolower(ind_sex), ", ", tolower(ind_age))
-short_title <- paste0("Emergency admissions for injuries (", ind_age, ")")
-additional_text <- NULL
-notes <- NULL
-
+short_title <- paste0("Emergency admissions for injuries (", tolower(ind_age),
+                      ")")
+context <- NULL
 value_type <- "Crude rate per 1,000"
 value_type_short <- "per 1,000"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -659,10 +661,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -701,17 +704,17 @@ ind_sex <- "Persons"
 ind_age <- "Under 15 yrs"
 title <- paste0("Emergency hospital admissions for injuries, ", 
                 tolower(ind_sex), ", ", tolower(ind_age))
-short_title <- paste0("Emergency admissions for injuries (", ind_age, ")")
-additional_text <- NULL
-notes <- NULL
-
+short_title <- paste0("Emergency admissions for injuries (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Crude rate per 1,000"
 value_type_short <- "per 1,000"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -726,10 +729,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -769,16 +773,16 @@ ind_age <- "15 to 24 yrs"
 title <- paste0("Emergency hospital admissions for injuries, ", 
                 tolower(ind_sex), ", ", tolower(ind_age))
 short_title <- paste0("Emergency admissions for injuries (", ind_age, ")")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Crude rate per 1,000"
 value_type_short <- "per 1,000"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -793,10 +797,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -833,17 +838,18 @@ theme <- NULL
 ind_ID <- 93105
 ind_sex <- "Persons"
 ind_age <- "4-5 yrs"
-title <- paste0("Reception: Prevalence of obesity, ", tolower(ind_sex), ", ", tolower(ind_age))
+title <- paste0("Reception: Prevalence of obesity (including severe obesity), ",
+                tolower(ind_sex), ", ", tolower(ind_age))
 short_title <- paste0("Reception: Prevalence of obesity (", ind_age, ")")
-additional_text <- "Obesity: including severe obesity.\n\n"
-notes <- "\nNotes: Due to the impact of COVID-19 on the NCMP data collection, data was not published for the 2018/19-20/21 time period."
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Data for local authorities may not match that published by NHS England which are based on the local authority of the school attended by the child or based on the local authority that submitted the data")
+notes <- "Due to the impact of COVID-19 on the NCMP data collection, data was not published for the 2018/19 - 20/21 time period"
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -858,10 +864,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -884,8 +891,10 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas")
                  value = area_comp$plot, alt_text = area_comp$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
                  value = map$plot, alt_text = map$alt_text)
+# gotta make font size smaller as too much metadata
+formatted_metadata <- fpar(ftext(metadata, prop = fp_text(font.size = 8)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
-                 value = metadata) 
+                 value = formatted_metadata)
 
 ```
 
@@ -898,17 +907,19 @@ theme <- NULL
 ind_ID <- 93106
 ind_sex <- "Persons"
 ind_age <- "4-5 yrs"
-title <- paste0("Reception: Prevalence of overweight, ", tolower(ind_sex), ", ", tolower(ind_age))
+title <- paste0("Reception: Prevalence of overweight (including obesity), ",
+                tolower(ind_sex), ", ", tolower(ind_age))
 short_title <- paste0("Reception: Prevalence of overweight (", ind_age, ")")
 additional_text <- "Overweight: including obesity\n\n"
-notes <- "\nNotes: Due to the impact of COVID-19 on the NCMP data collection, data was not published for the 2018/19-20/21 time period."
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- "Data for local authorities may not match that published by NHS England which are based on the local authority of the school attended by the child or based on the local authority that submitted the data"
+notes <- "Due to the impact of COVID-19 on the NCMP data collection, data was not published for the 2018/19-20/21 time period"
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -923,10 +934,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -949,8 +961,10 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas")
                  value = area_comp$plot, alt_text = area_comp$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
                  value = map$plot, alt_text = map$alt_text)
+# gotta make font size smaller as too much metadata
+formatted_metadata <- fpar(ftext(metadata, prop = fp_text(font.size = 8)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
-                 value = metadata) 
+                 value = formatted_metadata)
 
 ```
 
@@ -963,17 +977,18 @@ theme <- NULL
 ind_ID <- 93107
 ind_sex <- "Persons"
 ind_age <- "10-11 yrs"
-title <- paste0("Year 6: Prevalence of obesity, ", tolower(ind_sex), ", ", tolower(ind_age))
+title <- paste0("Year 6: Prevalence of obesity (including severe obesity), ",
+                tolower(ind_sex), ", ", tolower(ind_age))
 short_title <- paste0("Year 6: Prevalence of obesity (", ind_age, ")")
-additional_text <- "Obesity: including severe obesity.\n\n"
-notes <- "\nNotes: Due to the impact of COVID-19 on the NCMP data collection, data was not published for the 2018/19-20/21 time period."
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- "Data for local authorities may not match that published by NHS England which are based on the local authority of the school attended by the child or based on the local authority that submitted the data"
+notes <- "Due to the impact of COVID-19 on the NCMP data collection, data was not published for the 2018/19-20/21 time period"
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -988,10 +1003,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -1014,8 +1030,10 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas")
                  value = area_comp$plot, alt_text = area_comp$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
                  value = map$plot, alt_text = map$alt_text)
+# gotta make font size smaller as too much metadata
+formatted_metadata <- fpar(ftext(metadata, prop = fp_text(font.size = 8)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
-                 value = metadata) 
+                 value = formatted_metadata) 
 
 ```
 
@@ -1028,17 +1046,18 @@ theme <- NULL
 ind_ID <- 93108
 ind_sex <- "Persons"
 ind_age <- "10-11 yrs"
-title <- paste0("Year 6: Prevalence of overweight, ", tolower(ind_sex), ", ", tolower(ind_age))
+title <- paste0("Year 6: Prevalence of overweight (including obesity), ",
+                tolower(ind_sex), ", ", tolower(ind_age))
 short_title <- paste0("Year 6: Prevalence of overweight (", ind_age, ")")
-additional_text <- "Overweight: including obesity.\n\n"
-notes <- "\nNotes: Due to the impact of COVID-19 on the NCMP data collection, data was not published for the 2018/19-20/21 time period."
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- "Data for local authorities may not match that published by NHS England which are based on the local authority of the school attended by the child or based on the local authority that submitted the data"
+notes <- "Due to the impact of COVID-19 on the NCMP data collection, data was not published for the 2018/19-20/21 time period"
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -1053,10 +1072,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -1079,8 +1099,10 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas")
                  value = area_comp$plot, alt_text = area_comp$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
                  value = map$plot, alt_text = map$alt_text)
+# gotta make font size smaller as too much metadata
+formatted_metadata <- fpar(ftext(metadata, prop = fp_text(font.size = 8)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
-                 value = metadata) 
+                 value = formatted_metadata)
 
 ```
 
@@ -1094,17 +1116,17 @@ ind_ID <- 90933
 ind_sex <- "Persons"
 ind_age <- "6+ yrs"
 title <- paste0("Asthma: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("Asthma: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+short_title <- paste0("Asthma: QOF prevalence (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -1119,10 +1141,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -1185,17 +1208,17 @@ ind_sex <- "Female"
 ind_age <- NULL
 title <- paste0("Life expectancy at birth, upper age band 90 and over (",
                 tolower(ind_sex), ")")
-short_title <- paste0("Life expectancy at birth (", ind_sex, ")")
-additional_text <- NULL
-notes <- NULL
-
+short_title <- paste0("Life expectancy at birth (", tolower(ind_sex), ")")
+context <- NULL
 value_type <- "Life expectancy (years)"
 value_type_short <- "Years"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Chiang CL (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Chiang CL (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID & 
                        fingertips_msoa$Sex == ind_sex, ]
@@ -1211,10 +1234,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -1222,7 +1246,7 @@ dataset <- rbind(dataset, x)
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
-                 value = title)
+                 value = short_title)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
                  value = slide_num)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
@@ -1253,17 +1277,17 @@ ind_sex <- "Male"
 ind_age <- NULL
 title <- paste0("Life expectancy at birth, upper age band 90 and over (",
                 tolower(ind_sex), ")")
-short_title <- paste0("Life expectancy at birth (", ind_sex, ")")
-additional_text <- NULL
-notes <- NULL
-
-value_type <- "Life expetancy (years)"
+short_title <- paste0("Life expectancy at birth (", tolower(ind_sex), ")")
+context <- NULL
+value_type <- "Life expectancy (years)"
 value_type_short <- "Years"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Chiang CL (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Chiang CL (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID & 
                        fingertips_msoa$Sex == ind_sex, ]
@@ -1279,10 +1303,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -1290,7 +1315,7 @@ dataset <- rbind(dataset, x)
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
-                 value = title)
+                 value = short_title)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
                  value = slide_num)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
@@ -1319,18 +1344,19 @@ theme <- NULL
 ind_ID <- 93097
 ind_sex <- "Persons"
 ind_age <- "16-64 yrs"
-title <- paste0("Unemployment (Percentage of the working age population claiming out of work benefit) (", tolower(ind_sex), "), (", tolower(ind_age), ")")
+title <- paste0("Unemployment (Percentage of the working age population claiming out of work benefit) (",
+                tolower(ind_sex), "), (", tolower(ind_age), ")")
 short_title <- paste0("Unemployment (", ind_age, ")")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -1345,10 +1371,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -1387,16 +1414,16 @@ ind_sex <- "Persons"
 ind_age <- "16-64 yrs"
 title <- paste0("Long-Term Unemployment (", tolower(ind_sex), "), (", tolower(ind_age), ")")
 short_title <- paste0("Long-Term Unemployment (", ind_age, ")")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Crude rate per 1,000"
 value_type_short <- "per 1,000"
 timeperiod <- "financial years"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Jobseekers Allowance datasets only cover a subset of people claiming unemployment related benefits")
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -1411,10 +1438,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -1451,18 +1479,19 @@ theme <- NULL
 ind_ID <- 200
 ind_sex <- "Persons"
 ind_age <- "All ages"
-title <- paste0("Learning disability: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("Learning disability")
-additional_text <- NULL
-notes <- NULL
-
+title <- paste0("Learning disability: QOF prevalence (", tolower(ind_sex),
+                "), (", tolower(ind_age), ")")
+short_title <- paste0("Learning disability: QOF prevalence")
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -1477,10 +1506,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -1521,18 +1551,19 @@ theme <- NULL
 ind_ID <- 219
 ind_sex <- "Persons"
 ind_age <- "All ages"
-title <- paste0("Hypertension: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
+title <- paste0("Hypertension: QOF prevalence (", tolower(ind_sex), "), (",
+                tolower(ind_age), ")")
 short_title <- paste0("Hypertension: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -1547,10 +1578,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -1591,18 +1623,19 @@ theme <- NULL
 ind_ID <- 224
 ind_sex <- "Persons"
 ind_age <- "18+ yrs"
-title <- paste0("Epilepsy: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("Epilepsy: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+title <- paste0("Epilepsy: QOF prevalence (", tolower(ind_sex), "), (",
+                tolower(ind_age), ")")
+short_title <- paste0("Epilepsy: QOF prevalence (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -1617,10 +1650,11 @@ area_comp <- plot_area_comparison(data = x, area_code = NULL,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -1663,18 +1697,19 @@ theme <- NULL
 ind_ID <- 241
 ind_sex <- "Persons"
 ind_age <- "17+ yrs"
-title <- paste0("Diabetes: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("Diabetes: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+title <- paste0("Diabetes: QOF prevalence (", tolower(ind_sex), "), (",
+                tolower(ind_age), ")")
+short_title <- paste0("Diabetes: QOF prevalence (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -1689,10 +1724,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -1733,18 +1769,19 @@ theme <- NULL
 ind_ID <- 253
 ind_sex <- "Persons"
 ind_age <- "All ages"
-title <- paste0("Chronic Obstructive Pulmonary Disease: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
+title <- paste0("Chronic Obstructive Pulmonary Disease: QOF prevalence (",
+                tolower(ind_sex), "), (", tolower(ind_age), ")")
 short_title <- paste0("COPD: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -1759,10 +1796,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -1803,18 +1841,19 @@ theme <- NULL
 ind_ID <- 262
 ind_sex <- "Persons"
 ind_age <- "All ages"
-title <- paste0("Heart Failure: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
+title <- paste0("Heart Failure: QOF prevalence (", tolower(ind_sex), "), (",
+                tolower(ind_age), ")")
 short_title <- paste0("Heart Failure: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -1829,10 +1868,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -1873,18 +1913,19 @@ theme <- NULL
 ind_ID <- 273
 ind_sex <- "Persons"
 ind_age <- "All ages"
-title <- paste0("Coronary heart disease: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
+title <- paste0("Coronary heart disease: QOF prevalence (", tolower(ind_sex),
+                "), (", tolower(ind_age), ")")
 short_title <- paste0("CHD: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -1899,10 +1940,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -1943,18 +1985,19 @@ theme <- NULL
 ind_ID <- 276
 ind_sex <- "Persons"
 ind_age <- "All ages"
-title <- paste0("Cancer: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
+title <- paste0("Cancer: QOF prevalence (", tolower(ind_sex), "), (",
+                tolower(ind_age), ")")
 short_title <- paste0("Cancer: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -1969,10 +2012,11 @@ area_comp <- plot_area_comparison(data = x, area_code = NULL,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -2015,18 +2059,19 @@ theme <- NULL
 ind_ID <- 280
 ind_sex <- "Persons"
 ind_age <- "All ages"
-title <- paste0("Atrial fibrillation: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
+title <- paste0("Atrial fibrillation: QOF prevalence (", tolower(ind_sex),
+                "), (", tolower(ind_age), ")")
 short_title <- paste0("Atrial fibrillation: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -2041,10 +2086,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -2087,16 +2133,16 @@ ind_sex <- "Persons"
 ind_age <- "All ages"
 title <- paste0("Mental Health: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
 short_title <- paste0("Mental Health: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -2111,10 +2157,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -2156,17 +2203,17 @@ ind_ID <- 90646
 ind_sex <- "Persons"
 ind_age <- "18+ yrs"
 title <- paste0("Depression: QOF incidence - new diagnosis (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("Depression: QOF incidence - new diagnosis")
-additional_text <- NULL
-notes <- NULL
-
+short_title <- paste0("Depression: QOF incidence (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -2181,10 +2228,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -2226,17 +2274,17 @@ ind_ID <- 91280
 ind_sex <- "Persons"
 ind_age <- "15+ yrs"
 title <- paste0("Smoking: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("Smoking: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+short_title <- paste0("Smoking: QOF prevalence (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -2251,10 +2299,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -2299,16 +2348,16 @@ ind_sex <- "Persons"
 ind_age <- "18+ yrs"
 title <- paste0("Obesity: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
 short_title <- paste0("Obesity: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -2323,10 +2372,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -2367,18 +2417,20 @@ theme <- NULL
 ind_ID <- 93725
 ind_sex <- "Female"
 ind_age <- "25-49 yrs"
-title <- paste0("Cervical screening coverage: aged 25 to 49 years old (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("Cervical screening coverage: aged 25 to 49 years old")
-additional_text <- NULL
-notes <- NULL
-
+title <- paste0("Cervical screening coverage (", tolower(ind_sex), "), (",
+                tolower(ind_age), ")")
+short_title <- paste0("Cervical screening coverage (", tolower(ind_sex), ") (", 
+                      tolower(ind_age), ")")
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -2393,10 +2445,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -2439,18 +2492,20 @@ theme <- NULL
 ind_ID <- 93726
 ind_sex <- "Female"
 ind_age <- "50-64 yrs"
-title <- paste0("Cervical screening coverage: aged 50 to 64 years old (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("Cervical screening coverage: aged 50 to 64 years old")
-additional_text <- NULL
-notes <- NULL
-
+title <- paste0("Cervical screening coverage (", tolower(ind_sex), "), (",
+                tolower(ind_age), ")")
+short_title <- paste0("Cervical screening coverage (", tolower(ind_sex), ") (", 
+                      tolower(ind_age), ")")
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -2465,10 +2520,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -2511,18 +2567,19 @@ theme <- NULL
 ind_ID <- 352
 ind_sex <- "Persons"
 ind_age <- "16+ yrs"
-title <- paste0("% with caring responsibility (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("% with caring responsibility")
-additional_text <- NULL
-notes <- NULL
-
+title <- paste0("% with caring responsibility (", tolower(ind_sex), "), (",
+                tolower(ind_age), ")")
+short_title <- paste0("% with caring responsibility (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
-CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+CI_level <- NULL
+benchmarking_method <- paste0("Quintiles created using sample quantiles")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- paste0("All results are based on weighted data. Weighting changes the data to account for differences between all patients at a practice and the sub-set of patients who actually take part in the survey")
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 
@@ -2572,10 +2629,11 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
                           legend_title = "Quintiles",
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -2621,16 +2679,16 @@ ind_age <- "All ages"
 title <- paste0("Emergency hospital admissions for all causes, ",
                 tolower(ind_sex), ", ", tolower(ind_age))
 short_title <- paste0("Emergency admissions for all causes")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -2645,10 +2703,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -2688,16 +2747,16 @@ ind_age <- "All ages"
 title <- paste0("EEmergency hospital admissions for coronary heart disease, ",
                 tolower(ind_sex), ", ", tolower(ind_age))
 short_title <- paste0("Emergency admissions for CHD")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -2712,10 +2771,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -2752,19 +2812,19 @@ theme <- NULL
 ind_ID <- 93231
 ind_sex <- "Persons"
 ind_age <- "All ages"
-title <- paste0("Emergency hospital admissions for stroke, ",
-                tolower(ind_sex), ", ", tolower(ind_age))
+title <- paste0("Emergency hospital admissions for stroke, ", tolower(ind_sex),
+                ", ", tolower(ind_age))
 short_title <- paste0("Emergency admissions for stroke")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -2779,10 +2839,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -2822,16 +2883,16 @@ ind_age <- "All ages"
 title <- paste0("Emergency hospital admissions for myocardial infarction (heart attack), ",
                 tolower(ind_sex), ", ", tolower(ind_age))
 short_title <- paste0("Emergency admissions for heart attack")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -2846,10 +2907,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -2889,16 +2951,16 @@ ind_age <- "All ages"
 title <- paste0("Emergency hospital admissions for chronic obstructive pulmonary disease (COPD), ",
                 tolower(ind_sex), ", ", tolower(ind_age))
 short_title <- paste0("Emergency admissions for COPD")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -2913,10 +2975,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -2956,16 +3019,16 @@ ind_age <- "All ages"
 title <- paste0("Emergency hospital admissions for intentional self harm, ",
                 tolower(ind_sex), ", ", tolower(ind_age))
 short_title <- paste0("Emergency admissions for self harm")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -2980,10 +3043,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -3042,9 +3106,7 @@ ind_sex <- "Persons"
 ind_age <- "All ages"
 title <- paste0("Stroke: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
 short_title <- paste0("Stroke: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
@@ -3052,6 +3114,8 @@ original_geography <- "GP"
 CI_level <- 0.95
 confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -3066,10 +3130,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -3112,9 +3177,7 @@ ind_sex <- "Persons"
 ind_age <- "All ages"
 title <- paste0("Dementia: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
 short_title <- paste0("Dementia: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
@@ -3122,6 +3185,8 @@ original_geography <- "GP"
 CI_level <- 0.95
 confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -3136,10 +3201,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -3180,18 +3246,19 @@ theme <- NULL
 ind_ID <- 258
 ind_sex <- "Persons"
 ind_age <- "18+ yrs"
-title <- paste0("Chronic Kidney Disease: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("CKD: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+title <- paste0("Chronic Kidney Disease: QOF prevalence (", tolower(ind_sex), 
+                "), (", tolower(ind_age), ")")
+short_title <- paste0("CKD: QOF prevalence (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -3206,10 +3273,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -3250,18 +3318,19 @@ theme <- NULL
 ind_ID <- 90443
 ind_sex <- "Persons"
 ind_age <- "50+ yrs"
-title <- paste0("Osteoporosis: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("Osteoporosis: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+title <- paste0("Osteoporosis: QOF prevalence (", tolower(ind_sex), "), (",
+                tolower(ind_age), ")")
+short_title <- paste0("Osteoporosis: QOF prevalence (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -3276,10 +3345,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -3320,18 +3390,20 @@ theme <- NULL
 ind_ID <- 91269
 ind_sex <- "Persons"
 ind_age <- "16+ yrs"
-title <- paste0("Rheumatoid arthritis: QOF prevalence (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("Rheumatoid arthritis: QOF prevalence")
-additional_text <- NULL
-notes <- NULL
-
+title <- paste0("Rheumatoid arthritis: QOF prevalence (", tolower(ind_sex),
+                "), (", tolower(ind_age), ")")
+short_title <- paste0("Rheumatoid arthritis: QOF prevalence (",
+                      tolower(ind_age), ")")
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -3346,10 +3418,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -3390,18 +3463,19 @@ theme <- NULL
 ind_ID <- 92600
 ind_sex <- "Persons"
 ind_age <- "60-74 yrs"
-title <- paste0("Bowel cancer screening coverage: aged 60 to 74 years old (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("Bowel cancer screening coverage: aged 60 to 74 years old")
-additional_text <- NULL
-notes <- NULL
-
+title <- paste0("Bowel cancer screening coverage (", tolower(ind_sex), "), (",
+                tolower(ind_age), ")")
+short_title <- paste0("Bowel cancer screening (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -3416,10 +3490,11 @@ area_comp <- plot_area_comparison(data = x, area_code = NULL,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -3462,18 +3537,19 @@ theme <- NULL
 ind_ID <- 94063
 ind_sex <- "Persons"
 ind_age <- "53-70 yrs"
-title <- paste0("Breast screening coverage: aged 53 to 70 years old (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("Breast screening coverage: aged 53 to 70 years old")
-additional_text <- NULL
-notes <- NULL
-
+title <- paste0("Breast screening coverage (", tolower(ind_sex), "), (",
+                tolower(ind_age), ")")
+short_title <- paste0("Breast screening (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
@@ -3488,10 +3564,11 @@ area_comp <- plot_area_comparison(data = x, area_code = NULL,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -3537,16 +3614,16 @@ ind_age <- "65 yrs+"
 title <- paste0("Emergency hospital admissions for hip fracture, ",
                 tolower(ind_sex), ", ", tolower(ind_age))
 short_title <- paste0("Emergency admissions for hip fracture (", ind_age, ")")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -3561,10 +3638,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -3604,16 +3682,16 @@ ind_age <- "All ages"
 title <- paste0("Deaths from all causes, ", tolower(ind_sex), ", ",
                 tolower(ind_age))
 short_title <- paste0("Deaths from all causes")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -3628,10 +3706,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -3670,17 +3749,17 @@ ind_sex <- "Persons"
 ind_age <- "Under 75 yrs"
 title <- paste0("Deaths from all causes, ", tolower(ind_sex), ", ",
                 tolower(ind_age))
-short_title <- paste0("Deaths from all causes (", ind_age, ")")
-additional_text <- NULL
-notes <- NULL
-
+short_title <- paste0("Deaths from all causes (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -3695,10 +3774,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -3737,17 +3817,17 @@ ind_sex <- "Persons"
 ind_age <- "Under 75 yrs"
 title <- paste0("Deaths from causes considered preventable, ", tolower(ind_sex), ", ",
                 tolower(ind_age))
-short_title <- paste0("Deaths from preventable causes (", ind_age, ")")
-additional_text <- NULL
-notes <- NULL
-
+short_title <- paste0("Deaths from preventable causes (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -3762,10 +3842,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -3805,16 +3886,16 @@ ind_age <- "All ages"
 title <- paste0("Deaths from all cancer, ", tolower(ind_sex), ", ",
                 tolower(ind_age))
 short_title <- paste0("Deaths from all cancer")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -3829,10 +3910,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -3871,17 +3953,17 @@ ind_sex <- "Persons"
 ind_age <- "Under 75 yrs"
 title <- paste0("Deaths from all cancer, ", tolower(ind_sex), ", ",
                 tolower(ind_age))
-short_title <- paste0("Deaths from all cancer (", ind_age, ")")
-additional_text <- NULL
-notes <- NULL
-
+short_title <- paste0("Deaths from all cancer (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -3896,10 +3978,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -3939,16 +4022,16 @@ ind_age <- "All ages"
 title <- paste0("Deaths from circulatory disease, ", tolower(ind_sex), ", ",
                 tolower(ind_age))
 short_title <- paste0("Deaths from circulatory disease")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -3963,10 +4046,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -4005,17 +4089,17 @@ ind_sex <- "Persons"
 ind_age <- "Under 75 yrs"
 title <- paste0("Deaths from circulatory disease, ", tolower(ind_sex), ", ",
                 tolower(ind_age))
-short_title <- paste0("Deaths from circulatory disease (", ind_age, ")")
-additional_text <- NULL
-notes <- NULL
-
+short_title <- paste0("Deaths from circulatory disease (", tolower(ind_age), ")")
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -4030,10 +4114,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -4073,16 +4158,16 @@ ind_age <- "All ages"
 title <- paste0("Deaths from coronary heart disease, ", tolower(ind_sex), ", ",
                 tolower(ind_age))
 short_title <- paste0("Deaths from CHD")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -4097,10 +4182,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -4140,16 +4226,16 @@ ind_age <- "All ages"
 title <- paste0("Deaths from stroke, ", tolower(ind_sex), ", ",
                 tolower(ind_age))
 short_title <- paste0("Deaths from stroke")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -4164,10 +4250,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -4207,16 +4294,16 @@ ind_age <- "All ages"
 title <- paste0("Deaths from respiratory diseases, ", tolower(ind_sex), ", ",
                 tolower(ind_age))
 short_title <- paste0("Deaths from respiratory diseases")
-additional_text <- NULL
-notes <- NULL
-
+context <- NULL
 value_type <- "Indirectly standardised ratio"
 value_type_short <- "per 100"
 timeperiod <- "periods"
 original_geography <- "MSOA"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Byar's method method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Byar's method method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
@@ -4231,10 +4318,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 dataset <- rbind(dataset, x)
@@ -4288,22 +4376,21 @@ slide_num <- slide_num + 1
 theme <- NULL
 
 # Metadata
-# ind_ID <- 
-# ind_sex <- 
-# ind_age <- 
+ind_ID <- NULL
+ind_sex <- NULL
+ind_age <- NULL
 title <- paste0("Fuel poverty measured as low income low energy efficiency (LILEE)")
 short_title <- paste0("Fuel poverty")
-additional_text <- NULL
-notes <- NULL
-#caveats <- NULL
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
-# timeperiod <- "periods"
+timeperiod <- NULL
 original_geography <- "MSOA"
-#CI_level <- 0.95
-confidence_interval_method <- paste0("Sample quantiles")
+CI_level <- NULL
+benchmarking_method <- paste0("Quintiles created using sample quantiles")
 source <- paste0("Department for Energy Security and Net Zero. Sub-regional fuel poverty data")
+caveats <- NULL
+notes <- NULL
 
 x <- read.xlsx(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/gov.uk/Sub-regional fuel poverty data/source-data/Sub-regional_fuel_poverty_statistics_2023.xlsx"), 
                sheet = "Table 4", startRow = 3)
@@ -4328,24 +4415,6 @@ LA$AreaType <- "Local authority"
 i <- x$Country.code == eng_code
 eng <- slide_num <- slide_num + 1
 theme <- NULL
-
-# Metadata
-# ind_ID <- 
-# ind_sex <- 
-# ind_age <- 
-title <- paste0("Fuel poverty measured as low income low energy efficiency")
-short_title <- paste0("Fuel poverty")
-additional_text <- NULL
-notes <- NULL
-#caveats <- NULL
-
-value_type <- "Proportion (%)"
-value_type_short <- "%"
-# timeperiod <- "periods"
-original_geography <- "MSOA"
-#CI_level <- 0.95
-confidence_interval_method <- paste0("Sample quantiles")
-source <- paste0("Department for Energy Security and Net Zero. Sub-regional fuel poverty data")
 
 x <- read.xlsx(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/gov.uk/Sub-regional fuel poverty data/source-data/Sub-regional_fuel_poverty_statistics_2023.xlsx"), 
                sheet = "Table 4", startRow = 3)
@@ -4508,17 +4577,18 @@ map <- map_quintile_indicator(data = x, shape_file = shp_lsoa,
 
 trend_plot <- paste0("No trend data available.")
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 # add indicator to master dataset
 #dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
-                 value = title)
+                 value = short_title)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
                  value = slide_num)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
@@ -4544,22 +4614,21 @@ slide_num <- slide_num + 1
 theme <- NULL
 
 # Metadata
-# ind_ID <- 
-# ind_sex <- 
-# ind_age <- 
+ind_ID <- NULL
+ind_sex <- NULL
+ind_age <- NULL
 title <- paste0("Access to garden space")
 short_title <- paste0("Access to garden space")
-additional_text <- NULL
-notes <- NULL
-#caveats <- NULL
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
-# timeperiod <- "periods"
+timeperiod <- NULL
 original_geography <- "MSOA"
-#CI_level <- 0.95
-confidence_interval_method <- paste0("Sample quantiles")
+CI_level <- NULL
+benchmarking_method <- paste0("Quintiles created using sample quantiles")
 source <- paste0("Office for National Statistics. Access to gardens and public green space in Great Britain")
+caveats <- NULL
+notes <- NULL
 
 x <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/Access to gardens and public green space in Great Britain/MSOA-gardens.csv"))
 
@@ -4753,12 +4822,11 @@ map <- map_quintile_indicator(data = x, shape_file = shp_msoa,
 
 trend_plot <- paste0("No trend data available.")
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source)
-metadata <- paste0("Definition: Addresses with a private outdoor space or shared garden.\n",
-                   metadata)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 #dataset <- rbind(dataset, x)
@@ -4792,22 +4860,21 @@ slide_num <- slide_num + 1
 theme <- NULL
 
 # Metadata
-# ind_ID <- 
-# ind_sex <- 
-# ind_age <- 
+ind_ID <- NULL
+ind_sex <- NULL
+ind_age <- NULL
 title <- paste0("Access to public green space (within a five-minute walk)")
 short_title <- paste0("Access to public green space")
-additional_text <- NULL
-notes <- NULL
-caveats <- paste0("Public green space access indicator is restricted to built up areas postcodes only")
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
-# timeperiod <- "periods"
+timeperiod <- NULL
 original_geography <- "Postcode"
-#CI_level <- 0.95
-confidence_interval_method <- paste0("Sample quantiles")
+CI_level <- NULL
+benchmarking_method <- paste0("Quintiles created using sample quantiles")
 source <- paste0("Office for National Statistics. Access to gardens and public green space in Great Britain")
+caveats <- paste0("Public green space access indicator is restricted to built up areas postcodes only")
+notes <- NULL
 
 x <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/Access to gardens and public green space in Great Britain/LSOA-Parks-and-Playing-Fields.csv"))
 
@@ -4974,11 +5041,11 @@ map <- map_quintile_indicator(data = x, shape_file = shp_lsoa,
 
 trend_plot <- paste0("No trend data available.")
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source,
-                          caveats = caveats)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 #dataset <- rbind(dataset, x)
@@ -4986,7 +5053,7 @@ metadata <- text_metadata(value_type = value_type,
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
-                 value = title)
+                 value = short_title)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
                  value = slide_num)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
@@ -5012,23 +5079,21 @@ slide_num <- slide_num + 1
 theme <- NULL
 
 # Metadata
-# ind_ID <- 
-# ind_sex <- 
-# ind_age <- 
+ind_ID <- NULL
+ind_sex <- NULL
+ind_age <- NULL
 title <- paste0("Access to secondary school within 30 minutes by public transport or walking")
 short_title <- "Access to secondary school"
-additional_text <- NULL
-notes <- NULL
-caveats <- paste0("Public green space access indicator is restricted to built up areas postcodes only")
-
+context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
-# timeperiod <- "periods"
+timeperiod <- NULL
 original_geography <- "Postcode"
-CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score CI method (", CI_level * 100,"%)")
+CI_level <- NULL
+benchmarking_method <- paste0("Quintiles created using sample quantiles")
 source <- "Department for Transport. Journey time statistics"
-notes <- "Definition: Service users able to access a secondary school within 30-minutes by public transport or walking.\n"
+caveats <- NULL
+notes <- "Service users able to access a secondary school within 30-minutes by public transport or walking"
 
 x <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/gov.uk/Journey time statistics data tables (JTS)/lower super output area (JTS05)/JTS0503/processed-data/secondary-school-30min-travel.Rds"))
 
@@ -5066,11 +5131,11 @@ map <- map_rag_indicator(data = x, shape_file = shp_lsoa,
 
 trend_plot <- paste0("No trend data available.")
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          benchmarking_method = confidence_interval_method,
-                          source = source,
-                          caveats = caveats)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # add indicator to master dataset
 #dataset <- rbind(dataset, x)
@@ -5078,7 +5143,7 @@ metadata <- text_metadata(value_type = value_type,
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
-                 value = title)
+                 value = short_title)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
                  value = slide_num)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
