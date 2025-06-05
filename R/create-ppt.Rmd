@@ -401,23 +401,27 @@ theme <- NULL
 ind_ID <- 92781
 ind_sex <- "Persons"
 ind_age <- "2 yrs"
-title <- paste0("	MMR vaccination for one dose (2 years) (", tolower(ind_sex), "), (", tolower(ind_age), ")")
-short_title <- paste0("MMR vaccination for one dose (2 years)")
-additional_text <- NULL
-notes <- NULL
+title <- paste0("MMR vaccination for one dose - registered population (",
+                tolower(ind_sex), "), (", tolower(ind_age), ")")
+short_title <- paste0("MMR vaccination for one dose (", (ind_age), ")")
 
+context <- paste0("MMR is the combined vaccine that protects against measles, mumps and rubella. The Department of Health have adoped the World Health Organisation's 95% target for vaccination coverage at national and local levels")
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- "financial years"
 original_geography <- "GP"
 CI_level <- 0.95
-confidence_interval_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
+benchmarking_method <- paste0("Wilson Score method (", CI_level * 100,"%)")
 source <- paste0("Office for Health Improvement and Disparities. Fingertips. Indicator ID: ", ind_ID)
+caveats <- NULL
+notes <- NULL
+
+
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 
 # temp fix
-i <- x$Timeperiod <= max(x$Timeperiod[x$AreaType == "GPs"])
+i <- x$Timeperiod <= max(x$Timeperiod[x$AreaType == "GP"])
 x <- x[i, ]
 
 x <- create_comp_bob(data = x)
@@ -432,10 +436,11 @@ area_comp <- plot_area_comparison(data = x, value_type = value_type,
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
-metadata <- text_metadata(value_type = value_type, 
+metadata <- text_metadata(title = title, context = context,
+                          value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
-                          source = source)
+                          benchmarking_method = benchmarking_method,
+                          source = source, caveats = caveats, notes = notes)
 
 # drop eastings and northings for bind
 x$oseast1m <- NULL
@@ -494,7 +499,7 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 
 # temp fix
-i <- x$Timeperiod <= max(x$Timeperiod[x$AreaType == "GPs"])
+i <- x$Timeperiod <= max(x$Timeperiod[x$AreaType == "GP"])
 x <- x[i, ]
 
 x <- create_comp_bob(data = x)
@@ -511,7 +516,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -583,7 +588,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -650,7 +655,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -717,7 +722,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -784,7 +789,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -849,7 +854,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -914,7 +919,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -979,7 +984,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -1044,7 +1049,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -1110,7 +1115,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -1202,7 +1207,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -1270,7 +1275,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -1336,7 +1341,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -1402,7 +1407,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -1468,7 +1473,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -1538,7 +1543,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -1608,7 +1613,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -1680,7 +1685,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -1750,7 +1755,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -1820,7 +1825,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -1890,7 +1895,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -1960,7 +1965,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -2032,7 +2037,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -2102,7 +2107,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -2172,7 +2177,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -2242,7 +2247,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -2314,7 +2319,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -2384,7 +2389,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -2456,7 +2461,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -2518,7 +2523,7 @@ x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 data <- x
 eng <- data[data$AreaCode == eng_code, ]
 
-x <- data[data$AreaType == "GPs", ]
+x <- data[data$AreaType == "GP", ]
 
 # Create quintiles for all LSOA data
 quintiles <- quantile(x$Value, probs = seq(0, 1, by = 0.2), na.rm = TRUE) 
@@ -2563,7 +2568,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -2636,7 +2641,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -2703,7 +2708,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -2770,7 +2775,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -2837,7 +2842,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -2904,7 +2909,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -2971,7 +2976,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -3057,7 +3062,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -3127,7 +3132,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -3197,7 +3202,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -3267,7 +3272,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -3337,7 +3342,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -3407,7 +3412,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -3479,7 +3484,7 @@ map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # drop eastings and northings for bind
@@ -3552,7 +3557,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -3619,7 +3624,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -3686,7 +3691,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -3753,7 +3758,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -3820,7 +3825,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -3887,7 +3892,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -3954,7 +3959,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -4021,7 +4026,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -4088,7 +4093,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -4155,7 +4160,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -4222,7 +4227,7 @@ map <- map_rag_indicator(data = x, shape_file = shp_msoa,
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 
 # add indicator to master dataset
@@ -4499,7 +4504,7 @@ trend_plot <- paste0("No trend data available.")
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 # add indicator to master dataset
 #dataset <- rbind(dataset, x)
@@ -4744,7 +4749,7 @@ trend_plot <- paste0("No trend data available.")
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source)
 metadata <- paste0("Definition: Addresses with a private outdoor space or shared garden.\n",
                    metadata)
@@ -4965,7 +4970,7 @@ trend_plot <- paste0("No trend data available.")
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source,
                           caveats = caveats)
 
@@ -5057,7 +5062,7 @@ trend_plot <- paste0("No trend data available.")
 
 metadata <- text_metadata(value_type = value_type, 
                           original_geography = original_geography, 
-                          ci_method = confidence_interval_method,
+                          benchmarking_method = confidence_interval_method,
                           source = source,
                           caveats = caveats)
 
