@@ -76,6 +76,7 @@ params:
   
   # Healthy places
   title_healthy_place: TRUE
+  healthy_place_signpost_slide: TRUE
   fuel_poverty: TRUE
   access_gardenspace: TRUE
   access_public_greenspace: TRUE
@@ -97,7 +98,7 @@ ward_name <- NULL
 ward_code <- NULL
 
 # Version number
-version_num <- "0.57.3"
+version_num <- 0.58
 
 # Load required packages
 library(officer)
@@ -203,6 +204,7 @@ incl_deaths_respiratory <- report_params$deaths_respiratory
 
 # Healthy place
 incl_title_healthy_place <- report_params$title_healthy_place
+incl_healthy_place_signpost_slide <- report_params$healthy_place_signpost_slide
 incl_fuel_poverty <- report_params$fuel_poverty
 incl_access_gardenspace <- report_params$access_gardenspace
 incl_access_public_greenspace <- report_params$access_public_greenspace
@@ -4367,6 +4369,48 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
                  value = slide_num)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
+  
+```
+
+```{r healthy_place_signpost_slide, eval = incl_healthy_place_signpost_slide}
+
+slide_num <- slide_num + 1
+theme <- NULL
+title <- paste0("Healthy place indicator signpost")
+short_title <- NULL
+
+# font size
+size <- fp_text(font.size = 18 )
+
+
+# Define multiple links
+housing_condition <- hyperlink_ftext("English Housing Survey. Ministry of Housing, Communities and Local Government.", href = "https://www.gov.uk/government/statistics/english-housing-survey-local-authority-housing-stock-condition-modelling-2023",
+                                     prop = size)
+housing_efficiency <- hyperlink_ftext("Energy efficiency of housing. Nomis.", 
+                                      href = "https://www.nomisweb.co.uk/datasets/eeh",
+                                      prop = size)
+housing_maps <- hyperlink_ftext("Housing Census maps. ONS.", 
+                                href = "https://www.ons.gov.uk/census/maps/choropleth/housing?lad=E06000040",
+                                prop = size)
+work_maps <- hyperlink_ftext("Work Census maps. ONS.", 
+                             href = "https://www.ons.gov.uk/census/maps/choropleth/work?lad=E06000040",
+                             prop = size)
+
+# Combine them into a formatted paragraph
+bullet_list <- block_list(fpar(housing_condition), fpar(housing_efficiency),
+                          fpar(housing_maps), fpar(work_maps))
+
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title and content", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
+                 value = bullet_list)
   
 ```
 
