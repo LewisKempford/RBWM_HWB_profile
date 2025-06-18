@@ -4429,7 +4429,7 @@ context <- NULL
 value_type <- "Proportion (%)"
 value_type_short <- "%"
 timeperiod <- NULL
-original_geography <- "MSOA"
+original_geography <- "LSOA"
 CI_level <- NULL
 benchmarking_method <- paste0("Quintiles created using sample quantiles")
 source <- paste0("Department for Energy Security and Net Zero. Sub-regional fuel poverty data")
@@ -4457,8 +4457,6 @@ colnames(LA) <- c("AreaCode", "AreaName", "Count", "Denominator")
 LA$AreaType <- "Local authority"
 
 i <- x$Country.code == eng_code
-eng <- slide_num <- slide_num + 1
-theme <- NULL
 
 x <- read.xlsx(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/gov.uk/Sub-regional fuel poverty data/source-data/Sub-regional_fuel_poverty_statistics_2023.xlsx"), 
                sheet = "Table 4", startRow = 3)
