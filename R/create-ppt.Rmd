@@ -500,8 +500,8 @@ notes <- NULL
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 
-# temp fix
-i <- x$Timeperiod <= max(x$Timeperiod[x$AreaType == "GP"])
+# max time period is only for England atm 2025-06-18
+i <- x$Timeperiod <= max(x$Timeperiod[x$AreaType != "England"])
 x <- x[i, ]
 
 x <- create_comp_bob(data = x)
