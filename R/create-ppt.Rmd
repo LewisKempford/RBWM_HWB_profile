@@ -305,7 +305,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 
 # ---- People and place ----
 slide_num <- slide_num + 1
-theme <- NULL
+
 title <- paste0("People and place")
 short_title <- NULL
 
@@ -324,7 +324,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 ```{r population, eval = incl_population}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 title <- paste0("Population")
 short_title <- NULL
 
@@ -350,7 +350,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right")
 ```{r deprivation, eval = incl_deprivation}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 title <- paste0("Deprivation")
 short_title <- NULL
 
@@ -378,7 +378,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right")
 
 # ---- Best start in life ----
 slide_num <- slide_num + 1
-theme <- NULL
+
 title <- paste0("Best start in life")
 short_title <- NULL
 
@@ -397,7 +397,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 ```{r mmr, eval = incl_mmr}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 92781
@@ -477,7 +477,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r combined_dtap_ipv_hib, eval = incl_combined_dtap_ipv_hib}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 92782
@@ -560,7 +560,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r child_admissions, eval = incl_child_admissions}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93115
@@ -627,7 +627,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r injury_admiss_under_5, eval = incl_injury_admiss_under_5}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93114
@@ -696,7 +696,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r injury_admiss_under_15, eval = incl_injury_admiss_under_15}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93219
@@ -764,7 +764,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r injury_admiss_15_to_24, eval = incl_injury_admiss_15_to_24}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93224
@@ -832,7 +832,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r reception_obesity, eval = incl_reception_obesity}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93105
@@ -901,7 +901,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r reception_overweight, eval = incl_reception_overweight}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93106
@@ -971,7 +971,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r year_6_obesity, eval = incl_year_6_obesity}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93107
@@ -1040,7 +1040,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r year_6_overweight, eval = incl_year_6_overweight}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93108
@@ -1109,7 +1109,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_asthma, eval = incl_qof_asthma}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 90933
@@ -1181,7 +1181,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 # ---- Living well ----
 slide_num <- slide_num + 1
-theme <- NULL
+
 title <- paste0("Living well")
 short_title <- NULL
 
@@ -1200,7 +1200,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 ```{r life_expectancy_females, eval = incl_life_expectancy_females}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93283
@@ -1269,7 +1269,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r life_expectancy_males, eval = incl_life_expectancy_males}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93283
@@ -1338,7 +1338,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r unemployment, eval = incl_unemployment}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93097
@@ -1406,7 +1406,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r long_term_unemployment, eval = incl_long_term_unemployment}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93098
@@ -1473,7 +1473,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_learning_disability, eval = incl_qof_learning_disability}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 200
@@ -1545,7 +1545,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_hypertension, eval = incl_qof_hypertension}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 219
@@ -1617,7 +1617,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_epilepsy, eval = incl_qof_epilepsy}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 224
@@ -1691,7 +1691,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_diabetes, eval = incl_qof_diabetes}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 241
@@ -1763,7 +1763,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_copd, eval = incl_qof_copd}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 253
@@ -1835,7 +1835,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_hf, eval = incl_qof_hf}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 262
@@ -1907,7 +1907,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_chd, eval = incl_qof_chd}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 273
@@ -1979,7 +1979,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_cancer, eval = incl_qof_cancer}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 276
@@ -2053,7 +2053,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_af, eval = incl_qof_af}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 280
@@ -2125,7 +2125,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_mental_health, eval = incl_qof_mental_health}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 90581
@@ -2196,7 +2196,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_depression, eval = incl_qof_depression}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 90646
@@ -2267,7 +2267,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_smoking, eval = incl_qof_smoking}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 91280
@@ -2340,7 +2340,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_obesity, eval = incl_qof_obesity}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 94136
@@ -2411,7 +2411,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r cervical_screening_25_49, eval = incl_cervical_screening_25_49}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93725
@@ -2486,7 +2486,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r cervical_screening_50_64, eval = incl_cervical_screening_50_64}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93726
@@ -2561,7 +2561,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r gp_caring_responsibility, eval = incl_gp_caring_responsibility}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 352
@@ -2670,7 +2670,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r emergency_admiss_all, eval = incl_emergency_admiss_all}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93227
@@ -2738,7 +2738,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r emergency_admiss_chd, eval = incl_emergency_admiss_chd}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93229
@@ -2806,7 +2806,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r emergency_admiss_stroke, eval = incl_emergency_admiss_stroke}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93231
@@ -2874,7 +2874,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r emergency_admiss_heart_attack, eval = incl_emergency_admiss_heart_attack}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93232
@@ -2942,7 +2942,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r emergency_admiss_copd, eval = incl_emergency_admiss_copd}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93233
@@ -3010,7 +3010,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r emergency_admiss_self_harm, eval = incl_emergency_admiss_self_harm}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93239
@@ -3079,7 +3079,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 # ---- Healthy ageing ----
 slide_num <- slide_num + 1
-theme <- NULL
+
 title <- paste0("Healthy ageing")
 short_title <- NULL
 
@@ -3098,7 +3098,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 ```{r qof_stroke, eval = incl_qof_stroke}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 212
@@ -3169,7 +3169,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_dementia, eval = incl_qof_dementia}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 247
@@ -3240,7 +3240,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_ckd, eval = incl_qof_ckd}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 258
@@ -3312,7 +3312,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_osteoporosis, eval = incl_qof_osteoporosis}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 90443
@@ -3384,7 +3384,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_rheumatoid_arthritis, eval = incl_qof_rheumatoid_arthritis}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 91269
@@ -3457,7 +3457,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r bowel_cancer_screening, eval = incl_bowel_cancer_screening}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 92600
@@ -3531,7 +3531,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r breast_cancer_screening, eval = incl_breast_cancer_screening}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 94063
@@ -3605,7 +3605,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r emergency_admiss_hip_fracture, eval = incl_emergency_admiss_hip_fracture}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93241
@@ -3673,7 +3673,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r deaths_all_causes, eval = incl_deaths_all_causes}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93250
@@ -3741,7 +3741,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r deaths_under_75, eval = incl_deaths_under_75}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93252
@@ -3809,7 +3809,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r deaths_preventable, eval = incl_deaths_preventable}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93480
@@ -3877,7 +3877,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r deaths_cancer, eval = incl_deaths_cancer}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93253
@@ -3945,7 +3945,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r deaths_cancer_under_75, eval = incl_deaths_cancer_under_75}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93254
@@ -4013,7 +4013,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r deaths_circulatory_disease, eval = incl_deaths_circulatory_disease}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93255
@@ -4081,7 +4081,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r deaths_circulatory_disease_under_75, eval = incl_deaths_circulatory_disease_under_75}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93256
@@ -4149,7 +4149,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r deaths_chd, eval = incl_deaths_chd}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93257
@@ -4217,7 +4217,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r deaths_stroke, eval = incl_deaths_stroke}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93259
@@ -4285,7 +4285,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r deaths_respiratory, eval = incl_deaths_respiratory}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- 93260
@@ -4354,7 +4354,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 # ---- Healthy place ----
 slide_num <- slide_num + 1
-theme <- NULL
+
 title <- paste0("Healthy place")
 short_title <- NULL
 
@@ -4373,7 +4373,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 ```{r healthy_place_signpost_slide, eval = incl_healthy_place_signpost_slide}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 title <- paste0("Healthy place indicator signpost")
 short_title <- NULL
 
@@ -4415,7 +4415,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"),
 ```{r fuel_poverty, eval = incl_fuel_poverty}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- NULL
@@ -4651,7 +4651,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r access_gardenspace, eval = incl_access_gardenspace}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- NULL
@@ -4897,7 +4897,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r access_public_greenspace, eval = incl_access_public_greenspace}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- NULL
@@ -5116,7 +5116,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r access_secondary_school, eval = incl_access_secondary_school}
 
 slide_num <- slide_num + 1
-theme <- NULL
+
 
 # Metadata
 ind_ID <- NULL
