@@ -98,7 +98,7 @@ ward_name <- NULL
 ward_code <- NULL
 
 # Version number
-version_num <- 0.58
+version_num <- 0.59
 
 # Load required packages
 library(officer)
@@ -4660,8 +4660,8 @@ ind_age <- NULL
 title <- paste0("Access to garden space")
 short_title <- paste0("Access to garden space")
 context <- NULL
-value_type <- "Proportion (%)"
-value_type_short <- "Proportion (%) - Addresses"
+value_type <- "Proportion (%) - Addresses"
+value_type_short <- "Proportion (%)"
 timeperiod <- NULL
 original_geography <- "MSOA"
 CI_level <- NULL
