@@ -117,7 +117,7 @@ t1 <- Sys.time()
 # ---- PowerPoint template ----
 
 # Open connection to pptx file
-mydoc <- read_pptx(path = paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/References/Templates/RBWM-PHI-profiles-template.pptx"))
+mydoc <- read_pptx(path = paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/References/Templates/RBWM_PHI_profiles_template.pptx"))
 
 # slide number
 slide_num <- 0
@@ -227,7 +227,7 @@ eng_code <- "E92000001"
 lsoa_ward_lad <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/References/Geography/ONS Open Geography Portal/Lookups/LSOA to Ward to LAD/LSOA_(2021)_to_Electoral_Ward_(2024)_to_LAD_(2024)_Best_Fit_Lookup_in_EW.csv"))
 
 # RBWM postcodes
-rbwm_pcodes <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/References/Geography/ONS Open Geography Portal/NSPL/processed-data/nspl-rbwm-postcodes.Rds"))
+rbwm_pcodes <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/References/Geography/ONS Open Geography Portal/NSPL/processed_data/nspl_rbwm_postcodes.Rds"))
 
 # RBWM lsoas
 i <- lsoa_ward_lad$LAD24CD == rbwm_code
@@ -245,7 +245,7 @@ i <- msoa_ward_lad$LAD24CD == rbwm_code
 rbwm_msoas <- msoa_ward_lad$MSOA21CD[i]
 
 # ONS LA pop estimates
-pop_la <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Population/Population estimates/Local authority/processed data/ons-la-pop.Rds"))
+pop_la <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Population/Population estimates/Local authority/processed_data/ons-la-pop.Rds"))
 
 # ONS lsoa pop estimates
 pop_lsoa <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Population/Population estimates/lsoa/processed data/ons-lsoa-pop.Rds"))
@@ -254,7 +254,7 @@ pop_lsoa <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Roy
 dep <- data_deprivation_pop(population = pop_lsoa)
 
 # RBWM GPs
-epraccur <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/NHS Digital/GP and GP practice related data/processed-data/epraccur.Rds"))
+epraccur <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/NHS Digital/GP and GP practice related data/processed_data/epraccur.Rds"))
 
 rbwm_gp <- merge(x = epraccur, y = rbwm_pcodes, by = "pcdNoSpaces")
 rbwm_gp <- rbwm_gp[, c("Organisation Code", "oseast1m", "osnrth1m")]
@@ -4424,8 +4424,8 @@ ind_age <- NULL
 title <- paste0("Fuel poverty measured as low income low energy efficiency (LILEE)")
 short_title <- paste0("Fuel poverty")
 context <- NULL
-value_type <- "Proportion (%)"
-value_type_short <- "%"
+value_type <- "Proportion (%) - Households"
+value_type_short <- "Proportion (%)"
 timeperiod <- NULL
 original_geography <- "LSOA"
 CI_level <- NULL
@@ -4534,7 +4534,7 @@ x$Colour[x$Quintile == "Not compared"] <- "grey"
 x$Colour <- factor(x$Colour, c("#342346FF", "#40498EFF", "#357BA2FF", "#38AAACFF",
                                "#78D6AEFF", "grey"))
 
-latest_value <- plot_latest_value_quint(data = x, value_type = value_type)
+latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 
 #### RBWM wards ###
@@ -4570,7 +4570,7 @@ x$Colour[x$Quintile == "Not compared"] <- "grey"
 x$Colour <- factor(x$Colour, c("#342346FF", "#40498EFF", "#357BA2FF", "#38AAACFF",
                                "#78D6AEFF", "grey"))
 
-area_comp <- plot_area_comparison_quint(data = x, value_type = value_type,
+area_comp <- plot_area_comparison_quint(data = x, value_type = value_type_short,
                                         show_ci = FALSE)
 
 #### RBWM lsoas ###
@@ -4661,7 +4661,7 @@ title <- paste0("Access to garden space")
 short_title <- paste0("Access to garden space")
 context <- NULL
 value_type <- "Proportion (%)"
-value_type_short <- "%"
+value_type_short <- "Proportion (%) - Addresses"
 timeperiod <- NULL
 original_geography <- "MSOA"
 CI_level <- NULL
@@ -4760,7 +4760,7 @@ x$Colour <- factor(x$Colour, c("#342346FF", "#40498EFF", "#357BA2FF", "#38AAACFF
 
 
 
-latest_value <- plot_latest_value_quint(data = x, value_type = value_type)
+latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 
 #### RBWM MSOAs ###
@@ -4805,7 +4805,7 @@ x <- merge(x = x, y = msoa_names, by = "AreaCode", all.x = TRUE)
 
 x$AreaName[x$AreaType == "MSOA"] <- x$MSOAName[x$AreaType == "MSOA"]
 
-area_comp <- plot_area_comparison_quint(data = x, value_type = value_type,
+area_comp <- plot_area_comparison_quint(data = x, value_type = value_type_short,
                                         show_ci = FALSE)
 
 #### RBWM MSOAs ###
@@ -4906,8 +4906,8 @@ ind_age <- NULL
 title <- paste0("Access to public green space (within a five-minute walk)")
 short_title <- paste0("Access to public green space")
 context <- NULL
-value_type <- "Proportion (%)"
-value_type_short <- "%"
+value_type <- "Proportion (%) - Addresses"
+value_type_short <- "Proportion (%)"
 timeperiod <- NULL
 original_geography <- "Postcode"
 CI_level <- NULL
@@ -4998,7 +4998,7 @@ x$Colour[x$Quintile == "Not compared"] <- "grey"
 x$Colour <- factor(x$Colour, c("#342346FF", "#40498EFF", "#357BA2FF", "#38AAACFF",
                                "#78D6AEFF", "grey"))
 
-latest_value <- plot_latest_value_quint(data = x, value_type = value_type)
+latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 
 #### RBWM wards ###
@@ -5034,7 +5034,7 @@ x$Colour[x$Quintile == "Not compared"] <- "grey"
 x$Colour <- factor(x$Colour, c("#342346FF", "#40498EFF", "#357BA2FF", "#38AAACFF",
                                "#78D6AEFF", "grey"))
 
-area_comp <- plot_area_comparison_quint(data = x, value_type = value_type,
+area_comp <- plot_area_comparison_quint(data = x, value_type = value_type_short,
                                         show_ci = FALSE)
 
 #### RBWM lsoas ###
