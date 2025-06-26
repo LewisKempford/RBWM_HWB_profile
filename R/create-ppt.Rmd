@@ -309,7 +309,6 @@ slide_num <- slide_num + 1
 title <- paste0("People and place")
 short_title <- NULL
 
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "title", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -382,7 +381,6 @@ slide_num <- slide_num + 1
 title <- paste0("Best start in life")
 short_title <- NULL
 
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "title", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -397,7 +395,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 ```{r mmr, eval = incl_mmr}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 92781
@@ -477,7 +474,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r combined_dtap_ipv_hib, eval = incl_combined_dtap_ipv_hib}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 92782
@@ -561,7 +557,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93115
 ind_sex <- "Persons"
@@ -627,7 +622,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r injury_admiss_under_5, eval = incl_injury_admiss_under_5}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 93114
@@ -697,7 +691,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93219
 ind_sex <- "Persons"
@@ -764,7 +757,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r injury_admiss_15_to_24, eval = incl_injury_admiss_15_to_24}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 93224
@@ -833,7 +825,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93105
 ind_sex <- "Persons"
@@ -901,7 +892,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r reception_overweight, eval = incl_reception_overweight}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 93106
@@ -972,7 +962,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93107
 ind_sex <- "Persons"
@@ -1041,7 +1030,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93108
 ind_sex <- "Persons"
@@ -1109,7 +1097,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_asthma, eval = incl_qof_asthma}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 90933
@@ -1185,7 +1172,6 @@ slide_num <- slide_num + 1
 title <- paste0("Living well")
 short_title <- NULL
 
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "title", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -1200,7 +1186,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 ```{r life_expectancy_females, eval = incl_life_expectancy_females}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 93283
@@ -1270,7 +1255,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93283
 ind_sex <- "Male"
@@ -1339,7 +1323,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93097
 ind_sex <- "Persons"
@@ -1407,7 +1390,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93098
 ind_sex <- "Persons"
@@ -1473,7 +1455,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_learning_disability, eval = incl_qof_learning_disability}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 200
@@ -1546,7 +1527,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 219
 ind_sex <- "Persons"
@@ -1617,7 +1597,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_epilepsy, eval = incl_qof_epilepsy}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 224
@@ -1692,7 +1671,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 241
 ind_sex <- "Persons"
@@ -1763,7 +1741,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_copd, eval = incl_qof_copd}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 253
@@ -1836,7 +1813,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 262
 ind_sex <- "Persons"
@@ -1908,7 +1884,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 273
 ind_sex <- "Persons"
@@ -1979,7 +1954,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_cancer, eval = incl_qof_cancer}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 276
@@ -2054,7 +2028,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 280
 ind_sex <- "Persons"
@@ -2126,7 +2099,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 90581
 ind_sex <- "Persons"
@@ -2197,7 +2169,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 90646
 ind_sex <- "Persons"
@@ -2267,7 +2238,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_smoking, eval = incl_qof_smoking}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 91280
@@ -2341,7 +2311,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 94136
 ind_sex <- "Persons"
@@ -2411,7 +2380,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r cervical_screening_25_49, eval = incl_cervical_screening_25_49}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 93725
@@ -2487,7 +2455,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93726
 ind_sex <- "Female"
@@ -2561,7 +2528,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r gp_caring_responsibility, eval = incl_gp_caring_responsibility}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 352
@@ -2671,7 +2637,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93227
 ind_sex <- "Persons"
@@ -2738,7 +2703,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r emergency_admiss_chd, eval = incl_emergency_admiss_chd}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 93229
@@ -2807,7 +2771,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93231
 ind_sex <- "Persons"
@@ -2874,7 +2837,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r emergency_admiss_heart_attack, eval = incl_emergency_admiss_heart_attack}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 93232
@@ -2943,7 +2905,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93233
 ind_sex <- "Persons"
@@ -3010,7 +2971,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r emergency_admiss_self_harm, eval = incl_emergency_admiss_self_harm}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 93239
@@ -3083,7 +3043,6 @@ slide_num <- slide_num + 1
 title <- paste0("Healthy ageing")
 short_title <- NULL
 
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "title", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -3098,7 +3057,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 ```{r qof_stroke, eval = incl_qof_stroke}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 212
@@ -3170,7 +3128,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 247
 ind_sex <- "Persons"
@@ -3240,7 +3197,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_ckd, eval = incl_qof_ckd}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 258
@@ -3313,7 +3269,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 90443
 ind_sex <- "Persons"
@@ -3384,7 +3339,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r qof_rheumatoid_arthritis, eval = incl_qof_rheumatoid_arthritis}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 91269
@@ -3457,7 +3411,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r bowel_cancer_screening, eval = incl_bowel_cancer_screening}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 92600
@@ -3532,7 +3485,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 94063
 ind_sex <- "Persons"
@@ -3606,7 +3558,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93241
 ind_sex <- "Persons"
@@ -3673,7 +3624,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r deaths_all_causes, eval = incl_deaths_all_causes}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 93250
@@ -3742,7 +3692,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93252
 ind_sex <- "Persons"
@@ -3809,7 +3758,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r deaths_preventable, eval = incl_deaths_preventable}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 93480
@@ -3878,7 +3826,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93253
 ind_sex <- "Persons"
@@ -3945,7 +3892,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r deaths_cancer_under_75, eval = incl_deaths_cancer_under_75}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 93254
@@ -4014,7 +3960,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93255
 ind_sex <- "Persons"
@@ -4081,7 +4026,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r deaths_circulatory_disease_under_75, eval = incl_deaths_circulatory_disease_under_75}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 93256
@@ -4150,7 +4094,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93257
 ind_sex <- "Persons"
@@ -4218,7 +4161,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- 93259
 ind_sex <- "Persons"
@@ -4285,7 +4227,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r deaths_respiratory, eval = incl_deaths_respiratory}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- 93260
@@ -4380,7 +4321,6 @@ short_title <- NULL
 # font size
 size <- fp_text(font.size = 18 )
 
-
 # Define multiple links
 housing_condition <- hyperlink_ftext("English Housing Survey. Ministry of Housing, Communities and Local Government.", href = "https://www.gov.uk/government/statistics/english-housing-survey-local-authority-housing-stock-condition-modelling-2023",
                                      prop = size)
@@ -4415,7 +4355,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"),
 ```{r fuel_poverty, eval = incl_fuel_poverty}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- NULL
@@ -4651,7 +4590,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r access_gardenspace, eval = incl_access_gardenspace}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- NULL
@@ -4898,7 +4836,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 slide_num <- slide_num + 1
 
-
 # Metadata
 ind_ID <- NULL
 ind_sex <- NULL
@@ -5116,7 +5053,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 ```{r access_secondary_school, eval = incl_access_secondary_school}
 
 slide_num <- slide_num + 1
-
 
 # Metadata
 ind_ID <- NULL
