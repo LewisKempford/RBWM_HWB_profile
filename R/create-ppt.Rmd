@@ -271,6 +271,20 @@ fingertips_gp <- fingertips_gp[fingertips_gp$AreaCode %in%
 fingertips_gp <- merge(x = fingertips_gp, y = rbwm_gp, by.x = "AreaCode",
                        by.y = "Organisation Code", all.x = TRUE)
 
+#### Fuel poverty ####
+fuel_poverty <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/gov.uk/Sub-regional fuel poverty data/processed_data/fuel_poverty_LILEE.Rds"))
+
+x <- merge(x = fuel_poverty, y = lsoa_ward_lad, by.x = "AreaCode",
+           by.y = "LSOA21CD")
+
+x <- aggregate(cbind(Count, Denominator) ~ WD24CD + WD24NM + Timeperiod,
+               data = x, FUN = sum)
+colnames(x) <- c("AreaCode", "AreaName", "Timeperiod", "Count", "Denominator")
+x$AreaType <- "Ward"
+x$Value <- x$Count / x$Denominator * 100
+
+fuel_poverty <- rbind(fuel_poverty, x)
+
 #---- Shape files ----
 #### LSOAs ####
 shp_lsoa <- data_shape_lsoa()
@@ -4373,76 +4387,11 @@ source <- paste0("Department for Energy Security and Net Zero. Sub-regional fuel
 caveats <- NULL
 notes <- NULL
 
-x <- read.xlsx(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/gov.uk/Sub-regional fuel poverty data/source-data/Sub-regional_fuel_poverty_statistics_2023.xlsx"), 
-               sheet = "Table 4", startRow = 3)
-
-x <- merge(x = x, y = lsoa_ward_lad, by.x = "LSOA.Code", by.y = "LSOA21CD")
-
-ward <- aggregate(cbind(Number.of.households.in.fuel.poverty, 
-                        Number.of.households) ~ 
-                    WD24CD + WD24NM,
-                  data = x, FUN = sum)
-colnames(ward) <- c("AreaCode", "AreaName", "Count", "Denominator")
-ward$AreaType <- "Ward"
-
-
-LA <- aggregate(cbind(Number.of.households.in.fuel.poverty, 
-                      Number.of.households) ~ 
-                  Local.Authority.Code + Local.Authority.Name,
-                data = x, FUN = sum)
-colnames(LA) <- c("AreaCode", "AreaName", "Count", "Denominator")
-LA$AreaType <- "Local authority"
-
-i <- x$Country.code == eng_code
-
-x <- read.xlsx(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/gov.uk/Sub-regional fuel poverty data/source-data/Sub-regional_fuel_poverty_statistics_2023.xlsx"), 
-               sheet = "Table 4", startRow = 3)
-
-x <- merge(x = x, y = lsoa_ward_lad, by.x = "LSOA.Code", by.y = "LSOA21CD")
-
-ward <- aggregate(cbind(Number.of.households.in.fuel.poverty, 
-                        Number.of.households) ~ 
-                    WD24CD + WD24NM,
-                  data = x, FUN = sum)
-colnames(ward) <- c("AreaCode", "AreaName", "Count", "Denominator")
-ward$AreaType <- "Ward"
-
-
-LA <- aggregate(cbind(Number.of.households.in.fuel.poverty, 
-                      Number.of.households) ~ 
-                  Local.Authority.Code + Local.Authority.Name,
-                data = x, FUN = sum)
-colnames(LA) <- c("AreaCode", "AreaName", "Count", "Denominator")
-LA$AreaType <- "Local authority"
-
-eng <- data.frame(AreaCode = eng_code, AreaName = "England",
-                  Count = sum(x$Number.of.households.in.fuel.poverty),
-                  Denominator = sum(x$Number.of.households))
-eng$AreaType <- "England"
-
-x <- x[, c("LSOA.Code", "LSOA.Name", "Number.of.households.in.fuel.poverty",
-           "Number.of.households")]
-colnames(x) <- c("AreaCode", "AreaName", "Count", "Denominator")
-x$AreaType <- "LSOA"
-
-x <- rbind(x, ward, LA, eng)
-
-x$Value <- x$Count / x$Denominator * 100
-x$Timeperiod <- 2023
-
-x$LowerCI95Limit <- PHEindicatormethods:::wilson_lower(x = x$Count, n = x$Denominator) * 100
-x$LowerCI99.8Limit <- NA
-x$UpperCI95Limit <- PHEindicatormethods:::wilson_upper(x = x$Count, n = x$Denominator) * 100
-x$UpperCI99.8Limit <- NA
-
-x <- create_comp_rag(data = x, low_is_good = FALSE)
-
-data <- x
-eng <- data[data$AreaCode == eng_code, ]
-rbwm <- data[data$AreaCode == rbwm_code, ]
+data <- fuel_poverty
 
 #### Local Authorities ####
-x <- data[data$AreaType == "Local authority", ]
+x <- data[data$AreaType == "LAD" & data$Timeperiod == 2023, ]
+eng <- data[data$AreaType == "England" & data$Timeperiod == 2023, ]
 
 # Create quintiles for all LSOA data
 quintiles <- quantile(x$Value, probs = seq(0, 1, by = 0.2), na.rm = TRUE) 
