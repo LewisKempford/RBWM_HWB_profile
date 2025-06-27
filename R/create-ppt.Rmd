@@ -104,7 +104,6 @@ version_num <- 0.59
 library(officer)
 library(phiTools)
 library(sf)
-library(plyr)
 library(openxlsx)
 
 # Warning options
@@ -4387,40 +4386,9 @@ source <- paste0("Department for Energy Security and Net Zero. Sub-regional fuel
 caveats <- NULL
 notes <- NULL
 
-data <- fuel_poverty
+x <- fuel_poverty
+x <- create_comp_quintiles(data = x)
 
-#### Local Authorities ####
-x <- data[data$AreaType == "LAD" & data$Timeperiod == 2023, ]
-eng <- data[data$AreaType == "England" & data$Timeperiod == 2023, ]
-
-# Create quintiles for all LSOA data
-quintiles <- quantile(x$Value, probs = seq(0, 1, by = 0.2), na.rm = TRUE) 
-quintiles[1] <- round_any(quintiles[1], 0.1, f = floor)
-quintiles[2:5] <- round_any(quintiles[2:5], 0.1, f = round)
-quintiles[6] <- round_any(quintiles[6], 0.1, f = ceiling)
-
-x <- rbind(x, eng)
-
-x$Quintile <- with(x, cut(Value, breaks = quintiles, include.lowest = TRUE, 
-                          labels = 1:5))
-levels(x$Quintile) <- gsub(",", " - ", levels(x$Quintile))
-# The notation (a - b] means ">a and <=b".
-
-levels(x$Quintile) <- c(levels(x$Quintile), "Not compared")
-x$Quintile[is.na(x$Value)] <- "Not compared"
-
-x$Quintile[x$AreaCode == eng_code] <- "Not compared"
-
-x$Colour <- NA
-x$Colour[x$Quintile == 1] <- "#342346FF"
-x$Colour[x$Quintile == 2] <- "#40498EFF"
-x$Colour[x$Quintile == 3] <- "#357BA2FF"
-x$Colour[x$Quintile == 4] <- "#38AAACFF"
-x$Colour[x$Quintile == 5] <- "#78D6AEFF"
-x$Colour[x$Quintile == "Not compared"] <- "grey"
-
-x$Colour <- factor(x$Colour, c("#342346FF", "#40498EFF", "#357BA2FF", "#38AAACFF",
-                               "#78D6AEFF", "grey"))
 
 latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -4462,7 +4430,7 @@ area_comp <- plot_area_comparison_quint(data = x, value_type = value_type_short,
                                         show_ci = FALSE)
 
 #### RBWM lsoas ###
-i <- data$AreaCode %in% rbwm_lsoas
+i <- data$AreaCode %in% rbwm_lsoas & data$Timeperiod == 2023
 x <- data[i, ]
 
 # Create quintiles for all LSOA data
@@ -4489,15 +4457,15 @@ x$Quintile[is.na(x$Value)] <- "Not compared"
 x$Quintile[x$AreaCode == eng_code] <- "Not compared"
 
 x$Colour <- NA
-x$Colour[x$Quintile == levels(x$Quintile)[1]] <- "#342346FF"
-x$Colour[x$Quintile == levels(x$Quintile)[2]] <- "#40498EFF"
-x$Colour[x$Quintile == levels(x$Quintile)[3]] <- "#357BA2FF"
-x$Colour[x$Quintile == levels(x$Quintile)[4]] <- "#38AAACFF"
-x$Colour[x$Quintile == levels(x$Quintile)[5]] <- "#78D6AEFF"
+x$Colour[x$Quintile == levels(x$Quintile)[1]] <- "#c4b0c7"
+x$Colour[x$Quintile == levels(x$Quintile)[2]] <- "#a384a8"
+x$Colour[x$Quintile == levels(x$Quintile)[3]] <- "#6f2277"
+x$Colour[x$Quintile == levels(x$Quintile)[4]] <- "#581b5e"
+x$Colour[x$Quintile == levels(x$Quintile)[5]] <- "#431347"
 x$Colour[x$Quintile == "Not compared"] <- "grey"
 
-x$Colour <- factor(x$Colour, c("#342346FF", "#40498EFF", "#357BA2FF", "#38AAACFF",
-                               "#78D6AEFF", "grey"))
+x$Colour <- factor(x$Colour, c("#c4b0c7", "#a384a8", "#6f2277", "#581b5e",
+                               "#431347", "grey"))
 
 
 map <- map_quintile_indicator(data = x, shape_file = shp_lsoa, 
