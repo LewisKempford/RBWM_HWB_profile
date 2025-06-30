@@ -2603,7 +2603,7 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison_quint(data = x, value_type = value_type,
+area_comp <- plot_area_comp_quint(data = x, value_type = value_type,
                                         show_ci = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           legend_title = "Quintiles",
@@ -4393,7 +4393,8 @@ x <- create_comp_quintiles(data = x)
 
 latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-area_comp <- plot_area_comp_quint(data = x, value_type = value_type_short,
+area_comp <- plot_area_comp_quint(data = x, area_codes = rbwm_wards,
+                                  value_type = value_type_short,
                                   show_ci = FALSE)
 map <- map_quintile_indicator(data = x, shape_file = shp_lsoa, 
                               areas_to_map = rbwm_lsoas)
@@ -4586,7 +4587,7 @@ x <- merge(x = x, y = msoa_names, by = "AreaCode", all.x = TRUE)
 
 x$AreaName[x$AreaType == "MSOA"] <- x$MSOAName[x$AreaType == "MSOA"]
 
-area_comp <- plot_area_comparison_quint(data = x, value_type = value_type_short,
+area_comp <- plot_area_comp_quint(data = x, value_type = value_type_short,
                                         show_ci = FALSE)
 
 #### RBWM MSOAs ###
@@ -4814,7 +4815,7 @@ x$Colour[x$Quintile == "Not compared"] <- "grey"
 x$Colour <- factor(x$Colour, c("#342346FF", "#40498EFF", "#357BA2FF", "#38AAACFF",
                                "#78D6AEFF", "grey"))
 
-area_comp <- plot_area_comparison_quint(data = x, value_type = value_type_short,
+area_comp <- plot_area_comp_quint(data = x, value_type = value_type_short,
                                         show_ci = FALSE)
 
 #### RBWM lsoas ###
