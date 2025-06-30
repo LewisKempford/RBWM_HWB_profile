@@ -104,6 +104,7 @@ version_num <- 0.59
 library(officer)
 library(phiTools)
 library(sf)
+library(plyr)
 library(openxlsx)
 
 # Warning options
@@ -436,7 +437,7 @@ x <- x[i, ]
 
 x <- create_comp_bob(data = x)
 
-# latest_value <- plot_latest_value(data = x, value_type = value_type)
+# latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
@@ -515,7 +516,7 @@ x <- x[i, ]
 
 x <- create_comp_bob(data = x)
 
-# latest_value <- plot_latest_value(data = x, value_type = value_type)
+# latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
@@ -590,7 +591,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -658,7 +659,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -725,7 +726,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -792,7 +793,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -858,7 +859,7 @@ notes <- "Due to the impact of COVID-19 on the NCMP data collection, data was no
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = "Proportion (%)")
+latest_value <- plot_latest_value_rag(data = x, value_type = "Proportion (%)")
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -927,7 +928,7 @@ notes <- "Due to the impact of COVID-19 on the NCMP data collection, data was no
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = "Proportion (%)")
+latest_value <- plot_latest_value_rag(data = x, value_type = "Proportion (%)")
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -995,7 +996,7 @@ notes <- "Due to the impact of COVID-19 on the NCMP data collection, data was no
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = "Proportion (%)")
+latest_value <- plot_latest_value_rag(data = x, value_type = "Proportion (%)")
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -1063,7 +1064,7 @@ notes <- "Due to the impact of COVID-19 on the NCMP data collection, data was no
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = "Proportion (%)")
+latest_value <- plot_latest_value_rag(data = x, value_type = "Proportion (%)")
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -1131,7 +1132,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -1222,7 +1223,7 @@ x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID &
                        fingertips_msoa$Sex == ind_sex, ]
 x <- create_comp_rag(data = x, low_is_good = FALSE)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -1290,7 +1291,7 @@ x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID &
                        fingertips_msoa$Sex == ind_sex, ]
 x <- create_comp_rag(data = x, low_is_good = FALSE)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -1357,7 +1358,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -1423,7 +1424,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -1490,7 +1491,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -1561,7 +1562,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -1632,7 +1633,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-#latest_value <- plot_latest_value(data = x, value_type = value_type)
+#latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
@@ -1705,7 +1706,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -1776,7 +1777,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -1847,7 +1848,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -1918,7 +1919,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -1989,7 +1990,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-#latest_value <- plot_latest_value(data = x, value_type = value_type)
+#latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
@@ -2062,7 +2063,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -2132,7 +2133,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -2202,7 +2203,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -2272,7 +2273,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-# latest_value <- plot_latest_value(data = x, value_type = value_type)
+# latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
@@ -2344,7 +2345,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -2416,7 +2417,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-# latest_value <- plot_latest_value(data = x, value_type = value_type)
+# latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
@@ -2490,7 +2491,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-# latest_value <- plot_latest_value(data = x, value_type = value_type)
+# latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
@@ -2597,7 +2598,7 @@ x$Colour <- factor(x$Colour, c("#342346FF", "#40498EFF", "#357BA2FF", "#38AAACFF
                                "#78D6AEFF", "grey"))
 x$Compared <- x$Quintile
 
-#latest_value <- plot_latest_value(data = x, value_type = value_type)
+#latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
@@ -2671,7 +2672,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -2738,7 +2739,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -2805,7 +2806,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -2872,7 +2873,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -2939,7 +2940,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -3006,7 +3007,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -3091,7 +3092,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -3161,7 +3162,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -3232,7 +3233,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -3303,7 +3304,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -3375,7 +3376,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -3446,7 +3447,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-#latest_value <- plot_latest_value(data = x, value_type = value_type)
+#latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
@@ -3519,7 +3520,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 x <- create_comp_bob(data = x)
 
-#latest_value <- plot_latest_value(data = x, value_type = value_type)
+#latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
@@ -3592,7 +3593,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -3659,7 +3660,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -3726,7 +3727,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -3793,7 +3794,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -3860,7 +3861,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -3927,7 +3928,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -3994,7 +3995,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -4061,7 +4062,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -4128,7 +4129,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -4195,7 +4196,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -4262,7 +4263,7 @@ notes <- NULL
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
 x <- create_comp_rag(data = x)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
@@ -4392,85 +4393,10 @@ x <- create_comp_quintiles(data = x)
 
 latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-
-#### RBWM wards ###
-i <- data$AreaCode %in% rbwm_wards
-x <- data[i, ]
-
-# Create quintiles for all LSOA data
-quintiles <- quantile(x$Value, probs = seq(0, 1, by = 0.2), na.rm = TRUE) 
-quintiles[1] <- round_any(quintiles[1], 0.1, f = floor)
-quintiles[2:5] <- round_any(quintiles[2:5], 0.1, f = round)
-quintiles[6] <- round_any(quintiles[6], 0.1, f = ceiling)
-
-x <- rbind(x, rbwm, eng)
-
-x$Quintile <- with(x, cut(Value, breaks = quintiles, include.lowest = TRUE, 
-                          labels = 1:5))
-levels(x$Quintile) <- gsub(",", " - ", levels(x$Quintile))
-# The notation (a - b] means ">a and <=b".
-
-levels(x$Quintile) <- c(levels(x$Quintile), "Not compared")
-x$Quintile[is.na(x$Value)] <- "Not compared"
-
-x$Quintile[x$AreaCode == eng_code] <- "Not compared"
-
-x$Colour <- NA
-x$Colour[x$Quintile == 1] <- "#342346FF"
-x$Colour[x$Quintile == 2] <- "#40498EFF"
-x$Colour[x$Quintile == 3] <- "#357BA2FF"
-x$Colour[x$Quintile == 4] <- "#38AAACFF"
-x$Colour[x$Quintile == 5] <- "#78D6AEFF"
-x$Colour[x$Quintile == "Not compared"] <- "grey"
-
-x$Colour <- factor(x$Colour, c("#342346FF", "#40498EFF", "#357BA2FF", "#38AAACFF",
-                               "#78D6AEFF", "grey"))
-
-area_comp <- plot_area_comparison_quint(data = x, value_type = value_type_short,
-                                        show_ci = FALSE)
-
-#### RBWM lsoas ###
-i <- data$AreaCode %in% rbwm_lsoas & data$Timeperiod == 2023
-x <- data[i, ]
-
-# Create quintiles for all LSOA data
-quintiles <- quantile(x$Value, probs = seq(0, 1, by = 0.2), na.rm = TRUE) 
-quintiles[1] <- round_any(quintiles[1], 0.1, f = floor)
-quintiles[2:5] <- round_any(quintiles[2:5], 0.1, f = round)
-quintiles[6] <- round_any(quintiles[6], 0.1, f = ceiling)
-
-x$Quintile <- with(x, cut(Value, breaks = quintiles, include.lowest = TRUE, 
-                          dig.lab = 5))
-
-levels(x$Quintile) <- gsub("([0-9]+\\.[0-9]+)(\\])", "\\2\\1", levels(x$Quintile))
-levels(x$Quintile) <- gsub("([0-9]+)(\\])", "\\2\\1", levels(x$Quintile))
-levels(x$Quintile) <- gsub("\\(", ">", levels(x$Quintile))
-levels(x$Quintile) <- gsub("\\]", "\u2264", levels(x$Quintile))
-levels(x$Quintile) <- gsub("\\[", "\u2265", levels(x$Quintile))
-levels(x$Quintile) <- gsub(",", " - ", levels(x$Quintile))
-
-# The notation (a - b] means ">a and <=b".
-
-levels(x$Quintile) <- c(levels(x$Quintile), "Not compared")
-x$Quintile[is.na(x$Value)] <- "Not compared"
-
-x$Quintile[x$AreaCode == eng_code] <- "Not compared"
-
-x$Colour <- NA
-x$Colour[x$Quintile == levels(x$Quintile)[1]] <- "#c4b0c7"
-x$Colour[x$Quintile == levels(x$Quintile)[2]] <- "#a384a8"
-x$Colour[x$Quintile == levels(x$Quintile)[3]] <- "#6f2277"
-x$Colour[x$Quintile == levels(x$Quintile)[4]] <- "#581b5e"
-x$Colour[x$Quintile == levels(x$Quintile)[5]] <- "#431347"
-x$Colour[x$Quintile == "Not compared"] <- "grey"
-
-x$Colour <- factor(x$Colour, c("#c4b0c7", "#a384a8", "#6f2277", "#581b5e",
-                               "#431347", "grey"))
-
-
+area_comp <- plot_area_comp_quint(data = x, value_type = value_type_short,
+                                  show_ci = FALSE)
 map <- map_quintile_indicator(data = x, shape_file = shp_lsoa, 
                               areas_to_map = rbwm_lsoas)
-
 trend_plot <- paste0("No trend data available.")
 
 metadata <- text_metadata(title = title, context = context,
@@ -5013,7 +4939,7 @@ x$UpperCI99.8Limit <- NA
 
 x <- create_comp_rag(data = x, low_is_good = FALSE)
 
-latest_value <- plot_latest_value(data = x, value_type = value_type)
+latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 
 i <- x$AreaCode %in% c(eng_code, rbwm_code, rbwm_wards)
