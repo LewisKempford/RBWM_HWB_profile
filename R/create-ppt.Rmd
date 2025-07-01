@@ -439,7 +439,7 @@ x <- create_comp_bob(data = x)
 
 # latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-# trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+# trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -518,7 +518,7 @@ x <- create_comp_bob(data = x)
 
 # latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-# trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+# trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -593,7 +593,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -661,7 +661,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -728,7 +728,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -795,7 +795,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -861,7 +861,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = "Proportion (%)")
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -930,7 +930,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = "Proportion (%)")
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -998,7 +998,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = "Proportion (%)")
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -1066,7 +1066,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = "Proportion (%)")
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -1134,7 +1134,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -1225,7 +1225,7 @@ x <- create_comp_rag(data = x, low_is_good = FALSE)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -1293,7 +1293,7 @@ x <- create_comp_rag(data = x, low_is_good = FALSE)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -1360,7 +1360,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -1426,7 +1426,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -1493,7 +1493,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -1564,7 +1564,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -1635,7 +1635,7 @@ x <- create_comp_bob(data = x)
 
 #latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-# trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+# trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, area_code = NULL,
@@ -1708,7 +1708,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -1779,7 +1779,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -1850,7 +1850,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -1921,7 +1921,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -1992,7 +1992,7 @@ x <- create_comp_bob(data = x)
 
 #latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-# trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+# trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, area_code = NULL,
@@ -2065,7 +2065,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -2135,7 +2135,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -2205,7 +2205,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -2275,7 +2275,7 @@ x <- create_comp_bob(data = x)
 
 # latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-# trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+# trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -2347,7 +2347,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -2419,7 +2419,7 @@ x <- create_comp_bob(data = x)
 
 # latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-# trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+# trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -2493,7 +2493,7 @@ x <- create_comp_bob(data = x)
 
 # latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-# trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+# trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -2600,7 +2600,7 @@ x$Compared <- x$Quintile
 
 #latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-# trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+# trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comp_quint(data = x, value_type = value_type,
@@ -2674,7 +2674,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -2741,7 +2741,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -2808,7 +2808,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -2875,7 +2875,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -2942,7 +2942,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -3009,7 +3009,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -3094,7 +3094,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -3164,7 +3164,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -3235,7 +3235,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -3306,7 +3306,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -3378,7 +3378,7 @@ x <- create_comp_bob(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -3449,7 +3449,7 @@ x <- create_comp_bob(data = x)
 
 #latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-# trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+# trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, area_code = NULL,
@@ -3522,7 +3522,7 @@ x <- create_comp_bob(data = x)
 
 #latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-# trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+# trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, area_code = NULL,
@@ -3595,7 +3595,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -3662,7 +3662,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -3729,7 +3729,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -3796,7 +3796,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -3863,7 +3863,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -3930,7 +3930,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -3997,7 +3997,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -4064,7 +4064,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -4131,7 +4131,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -4198,7 +4198,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
@@ -4265,7 +4265,7 @@ x <- create_comp_rag(data = x)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_indicator_trend(data = x, value_type = value_type, 
+trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
