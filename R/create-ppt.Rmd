@@ -4390,7 +4390,6 @@ notes <- NULL
 x <- fuel_poverty
 x <- create_comp_quintiles(data = x)
 
-
 latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 area_comp <- plot_area_comp_quint(data = x, area_codes = rbwm_wards,
