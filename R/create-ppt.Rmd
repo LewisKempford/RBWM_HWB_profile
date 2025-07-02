@@ -2563,48 +2563,16 @@ notes <- paste0("All results are based on weighted data. Weighting changes the d
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 
-data <- x
-eng <- data[data$AreaCode == eng_code, ]
-
-x <- data[data$AreaType == "GP", ]
-
-# Create quintiles for all LSOA data
-quintiles <- quantile(x$Value, probs = seq(0, 1, by = 0.2), na.rm = TRUE) 
-quintiles[1] <- round_any(quintiles[1], 0.1, f = floor)
-quintiles[2:5] <- round_any(quintiles[2:5], 0.1, f = round)
-quintiles[6] <- round_any(quintiles[6], 0.1, f = ceiling)
-
-x <- rbind(x, eng)
-
-x$Quintile <- with(x, cut(Value, breaks = quintiles, include.lowest = TRUE, 
-                          labels = 1:5))
-levels(x$Quintile) <- gsub(",", " - ", levels(x$Quintile))
-# The notation (a - b] means ">a and <=b".
-
-levels(x$Quintile) <- c(levels(x$Quintile), "Not compared")
-x$Quintile[is.na(x$Value)] <- "Not compared"
-
-x$Quintile[x$AreaCode == eng_code] <- "Not compared"
-
-x$Colour <- NA
-x$Colour[x$Quintile == 1] <- "#342346FF"
-x$Colour[x$Quintile == 2] <- "#40498EFF"
-x$Colour[x$Quintile == 3] <- "#357BA2FF"
-x$Colour[x$Quintile == 4] <- "#38AAACFF"
-x$Colour[x$Quintile == 5] <- "#78D6AEFF"
-x$Colour[x$Quintile == "Not compared"] <- "grey"
-
-x$Colour <- factor(x$Colour, c("#342346FF", "#40498EFF", "#357BA2FF", "#38AAACFF",
-                               "#78D6AEFF", "grey"))
-x$Compared <- x$Quintile
+x <- create_comp_quintiles(data = x)
 
 #latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comp_quint(data = x, value_type = value_type,
-                                        show_ci = FALSE)
+area_comp <- plot_area_comp_quint(data = x, value_type = value_type, 
+                                  area_codes = rbwm_gp$`Organisation Code`,
+                                  show_ci = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           legend_title = "Quintiles",
                           locations_to_map = rbwm_gp$`Organisation Code`)
@@ -4397,7 +4365,7 @@ area_comp <- plot_area_comp_quint(data = x, area_codes = rbwm_wards,
                                   show_ci = FALSE)
 map <- map_quintile_indicator(data = x, shape_file = shp_lsoa, 
                               areas_to_map = rbwm_lsoas)
-trend_plot <- paste0("No trend data available.")
+trend_plot <- plot_trend_quint(data = x)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -4586,8 +4554,9 @@ x <- merge(x = x, y = msoa_names, by = "AreaCode", all.x = TRUE)
 
 x$AreaName[x$AreaType == "MSOA"] <- x$MSOAName[x$AreaType == "MSOA"]
 
-area_comp <- plot_area_comp_quint(data = x, value_type = value_type_short,
-                                        show_ci = FALSE)
+area_comp <- plot_area_comp_quint(data = x, area_codes = rbwm_wards,
+                                  value_type = value_type_short,
+                                  show_ci = FALSE)
 
 #### RBWM MSOAs ###
 i <- data$AreaCode %in% rbwm_msoas
@@ -4814,8 +4783,9 @@ x$Colour[x$Quintile == "Not compared"] <- "grey"
 x$Colour <- factor(x$Colour, c("#342346FF", "#40498EFF", "#357BA2FF", "#38AAACFF",
                                "#78D6AEFF", "grey"))
 
-area_comp <- plot_area_comp_quint(data = x, value_type = value_type_short,
-                                        show_ci = FALSE)
+area_comp <- plot_area_comp_quint(data = x, area_codes = rbwm_wards,
+                                  value_type = value_type_short,
+                                  show_ci = FALSE)
 
 #### RBWM lsoas ###
 i <- data$AreaCode %in% rbwm_lsoas
