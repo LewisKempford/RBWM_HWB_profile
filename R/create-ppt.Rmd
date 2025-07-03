@@ -294,8 +294,20 @@ garden_space <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive -
 #### Access to greenspace ####
 greenspace <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/Access to gardens and public green space in Great Britain/Public greenspace/processed_data/access_to_greenspace.Rds"))
 
-ward_greenspace <- merge(x = greenspace, y = lsoa_ward_lad_2011, 
-                         by.x = "AreaCode", by.y = "LSOA11CD", all.x = TRUE)
+# create ward level aggregate from LSOA best fit lookup
+ward <- greenspace[greenspace$AreaType == "LSOA", ]
+ward <- merge(x = ward, y = lsoa_ward_lad_2011, by.x = "AreaCode",
+              by.y = "LSOA11CD", all.x = TRUE)
+
+ward <- aggregate(cbind(Count, Denominator) ~ WD20CD + WD20NM + Timeperiod,
+                  data = ward, FUN = sum)
+colnames(ward)[colnames(ward) == "WD20CD"] <- "AreaCode"
+colnames(ward)[colnames(ward) == "WD20NM"] <- "AreaName"
+ward$AreaType <- "Ward"
+
+ward$Value <- ward$Count / ward$Denominator * 100
+
+greenspace <- rbind(greenspace, ward)
 
 #---- Shape files ----
 #### LSOAs ####
@@ -4400,7 +4412,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
                  value = latest_period, alt_text = latest_period)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot, alt_text = trend_plot)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
                  value = area_comp$plot, alt_text = area_comp$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
@@ -4496,7 +4508,7 @@ source <- paste0("Office for National Statistics. Access to gardens and public g
 caveats <- paste0("Public green space access indicator is restricted to built up areas postcodes only")
 notes <- NULL
 
-x <- 
+x <- greenspace
 x <- create_comp_quintiles(data = x, low_is_good = FALSE)
 
 latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
