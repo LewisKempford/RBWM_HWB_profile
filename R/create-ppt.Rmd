@@ -88,15 +88,6 @@ params:
 # set working directory
 setwd(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/projects_git/JHWBS-profiles/R"))
 
-# Save dataset
-save_dataset <- TRUE
-
-# Do you want to load the lookup and data files
-load_files <- TRUE
-
-ward_name <- NULL
-ward_code <- NULL
-
 # Version number
 version_num <- "0.60"
 
@@ -266,11 +257,11 @@ rbwm_gp <- rbwm_gp[, c("Organisation Code", "oseast1m", "osnrth1m")]
 fingertips_msoa <- data_fingertips_msoa()
 fingertips_gp <- data_fingertips_gp()
 
-# remove non_rbwm gps but keep england
-fingertips_gp <- fingertips_gp[fingertips_gp$AreaCode %in% 
-                                 c(rbwm_gp$`Organisation Code`, rbwm_code, 
-                                   eng_code), ]
-
+# # remove non_rbwm gps but keep england
+# fingertips_gp <- fingertips_gp[fingertips_gp$AreaCode %in% 
+#                                  c(rbwm_gp$`Organisation Code`, rbwm_code, 
+#                                    eng_code), ]
+# 
 fingertips_gp <- merge(x = fingertips_gp, y = rbwm_gp, by.x = "AreaCode",
                        by.y = "Organisation Code", all.x = TRUE)
 
@@ -456,7 +447,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 
 # max time period is only for England atm 2025-06-18
-i <- x$Timeperiod <= max(x$Timeperiod[x$AreaType != "England"])
+i <- x$Timeperiod <= max(x$Timeperiod[x$AreaCode %in% rbwm_gp$`Organisation Code`])
 x <- x[i, ]
 
 x <- create_comp_bob(data = x)
@@ -466,8 +457,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -535,7 +526,7 @@ notes <- NULL
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 
 # max time period is only for England atm 2025-06-18
-i <- x$Timeperiod <= max(x$Timeperiod[x$AreaType != "England"])
+i <- x$Timeperiod <= max(x$Timeperiod[x$AreaCode %in% rbwm_gp$`Organisation Code`])
 x <- x[i, ]
 
 x <- create_comp_bob(data = x)
@@ -1161,8 +1152,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, value_type = value_type,
+                             show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -2594,7 +2585,7 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comp_quint(data = x, value_type = value_type, 
+area_comp <- plot_areas_quint(data = x, value_type = value_type, 
                                   area_codes = rbwm_gp$`Organisation Code`,
                                   show_ci = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
@@ -4384,7 +4375,7 @@ x <- create_comp_quintiles(data = x)
 
 latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-area_comp <- plot_area_comp_quint(data = x, area_codes = rbwm_wards,
+area_comp <- plot_areas_quint(data = x, area_codes = rbwm_wards,
                                   value_type = value_type_short,
                                   show_ci = FALSE)
 map <- map_quintile_indicator(data = x, shape_file = shp_lsoa, 
@@ -4448,7 +4439,7 @@ x <- create_comp_quintiles(data = x, low_is_good = FALSE)
 
 latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-area_comp <- plot_area_comp_quint(data = x, area_codes = rbwm_msoas,
+area_comp <- plot_areas_quint(data = x, area_codes = rbwm_msoas,
                                   value_type = value_type_short,
                                   show_ci = FALSE)
 map <- map_quintile_indicator(data = x, shape_file = shp_msoa, 
@@ -4513,7 +4504,7 @@ x <- create_comp_quintiles(data = x, low_is_good = FALSE)
 
 latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-area_comp <- plot_area_comp_quint(data = x, area_codes = rbwm_wards,
+area_comp <- plot_areas_quint(data = x, area_codes = rbwm_wards,
                                   value_type = value_type_short,
                                   show_ci = FALSE)
 map <- map_quintile_indicator(data = x, shape_file = shp_lsoa, 
