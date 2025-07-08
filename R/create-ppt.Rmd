@@ -45,7 +45,7 @@ params:
   qof_obesity: TRUE
   cervical_screening_25_49: TRUE
   cervical_screening_50_64: TRUE
-  gp_caring_responsibility: FALSE
+  gp_caring_responsibility: TRUE
   emergency_admiss_all: TRUE
   emergency_admiss_chd: TRUE
   emergency_admiss_stroke: TRUE
@@ -1152,8 +1152,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, value_type = value_type,
-                             show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -1511,8 +1511,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -1582,8 +1582,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -1653,8 +1653,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, area_code = NULL,
-                                  value_type = value_type, show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -1726,8 +1726,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -1797,8 +1797,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -1868,8 +1868,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -1939,8 +1939,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -2010,8 +2010,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, area_code = NULL,
-                                  value_type = value_type, show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -2083,8 +2083,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -2153,8 +2153,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -2223,8 +2223,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -2293,8 +2293,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -2365,8 +2365,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -2437,8 +2437,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -2511,8 +2511,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -2578,7 +2578,7 @@ notes <- paste0("All results are based on weighted data. Weighting changes the d
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
 
-x <- create_comp_quintiles(data = x)
+x <- create_comp_quintiles(data = x, low_is_good = TRUE)
 
 #latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -2588,9 +2588,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 area_comp <- plot_areas_quint(data = x, value_type = value_type, 
                                   area_codes = rbwm_gp$`Organisation Code`,
                                   show_ci = FALSE)
-map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          legend_title = "Quintiles",
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+map <- map_quint_locations(data = x, shape_file = shp_lsoa_rbwm, 
+                           locations_to_map = rbwm_gp$`Organisation Code`)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -2625,8 +2624,10 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas")
                  value = area_comp$plot, alt_text = area_comp$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
                  value = map$plot, alt_text = map$alt_text)
+# gotta make font size smaller as too much metadata
+formatted_metadata <- fpar(ftext(metadata, prop = fp_text(font.size = 8)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
-                 value = metadata) 
+                 value = formatted_metadata) 
 
 ```
 
@@ -3080,8 +3081,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -3150,8 +3151,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -3221,8 +3222,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -3292,8 +3293,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -3364,8 +3365,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, value_type = value_type,
-                                  show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -3435,8 +3436,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, area_code = NULL,
-                                  value_type = value_type, show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -3508,8 +3509,8 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_area_comparison(data = x, area_code = NULL,
-                                  value_type = value_type, show_legend = FALSE)
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+                             value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
                           locations_to_map = rbwm_gp$`Organisation Code`)
 
@@ -4639,11 +4640,6 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 outfile <- paste0("../output/RBWM-JHWBS-profile-", format(version_num, nsmall = 1), ".pptx")
 print(mydoc, target = outfile)
-
-# Save dataset
-if(save_dataset == TRUE){
-  saveRDS(dataset, paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/Profiles/JHWBS profile/RBWM-JWHBS-data-", format(version_num, nsmall = 1),".Rds"))
-}
 
 t2 <- Sys.time()
 duration <- difftime(t2, t1, units = "secs")
