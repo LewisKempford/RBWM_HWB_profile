@@ -613,7 +613,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -681,7 +681,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -748,7 +748,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -815,7 +815,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -881,7 +881,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -950,7 +950,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -1018,7 +1018,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -1086,7 +1086,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -1245,7 +1245,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -1313,7 +1313,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -1380,7 +1380,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -1446,7 +1446,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = timeperiod)
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -2663,7 +2663,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -2730,7 +2730,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -2797,7 +2797,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -2864,7 +2864,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -2931,7 +2931,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -2998,7 +2998,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -3584,7 +3584,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -3651,7 +3651,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -3718,7 +3718,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -3785,7 +3785,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -3852,7 +3852,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -3919,7 +3919,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -3986,7 +3986,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -4053,7 +4053,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -4120,7 +4120,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -4187,7 +4187,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -4254,7 +4254,7 @@ trend_plot <- plot_trend_rag(data = x, value_type = value_type,
                                    timeperiod_format = "periods")
 area_comp <- plot_area_comparison(data = x, value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_msoa, 
+map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
                          areas_to_map = rbwm_msoas)
 
 metadata <- text_metadata(title = title, context = context,
@@ -4599,7 +4599,7 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 i <- x$AreaCode %in% c(eng_code, rbwm_code, rbwm_wards)
 area_comp <- plot_area_comparison(data = x[i, ], value_type = value_type,
                                   show_legend = FALSE)
-map <- map_rag_indicator(data = x, shape_file = shp_lsoa,
+map <- map_comp_indicator(data = x, shape_file = shp_lsoa,
                          areas_to_map = rbwm_lsoas)
 
 trend_plot <- paste0("No trend data available.")
