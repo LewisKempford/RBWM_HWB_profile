@@ -89,7 +89,7 @@ params:
 setwd(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/projects_git/JHWBS-profiles/R"))
 
 # Version number
-version_num <- "0.60"
+version_num <- "0.61"
 
 # Load required packages
 library(officer)
