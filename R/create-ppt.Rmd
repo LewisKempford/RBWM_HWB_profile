@@ -300,6 +300,32 @@ ward$Value <- ward$Count / ward$Denominator * 100
 
 greenspace <- rbind(greenspace, ward)
 
+#### Access to secondary school ####
+x <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/gov.uk/Journey time statistics data tables (JTS)/lower super output area (JTS05)/JTS0503/processed_data/secondary_school_30min_travel.Rds"))
+
+ward <- merge(x = x, y = lsoa_ward_lad, by.x = "AreaCode", by.y = "LSOA21CD", 
+              all.x = TRUE)
+
+ward <- aggregate(cbind(Count, Denominator) ~ WD24CD + WD24NM, data = ward,
+                  FUN = sum)
+colnames(ward) <- c("AreaCode", "AreaName", "Count", "Denominator")
+ward$AreaType <- "Ward"
+
+ward$Value <- ward$Count / ward$Denominator * 100
+
+x <- rbind(x, ward)
+
+x$Timeperiod <- 2019
+
+x$Count <- round(x$Count)
+
+x$LowerCI95Limit <- PHEindicatormethods:::wilson_lower(x = x$Count, n = x$Denominator) * 100
+x$LowerCI99.8Limit <- NA
+x$UpperCI95Limit <- PHEindicatormethods:::wilson_upper(x = x$Count, n = x$Denominator) * 100
+x$UpperCI99.8Limit <- NA
+
+access_secondary_school <- x
+
 #---- Shape files ----
 #### LSOAs ####
 shp_lsoa <- data_shape_lsoa()
@@ -4568,35 +4594,11 @@ source <- "Department for Transport. Journey time statistics"
 caveats <- NULL
 notes <- "Service users able to access a secondary school within 30-minutes by public transport or walking"
 
-x <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/gov.uk/Journey time statistics data tables (JTS)/lower super output area (JTS05)/JTS0503/processed-data/secondary-school-30min-travel.Rds"))
-
-ward <- merge(x = x, y = lsoa_ward_lad, by.x = "AreaCode", by.y = "LSOA21CD", 
-              all.x = TRUE)
-
-ward <- aggregate(cbind(Count, Denominator) ~ WD24CD + WD24NM, data = ward,
-                  FUN = sum)
-colnames(ward) <- c("AreaCode", "AreaName", "Count", "Denominator")
-ward$AreaType <- "Ward"
-
-ward$Value <- ward$Count / ward$Denominator * 100
-
-x <- rbind(x, ward)
-
-x$Timeperiod <- 2019
-
-x$Count <- round(x$Count)
-
-x$LowerCI95Limit <- PHEindicatormethods:::wilson_lower(x = x$Count, n = x$Denominator) * 100
-x$LowerCI99.8Limit <- NA
-x$UpperCI95Limit <- PHEindicatormethods:::wilson_upper(x = x$Count, n = x$Denominator) * 100
-x$UpperCI99.8Limit <- NA
-
+x <- access_secondary_school
 x <- create_comp_rag(data = x, low_is_good = FALSE)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-
-i <- x$AreaCode %in% c(eng_code, rbwm_code, rbwm_wards)
 area_comp <- plot_areas_comp(data = x, area_codes = rbwm_wards,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_indicator(data = x, shape_file = shp_lsoa,
