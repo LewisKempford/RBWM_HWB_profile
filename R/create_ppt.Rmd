@@ -222,7 +222,7 @@ i <- lsoa_ward_lad$LAD24CD == rbwm_code
 rbwm_lsoas <- lsoa_ward_lad$LSOA21CD[i]
 
 # 2011 LSOAs to ward
-lsoa_ward_lad_2011 <- read.csv(paste0("C:/Users/HWD307/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/References/Geography/ONS Open Geography Portal/Lookups/LSOA to Ward to LAD/LSOA11_WD20_LAD20_EW_LU_v2.csv"))
+lsoa_ward_lad_2011 <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/References/Geography/ONS Open Geography Portal/Lookups/LSOA to Ward to LAD/LSOA11_WD20_LAD20_EW_LU_v2.csv"))
 
 # RBWM postcodes
 rbwm_pcodes <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/References/Geography/ONS Open Geography Portal/NSPL/processed_data/nspl_rbwm_postcodes.Rds"))
