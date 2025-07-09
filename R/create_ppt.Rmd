@@ -4640,7 +4640,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 
 ``` {r finish.code}
 
-outfile <- paste0("../output/RBWM-JHWBS-profile-", format(version_num, nsmall = 1), ".pptx")
+outfile <- paste0("../output/RBWM_JHWBS_profile_", format(version_num, nsmall = 1), ".pptx")
 print(mydoc, target = outfile)
 
 t2 <- Sys.time()
