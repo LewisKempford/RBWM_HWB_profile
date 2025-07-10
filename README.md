@@ -1,2 +1,2 @@
-# JHWBS-profiles
+# JHWBS_profiles
 Profiles to inform the JHWBS
