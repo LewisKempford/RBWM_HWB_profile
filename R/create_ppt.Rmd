@@ -86,10 +86,10 @@ params:
 ```{r settings}
 
 # set working directory
-setwd(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/projects_git/JHWBS-profiles/R"))
+setwd(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/projects_git/JHWBS_profiles/R"))
 
 # Version number
-version_num <- "0.61"
+version_num <- 0.61
 
 # Load required packages
 library(officer)
@@ -207,9 +207,6 @@ summary <- data.frame(indicator = character(),
                       comparison = character(), 
                       slide = numeric(), stringsAsFactors = FALSE) 
 
-# Create empty data frame for dataset
-dataset <- data.frame()
-
 #---- Data ----
 rbwm_code <- "E06000040"
 eng_code <- "E92000001"
@@ -239,7 +236,7 @@ i <- msoa_ward_lad$LAD24CD == rbwm_code
 rbwm_msoas <- msoa_ward_lad$MSOA21CD[i]
 
 # ONS LA pop estimates
-pop_la <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Population/Population estimates/Local authority/processed_data/ons-la-pop.Rds"))
+pop_la <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Population/Population estimates/Local authority/processed_data/ons_la_pop.Rds"))
 
 # ONS lsoa pop estimates
 pop_lsoa <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Population/Population estimates/lsoa/processed data/ons-lsoa-pop.Rds"))
@@ -337,6 +334,15 @@ shp_lsoa_rbwm <- shp_lsoa[i, ]
 #### MSOAs ####
 shp_msoa <- data_shape_msoa()
 
+#### JHWBS profile dataset ####
+folder_path <- paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/Profiles/JHWBS profile/")
+files <- list.files(folder_path)
+files <- data.frame(FileName = files, 
+                    Created = file.info(paste0(folder_path, files))$ctime)
+files <- files[order(files$Created, decreasing = TRUE), ]
+
+dataset <- readRDS(paste0(folder_path, files$FileName[1]))
+
 ```
 
 ```{r title, eval = incl_title}
@@ -379,12 +385,29 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 
 slide_num <- slide_num + 1
 
+# Metadata
+ind_ID <- "LApe"
+ind_sex <- "Persons"
+ind_age <- NULL
 title <- paste0("Population")
 short_title <- NULL
+context <- NULL
+value_type <- NULL
+value_type_short <- NULL
+timeperiod <- NULL
+original_geography <- NULL
+CI_level <- NULL
+benchmarking_method <- NULL
+source <- NULL
+caveats <- NULL
+notes <- NULL
+
+
+x <- dataset[dataset$IndicatorID == ind_ID, ]
 
 # Outputs
-pop_pyramid <- plot_pop_pyramid(data = pop_la)
-pop_comp <- plot_pop_area_comp_eng(data = pop_la)
+pop_pyramid <- plot_pop_pyramid(data = x)
+pop_comp <- plot_pop_area_comp_eng(data = x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "two content", master = "PHI profiles")
