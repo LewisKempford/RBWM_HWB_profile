@@ -207,7 +207,7 @@ summary <- data.frame(indicator = character(),
                       comparison = character(), 
                       slide = numeric(), stringsAsFactors = FALSE) 
 
-#---- Data ----
+#---- Geography lookups ----
 rbwm_code <- "E06000040"
 eng_code <- "E92000001"
 
@@ -235,93 +235,11 @@ msoa_ward_lad <- read.csv(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive
 i <- msoa_ward_lad$LAD24CD == rbwm_code
 rbwm_msoas <- msoa_ward_lad$MSOA21CD[i]
 
-# ONS LA pop estimates
-pop_la <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Population/Population estimates/Local authority/processed_data/ons_la_pop.Rds"))
-
-# ONS lsoa pop estimates
-pop_lsoa <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Population/Population estimates/lsoa/processed data/ons-lsoa-pop.Rds"))
-
-# LSOA deprivation
-dep <- data_deprivation_pop(population = pop_lsoa)
-
 # RBWM GPs
 epraccur <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/NHS Digital/GP and GP practice related data/processed_data/epraccur.Rds"))
 
-rbwm_gp <- merge(x = epraccur, y = rbwm_pcodes, by = "pcdNoSpaces")
-rbwm_gp <- rbwm_gp[, c("Organisation Code", "oseast1m", "osnrth1m")]
-
-#### Fingertips data ####
-fingertips_msoa <- data_fingertips_msoa()
-fingertips_gp <- data_fingertips_gp()
-
-# # remove non_rbwm gps but keep england
-# fingertips_gp <- fingertips_gp[fingertips_gp$AreaCode %in% 
-#                                  c(rbwm_gp$`Organisation Code`, rbwm_code, 
-#                                    eng_code), ]
-# 
-fingertips_gp <- merge(x = fingertips_gp, y = rbwm_gp, by.x = "AreaCode",
-                       by.y = "Organisation Code", all.x = TRUE)
-
-#### Fuel poverty ####
-fuel_poverty <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/gov.uk/Sub-regional fuel poverty data/processed_data/fuel_poverty_LILEE.Rds"))
-
-x <- merge(x = fuel_poverty, y = lsoa_ward_lad, by.x = "AreaCode",
-           by.y = "LSOA21CD")
-
-x <- aggregate(cbind(Count, Denominator) ~ WD24CD + WD24NM + Timeperiod,
-               data = x, FUN = sum)
-colnames(x) <- c("AreaCode", "AreaName", "Timeperiod", "Count", "Denominator")
-x$AreaType <- "Ward"
-x$Value <- x$Count / x$Denominator * 100
-
-fuel_poverty <- rbind(fuel_poverty, x)
-
-#### Garden space ####
-garden_space <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/Access to gardens and public green space in Great Britain/Gardens/processed_data/private_outdoor_space.Rds"))
-
-#### Access to greenspace ####
-greenspace <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/Access to gardens and public green space in Great Britain/Public greenspace/processed_data/access_to_greenspace.Rds"))
-
-# create ward level aggregate from LSOA best fit lookup
-ward <- greenspace[greenspace$AreaType == "LSOA", ]
-ward <- merge(x = ward, y = lsoa_ward_lad_2011, by.x = "AreaCode",
-              by.y = "LSOA11CD", all.x = TRUE)
-
-ward <- aggregate(cbind(Count, Denominator) ~ WD20CD + WD20NM + Timeperiod,
-                  data = ward, FUN = sum)
-colnames(ward)[colnames(ward) == "WD20CD"] <- "AreaCode"
-colnames(ward)[colnames(ward) == "WD20NM"] <- "AreaName"
-ward$AreaType <- "Ward"
-
-ward$Value <- ward$Count / ward$Denominator * 100
-
-greenspace <- rbind(greenspace, ward)
-
-#### Access to secondary school ####
-x <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/gov.uk/Journey time statistics data tables (JTS)/lower super output area (JTS05)/JTS0503/processed_data/secondary_school_30min_travel.Rds"))
-
-ward <- merge(x = x, y = lsoa_ward_lad, by.x = "AreaCode", by.y = "LSOA21CD", 
-              all.x = TRUE)
-
-ward <- aggregate(cbind(Count, Denominator) ~ WD24CD + WD24NM, data = ward,
-                  FUN = sum)
-colnames(ward) <- c("AreaCode", "AreaName", "Count", "Denominator")
-ward$AreaType <- "Ward"
-
-ward$Value <- ward$Count / ward$Denominator * 100
-
-x <- rbind(x, ward)
-
-x$Timeperiod <- 2019
-
-x$Count <- round(x$Count)
-
-x$LowerCI95Limit <- PHEindicatormethods:::wilson_lower(x = x$Count, n = x$Denominator) * 100
-x$LowerCI99.8Limit <- NA
-x$UpperCI95Limit <- PHEindicatormethods:::wilson_upper(x = x$Count, n = x$Denominator) * 100
-x$UpperCI99.8Limit <- NA
-
-access_secondary_school <- x
+rbwm_gp_codes <- merge(x = epraccur, y = rbwm_pcodes, by = "pcdNoSpaces")
+rbwm_gp_codes <- rbwm_gp_codes$`Organisation Code`
 
 #---- Shape files ----
 #### LSOAs ####
@@ -455,7 +373,7 @@ x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID,
 
 # Outputs
 pop_dep_bar_plot <- plot_dep_pop(data = x)
-dep_map <- map_deprivation(deprivation_data = dep, lsoa_shape = shp_lsoa,
+dep_map <- map_deprivation(deprivation_data = x, lsoa_shape = shp_lsoa,
                            lsoas_to_plot = rbwm_lsoas)
 
 # Add slide
@@ -469,7 +387,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content left"), 
                  value = pop_dep_bar_plot$plot, alt_text = pop_dep_bar_plot$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right"), 
-                 value = dep_map$ggplot, alt_text = dep_map$alt_text)
+                 value = dep_map$plot, alt_text = dep_map$alt_text)
 
 ```
 
@@ -523,10 +441,10 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -590,10 +508,10 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -1176,10 +1094,10 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -1316,9 +1234,9 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID & 
-                       fingertips_msoa$Sex == ind_sex, ]
-x <- create_comp_rag(data = x, low_is_good = FALSE)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
+x <- x[x$Sex == ind_sex, ]
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -1381,8 +1299,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -1444,8 +1362,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Jobseekers Allowance datasets only cover a subset of people claiming unemployment related benefits")
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -1508,18 +1426,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -1572,18 +1490,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -1636,18 +1554,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 #latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -1702,18 +1620,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -1766,18 +1684,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -1830,18 +1748,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -1894,18 +1812,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -1958,18 +1876,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 #latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -2024,18 +1942,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -2087,18 +2005,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -2150,18 +2068,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -2213,18 +2131,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 # latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -2278,18 +2196,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -2343,18 +2261,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 # latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -2410,18 +2328,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 # latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -2476,9 +2394,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- paste0("All results are based on weighted data. Weighting changes the data to account for differences between all patients at a practice and the sub-set of patients who actually take part in the survey")
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-
-x <- create_comp_quintiles(data = x, low_is_good = TRUE)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 #latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -2486,10 +2403,10 @@ latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
 area_comp <- plot_areas_quint(data = x, value_type = value_type, 
-                                  area_codes = rbwm_gp$`Organisation Code`,
+                                  area_codes = rbwm_gp_codes,
                                   show_ci = FALSE)
 map <- map_quint_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                           locations_to_map = rbwm_gp$`Organisation Code`)
+                           locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -2546,8 +2463,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -2610,8 +2527,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -2674,8 +2591,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -2738,8 +2655,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -2802,8 +2719,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -2866,8 +2783,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -2948,18 +2865,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -3011,18 +2928,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -3075,18 +2992,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -3139,18 +3056,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -3204,18 +3121,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
                                    show_comp_legend = FALSE, 
                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -3268,18 +3185,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 #latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -3334,18 +3251,18 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 #latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 # trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
 #                                    show_comp_legend = FALSE, 
 #                                    timeperiod_format = timeperiod)
-area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp$`Organisation Code`,
+area_comp <- plot_areas_comp(data = x, area_codes = rbwm_gp_codes,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_locations(data = x, shape_file = shp_lsoa_rbwm, 
-                          locations_to_map = rbwm_gp$`Organisation Code`)
+                          locations_to_map = rbwm_gp_codes)
 
 metadata <- text_metadata(title = title, context = context,
                           value_type = value_type, 
@@ -3400,8 +3317,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -3464,8 +3381,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -3528,8 +3445,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -3592,8 +3509,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -3656,8 +3573,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -3720,8 +3637,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -3784,8 +3701,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -3848,8 +3765,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -3912,8 +3829,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -3976,8 +3893,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -4040,8 +3957,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -4148,7 +4065,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"),
 slide_num <- slide_num + 1
 
 # Metadata
-ind_ID <- NULL
+ind_ID <- "FlPv"
 ind_sex <- NULL
 ind_age <- NULL
 title <- paste0("Fuel poverty measured as low income low energy efficiency (LILEE)")
@@ -4164,8 +4081,8 @@ source <- paste0("Department for Energy Security and Net Zero. Sub-regional fuel
 caveats <- NULL
 notes <- NULL
 
-x <- fuel_poverty
-x <- create_comp_quintiles(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -4210,7 +4127,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 slide_num <- slide_num + 1
 
 # Metadata
-ind_ID <- NULL
+ind_ID <- "Accsstgrdn"
 ind_sex <- NULL
 ind_age <- NULL
 title <- paste0("Access to garden space")
@@ -4226,8 +4143,8 @@ source <- paste0("Office for National Statistics. Access to gardens and public g
 caveats <- NULL
 notes <- NULL
 
-x <- garden_space
-x <- create_comp_quintiles(data = x, low_is_good = FALSE)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -4272,7 +4189,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 slide_num <- slide_num + 1
 
 # Metadata
-ind_ID <- NULL
+ind_ID <- "Accsstgrns"
 ind_sex <- NULL
 ind_age <- NULL
 title <- paste0("Access to public green space (within a five-minute walk)")
@@ -4288,8 +4205,8 @@ source <- paste0("Office for National Statistics. Access to gardens and public g
 caveats <- paste0("Public green space access indicator is restricted to built up areas postcodes only")
 notes <- NULL
 
-x <- greenspace
-x <- create_comp_quintiles(data = x, low_is_good = FALSE)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -4337,7 +4254,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"),
 slide_num <- slide_num + 1
 
 # Metadata
-ind_ID <- NULL
+ind_ID <- "Accsstscns"
 ind_sex <- NULL
 ind_age <- NULL
 title <- paste0("Access to secondary school within 30 minutes by public transport or walking")
@@ -4353,8 +4270,8 @@ source <- "Department for Transport. Journey time statistics"
 caveats <- NULL
 notes <- "Service users able to access a secondary school within 30-minutes by public transport or walking"
 
-x <- access_secondary_school
-x <- create_comp_rag(data = x, low_is_good = FALSE)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
