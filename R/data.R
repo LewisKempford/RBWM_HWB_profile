@@ -345,7 +345,7 @@ x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID &
                        fingertips_msoa$Sex == ind_sex, ]
 
 # create rag comparison
-x <- create_comp_rag(data = x)
+x <- create_comp_rag(data = x, low_is_good = FALSE)
 
 # pull out and store factor levels
 factor_levels_list <- store_factor_levels(data = x, indicator_id = ind_ID, 
@@ -366,7 +366,7 @@ x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID &
                        fingertips_msoa$Sex == ind_sex, ]
 
 # create rag comparison
-x <- create_comp_rag(data = x)
+x <- create_comp_rag(data = x, low_is_good = FALSE)
 
 # pull out and store factor levels
 factor_levels_list <- store_factor_levels(data = x, indicator_id = ind_ID, 
