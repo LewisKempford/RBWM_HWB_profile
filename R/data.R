@@ -1216,10 +1216,6 @@ x <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Boro
 # create comparison quintiles
 x <- create_comp_quintiles(data = x)
 
-# pull out and store factor levels
-factor_levels_list <- store_factor_levels(data = x, indicator_id = ind_ID, 
-                                          master_list = factor_levels_list)
-
 x$IndicatorName <- "Access to gardenspace"
 x$IndicatorID <- abbreviate(x$IndicatorName, minlength = 10)
 ind_ID <- unique(x$IndicatorID)
