@@ -1222,7 +1222,7 @@ factor_levels_list <- store_factor_levels(data = x, indicator_id = ind_ID,
 
 x$IndicatorName <- "Access to gardenspace"
 x$IndicatorID <- abbreviate(x$IndicatorName, minlength = 10)
-ind_id <- unique(x$IndicatorID)
+ind_ID <- unique(x$IndicatorID)
 x$Sex <- "persons"
 x$Age <- "All ages"
 
