@@ -341,7 +341,12 @@ files <- data.frame(FileName = files,
                     Created = file.info(paste0(folder_path, files))$ctime)
 files <- files[order(files$Created, decreasing = TRUE), ]
 
-dataset <- readRDS(paste0(folder_path, files$FileName[1]))
+# read in data bundle
+data_bundle <- readRDS(paste0(folder_path, files$FileName[1]))
+
+# split data bundle into dataset and factor list
+dataset <- data_bundle$dataset
+factor_list <- data_bundle$factor_levels
 
 ```
 
@@ -428,11 +433,28 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right")
 
 slide_num <- slide_num + 1
 
+# Metadata
+ind_ID <- "IMD"
+ind_sex <- "persons"
+ind_age <- NULL
 title <- paste0("Deprivation")
 short_title <- NULL
+context <- NULL
+value_type <- NULL
+value_type_short <- NULL
+timeperiod <- NULL
+original_geography <- NULL
+CI_level <- NULL
+benchmarking_method <- NULL
+source <- NULL
+caveats <- NULL
+notes <- NULL
+
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 # Outputs
-pop_dep_bar_plot <- plot_dep_pop(data = dep)
+pop_dep_bar_plot <- plot_dep_pop(data = x)
 dep_map <- map_deprivation(deprivation_data = dep, lsoa_shape = shp_lsoa,
                            lsoas_to_plot = rbwm_lsoas)
 
