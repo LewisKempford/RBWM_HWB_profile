@@ -515,13 +515,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-
-# max time period is only for England atm 2025-06-18
-i <- x$Timeperiod <= max(x$Timeperiod[x$AreaCode %in% rbwm_gp$`Organisation Code`])
-x <- x[i, ]
-
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 # latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -538,13 +533,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 unavailable_note <- paste0("Data unavailable for counties & UAs")
 
@@ -594,13 +582,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-
-# max time period is only for England atm 2025-06-18
-i <- x$Timeperiod <= max(x$Timeperiod[x$AreaCode %in% rbwm_gp$`Organisation Code`])
-x <- x[i, ]
-
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 # latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -617,13 +600,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 unavailable_note <- paste0("Data unavailable for counties & UAs")
 
@@ -674,8 +650,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -692,9 +668,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -742,8 +715,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -760,9 +733,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -809,8 +779,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -828,8 +798,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -876,8 +844,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -894,9 +862,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -942,8 +907,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Data for local authorities may not match that published by NHS England which are based on the local authority of the school attended by the child or based on the local authority that submitted the data")
 notes <- "Due to the impact of COVID-19 on the NCMP data collection, data was not published for the 2018/19 - 20/21 time period"
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = "Proportion (%)")
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -960,9 +925,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -1011,8 +973,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- "Data for local authorities may not match that published by NHS England which are based on the local authority of the school attended by the child or based on the local authority that submitted the data"
 notes <- "Due to the impact of COVID-19 on the NCMP data collection, data was not published for the 2018/19-20/21 time period"
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = "Proportion (%)")
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -1029,9 +991,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -1079,8 +1038,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- "Data for local authorities may not match that published by NHS England which are based on the local authority of the school attended by the child or based on the local authority that submitted the data"
 notes <- "Due to the impact of COVID-19 on the NCMP data collection, data was not published for the 2018/19-20/21 time period"
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = "Proportion (%)")
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -1097,9 +1056,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -1147,8 +1103,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- "Data for local authorities may not match that published by NHS England which are based on the local authority of the school attended by the child or based on the local authority that submitted the data"
 notes <- "Due to the impact of COVID-19 on the NCMP data collection, data was not published for the 2018/19-20/21 time period"
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
-x <- create_comp_rag(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = "Proportion (%)")
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -1165,9 +1121,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -1215,8 +1168,8 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- paste0("Local authority values are calculated by assigning all patients of the GP practice to the local authority where the GP practice is located")
 notes <- NULL
 
-x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
-x <- create_comp_bob(data = x)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -1233,13 +1186,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -1305,9 +1251,9 @@ source <- paste0("Office for Health Improvement and Disparities. Fingertips. Ind
 caveats <- NULL
 notes <- NULL
 
-x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID & 
-                       fingertips_msoa$Sex == ind_sex, ]
-x <- create_comp_rag(data = x, low_is_good = FALSE)
+x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID, 
+                             factor_list = factor_list)
+x <- x[x$Sex == ind_sex, ]
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
@@ -1324,9 +1270,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -1393,9 +1336,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -1460,9 +1400,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -1525,9 +1462,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -1593,13 +1527,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -1664,13 +1591,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -1734,13 +1654,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 unavailable_note <- paste0("Data unavailable for counties & UAs")
 
@@ -1808,13 +1721,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -1878,13 +1784,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -1950,13 +1849,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -2021,13 +1913,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -2091,13 +1976,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 unavailable_note <- paste0("Data unavailable for counties & UAs")
 
@@ -2165,13 +2043,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -2234,13 +2105,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -2305,13 +2169,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -2374,13 +2231,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 unavailable_note <- paste0("Data unavailable for counties & UAs")
 
@@ -2447,13 +2297,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -2518,13 +2361,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 unavailable_note <- paste0("Data unavailable for counties & UAs")
 
@@ -2592,13 +2428,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 unavailable_note <- paste0("Data unavailable for counties & UAs")
 
@@ -2668,13 +2497,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-#dataset <- rbind(dataset, x)
-
 unavailable_note <- paste0("Data unavailable for counties & UAs")
 
 # Add slide
@@ -2743,9 +2565,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -2809,9 +2628,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -2877,9 +2693,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -2943,9 +2756,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -3011,9 +2821,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -3077,9 +2884,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -3163,13 +2967,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -3232,13 +3029,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -3304,13 +3094,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -3374,13 +3157,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -3447,13 +3223,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -3517,13 +3286,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 unavailable_note <- paste0("Data unavailable for counties & UAs")
 
@@ -3591,13 +3353,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# drop eastings and northings for bind
-x$oseast1m <- NULL
-x$osnrth1m <- NULL
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 unavailable_note <- paste0("Data unavailable for counties & UAs")
 
 # Add slide
@@ -3664,9 +3419,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -3730,9 +3482,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -3798,9 +3547,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -3864,9 +3610,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -3932,9 +3675,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -3998,9 +3738,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -4066,9 +3803,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -4132,9 +3866,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -4200,9 +3931,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -4267,9 +3995,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -4333,9 +4058,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -4459,8 +4181,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-# add indicator to master dataset
-#dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -4523,9 +4243,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-#dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
@@ -4590,9 +4307,6 @@ metadata <- text_metadata(title = title, context = context,
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
 
-# add indicator to master dataset
-#dataset <- rbind(dataset, x)
-
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -4656,9 +4370,6 @@ metadata <- text_metadata(title = title, context = context,
                           original_geography = original_geography, 
                           benchmarking_method = benchmarking_method,
                           source = source, caveats = caveats, notes = notes)
-
-# add indicator to master dataset
-#dataset <- rbind(dataset, x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "jlhws", master = "PHI profiles")
