@@ -6,6 +6,7 @@ params:
   title: TRUE
   introduction: TRUE
   summary: TRUE
+  geographies: TRUE
 
   # People and place
   title_people_and_place: TRUE
@@ -127,6 +128,7 @@ report_params <- params
 incl_title <- report_params$title
 incl_intro <- report_params$introduction
 incl_summary <- report_params$summary
+incl_geographies <- report_params$geographies
 
 # People and place
 incl_title_people_and_place<- report_params$title_people_and_place
@@ -373,6 +375,55 @@ for (i in seq_along(tables)) {
   my_doc <- ph_with(mydoc, location = location, value = tables[[i]])
 }
 
+```
+
+```{r geographies, eval = incl_geographies}
+
+slide_num <- slide_num + 1
+
+title <- paste0("Statistical, Census and electoral geographies")
+
+text <- unordered_list(
+  level_list = c(0, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2),
+  str_list = c(
+    "Data at several small area levels are used in this profile, these include:", # level 0
+    "Lower Super Output Areas (LSOAs)", # level 1
+    paste0("LSOAs have a population size of 1,000 to 3,000 people.\nThere are ", length(rbwm_lsoas), " 2021 based LSOAs in RBWM."), # level 2
+    "Middle Super Output Areas (MSOAs)", # level 1
+    paste0("MSOAs have a population size of 5,000 to 15,000 people.\nThere are ", length(rbwm_msoas), " 2021 based LSOAs in RBWM."), # level 2
+    "Electoral Wards", # level 1
+    paste0("An electoral ward is an area from which one or more councillors are elected to represent residents on the local council.\nThere are ", length(rbwm_wards), " wards in RBWM."), # level 2
+    "Postcodes", # level 1
+    paste0("Postcodes are used to identify specific locations within the borough.\nThere are ", nrow(rbwm_pcodes), " postcodes in RBWM."), # level 2
+    "GP practices", # level 1
+    paste0("This profile shows main GP practices in the borough.\nThere are ", length(rbwm_gp_codes), " GP practices in RBWM.") # level 2
+               ),
+  style = list(
+    fp_text(font.size = 20),
+    fp_text(font.size = 16),
+    fp_text(font.size = 14),
+    fp_text(font.size = 16),
+    fp_text(font.size = 14),
+    fp_text(font.size = 16),
+    fp_text(font.size = 14),
+    fp_text(font.size = 16),
+    fp_text(font.size = 14),
+    fp_text(font.size = 16),
+    fp_text(font.size = 14) 
+    )
+  )
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title and content", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
+                 value = text)
+  
 ```
 
 ```{r title_people_and_place, eval = incl_title_people_and_place}
