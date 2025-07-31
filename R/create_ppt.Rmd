@@ -4,6 +4,8 @@ params:
 
   # Introduction
   title: TRUE
+  introduction: TRUE
+  summary: TRUE
 
   # People and place
   title_people_and_place: TRUE
@@ -123,6 +125,8 @@ report_params <- params
 
 # Introduction
 incl_title <- report_params$title
+incl_intro <- report_params$introduction
+incl_summary <- report_params$summary
 
 # People and place
 incl_title_people_and_place<- report_params$title_people_and_place
@@ -283,6 +287,92 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
   
+```
+
+```{r introduction, eval = incl_intro}
+
+slide_num <- slide_num + 1
+
+title <- paste0("Introduction")
+
+text <- paste0("This profile provides a summary of the health and wellbeing of the population of the Royal Borough of Windsor and Maidenhead (RBWM).\nIt includes indicators that look across the life course of the population and includes demographic information, deprivation and health outcomes.\nIndicators have been grouped into five thematic areas: People and Place, Best Start in Life, Living Well, Healthy Ageing, and Healthy Place.\nThe profile was created to support the development of RBWM Joint Health and Wellbeing Strategy 2026-2036.")
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title and content", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
+                 value = text)
+  
+```
+
+```{r summary, eval = incl_summary}
+
+slide_num <- slide_num + 1
+
+title <- paste0("Summary (1/2)")
+
+text <- "This slide provides a summary of the indicators included in the profile compared to England for the local authority."
+
+# Create summary tables
+x <- summary_table_list(data = dataset)
+
+# can only plot three tables per slide
+tables <- x[1:3]
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "summary tables", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "text"),
+                 value = text)
+
+# Add each flextable at calculated position
+for (i in seq_along(tables)) {
+  # top_pos <- slide_height - 1.25
+  location <- ph_location(left = 0.375 + ((i - 1) * 4.25), top = 1.9)
+  my_doc <- ph_with(mydoc, location = location, value = tables[[i]])
+}
+
+```
+
+```{r summary_2, eval = incl_summary}
+
+slide_num <- slide_num + 1
+
+title <- paste0("Summary (2/2)")
+
+text <- "This slide provides a summary of the indicators included in the profile compared to England for the local authority."
+
+# can only plot three tables per slide
+tables <- x[4]
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "summary tables", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "text"),
+                 value = text)
+
+# Add each flextable at calculated position
+for (i in seq_along(tables)) {
+  # top_pos <- slide_height - 1.25
+  location <- ph_location(left = 0.375 + ((i - 1) * 4.25), top = 1.9)
+  my_doc <- ph_with(mydoc, location = location, value = tables[[i]])
+}
+
 ```
 
 ```{r title_people_and_place, eval = incl_title_people_and_place}
