@@ -43,14 +43,14 @@ rbwm_gp_codes <- rbwm_gp$`Organisation Code`
 
 #---- Prerequisite Data ----
 # Create empty data frame for ward profile dataset
-dataset <- data.frame(IndicatorID = NA, IndicatorName = NA,
-                      AreaCode = NA, AreaName = NA, AreaType = NA,
-                      Timeperiod = NA, GroupingVariable = NA, Group = NA, 
-                      Sex = NA, Age = NA, Count = NA, Denominator = NA,
-                      Value = NA, LowerCI95Limit = NA, UpperCI95Limit = NA, 
-                      LowerCI99.8Limit = NA, UpperCI99.8Limit = NA,
-                      QuantileValue = NA, Compared = NA, Quintile = NA,
-                      Colour = NA, oseast1m = NA, osnrth1m = NA)
+dataset <- data.frame(IndicatorID = NA, IndicatorName = NA, 
+                      ShortIndicatorName = NA, AreaCode = NA, AreaName = NA,
+                      AreaType = NA, Timeperiod = NA, GroupingVariable = NA, 
+                      Group = NA, Sex = NA, Age = NA, Count = NA,
+                      Denominator = NA, Value = NA, LowerCI95Limit = NA,
+                      UpperCI95Limit = NA, LowerCI99.8Limit = NA,
+                      UpperCI99.8Limit = NA, QuantileValue = NA, Compared = NA,
+                      Quintile = NA, Colour = NA, oseast1m = NA, osnrth1m = NA)
 dataset <- dataset[FALSE, ]
 
 # initialise empty list to story all factor levels per indicator
@@ -85,6 +85,7 @@ x$Denominator <- x$Count
 
 # add indicator name and ID
 x$IndicatorName <- "LA population estimates"
+x$ShortIndicatorName <- "LA population"
 x$IndicatorID <- abbreviate(x$IndicatorName)
 
 # add remaining dummy cols for rbind
@@ -103,11 +104,13 @@ colnames(x) <- c("AreaCode", "GroupingVariable", "Group", "Count")
 x$Denominator <- x$Count
 
 x$IndicatorName <- "IMD (Deprivation)"
+x$ShortIndicatorName <- "IMD"
 x$IndicatorID <- "IMD"
 x$AreaName <- x$AreaCode
 x$AreaType <- "LSOA"
 x$Sex <- "persons"
 x$Age <- "All ages"
+x$Timeperiod <- 2019
 
 # pull out and store factor levels
 factor_levels_list <- store_factor_levels(data = x, indicator_id = "IMD", 
@@ -124,6 +127,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 92781
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "MMR one dose (2 yrs)"
 
 # max time period is only for England atm 2025-06-18
 i <- x$Timeperiod <= max(x$Timeperiod[x$AreaCode %in% rbwm_gp_codes])
@@ -147,6 +151,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 92782
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "DTaP/IPV/Hib/HepB vaccine (2 yrs)"
 
 # max time period is only for England atm 2025-06-18
 i <- x$Timeperiod <= max(x$Timeperiod[x$AreaCode %in% rbwm_gp_codes])
@@ -170,6 +175,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93115
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Emergency admissions (<5 yrs)"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -189,6 +195,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93114
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Emergency admissions for injuries (<5 yrs)"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -208,6 +215,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93219
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Emergency admissions for injuries (<15 yrs)"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -227,6 +235,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93224
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Emergency admissions for injuries (15-24 yrs)"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -246,6 +255,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93105
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Reception: Prevalence of obesity"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -265,6 +275,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93106
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Reception: Prevalence of excess weight"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -284,6 +295,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93107
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Year 6: Prevalence of obesity"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -303,6 +315,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93108
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Year 6: Prevalence of excess weight"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -322,6 +335,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 90933
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Asthma"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -343,6 +357,7 @@ ind_sex <- "Female"
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID & 
                        fingertips_msoa$Sex == ind_sex, ]
+x$ShortIndicatorName <- "Life expetancy (female)"
 
 # create rag comparison
 x <- create_comp_rag(data = x, low_is_good = FALSE)
@@ -364,6 +379,7 @@ ind_sex <- "Male"
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID & 
                        fingertips_msoa$Sex == ind_sex, ]
+x$ShortIndicatorName <- "Life expetancy (male)"
 
 # create rag comparison
 x <- create_comp_rag(data = x, low_is_good = FALSE)
@@ -383,6 +399,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93097
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Unemployment"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -402,6 +419,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93098
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Long-term unemployment"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -421,6 +439,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 200
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Learning disability"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -440,6 +459,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 219
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Hypertension"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -459,6 +479,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 224
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Epilepsy"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -478,6 +499,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 241
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Diabetes"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -497,6 +519,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 253
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: COPD"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -516,6 +539,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 262
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Heart failure"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -535,6 +559,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 273
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Coronary heart disease"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -554,6 +579,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 276
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Cancer"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -573,6 +599,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 280
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Atrial fibrillation"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -592,6 +619,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 90581
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Mental health"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -611,6 +639,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 90646
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Depression"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -630,6 +659,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 91280
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Smoking"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -649,6 +679,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 94136
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Obesity"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -668,6 +699,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93725
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Cervical screening (25-49 yrs)"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -687,6 +719,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93726
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Cervical screening (50-64 yrs)"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -706,6 +739,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 352
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "% Caring responsibility"
 
 # create quintiles
 x <- create_comp_quintiles(data = x, low_is_good = TRUE)
@@ -725,6 +759,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93227
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Emergency admissions"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -744,6 +779,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93229
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Emergency admissions for CHD"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -763,6 +799,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93231
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Emergency admissions for stroke"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -782,6 +819,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93232
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Emergency admissions for heart attack"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -801,6 +839,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93233
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Emergency admissions for COPD"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -819,6 +858,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93239
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Emergency admissions for self harm"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -838,6 +878,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 212
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Stroke"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -857,6 +898,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 247
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Dementia"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -876,6 +918,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 258
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Chronic kidney disease"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -895,6 +938,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 90443
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Osteoporosis"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -914,6 +958,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 91269
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "QOF: Rheumatoid arthritis"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -929,10 +974,11 @@ x <- add_dummy_cols(data = x, stand_data_frame = dataset)
 x <- x[, names(dataset), drop = FALSE]
 dataset <- rbind(x, dataset)
 
-#### Bowel cancer screening ####
+#### Bowel cancer screening (60-74 yrs) ####
 ind_ID <- 92600
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Bowel cancer screening"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -952,6 +998,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 94063
 
 x <- fingertips_gp[fingertips_gp$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Breast cancer screening"
 
 # create higher and lower comparison (BOB)
 x <- create_comp_bob(data = x)
@@ -971,6 +1018,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93241
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Emergency admissions for hip fracture"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -990,6 +1038,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93250
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Deaths from all causes"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -1009,6 +1058,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93252
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Deaths under 75"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -1028,6 +1078,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93480
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Deaths preventable"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -1047,6 +1098,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93253
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Deaths from cancer"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -1066,6 +1118,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93254
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Deaths from cancer under 75"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -1085,6 +1138,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93255
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Deaths from circulatory disease"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -1104,6 +1158,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93256
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Deaths from circulatory disease under 75"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -1123,6 +1178,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93257
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Deaths from coronary heart disease"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -1142,6 +1198,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93259
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Deaths from stroke"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -1161,6 +1218,7 @@ dataset <- rbind(x, dataset)
 ind_ID <- 93260
 
 x <- fingertips_msoa[fingertips_msoa$IndicatorID == ind_ID, ]
+x$ShortIndicatorName <- "Deaths from respiratory disease"
 
 # create rag comparison
 x <- create_comp_rag(data = x)
@@ -1194,6 +1252,7 @@ x <- rbind(x, ward)
 x <- create_comp_quintiles(data = x)
 
 x$IndicatorName <- "Fuel Poverty"
+x$ShortIndicatorName <- "Fuel poverty"
 x$IndicatorID <- abbreviate(x$IndicatorName)
 ind_ID <- unique(x$IndicatorID)
 x$Sex <- "persons"
@@ -1217,6 +1276,7 @@ x <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Boro
 x <- create_comp_quintiles(data = x)
 
 x$IndicatorName <- "Access to gardenspace"
+x$ShortIndicatorName <- "Access to gardenspace"
 x$IndicatorID <- abbreviate(x$IndicatorName, minlength = 10)
 ind_ID <- unique(x$IndicatorID)
 x$Sex <- "persons"
@@ -1254,6 +1314,7 @@ x <- rbind(x, ward)
 x <- create_comp_quintiles(data = x, low_is_good = FALSE)
 
 x$IndicatorName <- "Access to greenspace"
+x$ShortIndicatorName <- "Access to greenspace"
 x$IndicatorID <- abbreviate(x$IndicatorName, minlength = 10)
 ind_ID <- unique(x$IndicatorID)
 x$Sex <- "persons"
@@ -1297,6 +1358,7 @@ x$UpperCI99.8Limit <- NA
 x <- create_comp_rag(data = x, low_is_good = FALSE)
 
 x$IndicatorName <- "Access to secondary school"
+x$ShortIndicatorName <- "Access to secondary school"
 x$IndicatorID <- abbreviate(x$IndicatorName, minlength = 10)
 ind_ID <- unique(x$IndicatorID)
 x$Sex <- "persons"
