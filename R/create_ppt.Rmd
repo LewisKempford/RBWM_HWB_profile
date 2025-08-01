@@ -7,6 +7,7 @@ params:
   introduction: TRUE
   summary: TRUE
   geographies: TRUE
+  indicator_explained: TRUE
 
   # People and place
   title_people_and_place: TRUE
@@ -129,6 +130,7 @@ incl_title <- report_params$title
 incl_intro <- report_params$introduction
 incl_summary <- report_params$summary
 incl_geographies <- report_params$geographies
+incl_indicator_explained <- report_params$indicator_explained
 
 # People and place
 incl_title_people_and_place<- report_params$title_people_and_place
@@ -424,6 +426,24 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
                  value = text)
   
+```
+
+```{r indicator_explained, eval = incl_indicator_explained}
+
+slide_num <- slide_num + 1
+
+title <- paste0("Indicators explained")
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "JHWBS indicator explained", 
+                   master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+
 ```
 
 ```{r title_people_and_place, eval = incl_title_people_and_place}
