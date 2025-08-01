@@ -88,7 +88,8 @@ params:
   access_secondary_school: TRUE
   
   # Further information and resources
-  further_information: TRUE
+  further_info: TRUE
+  indicator_measures: TRUE
 ---
 
 ```{r settings}
@@ -97,7 +98,7 @@ params:
 setwd(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/projects_git/JHWBS_profiles/R"))
 
 # Version number
-version_num <- 0.65
+version_num <- 0.66
 
 # Load required packages
 library(officer)
@@ -215,7 +216,8 @@ incl_access_public_greenspace <- report_params$access_public_greenspace
 incl_access_secondary_school <- report_params$access_secondary_school
 
 # Further information and resources
-incl_further_information <- report_params$further_information
+incl_further_info <- report_params$further_info
+incl_indicator_measures <- report_params$indicator_measures
 
 
 # Create empty data frame for summary table
@@ -4523,6 +4525,41 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
                  value = slide_num)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
+  
+```
+
+```{r indicator_measures, eval = incl_indicator_measures}
+
+slide_num <- slide_num + 1
+
+title <- paste0("Indicator measures")
+
+text <- unordered_list(
+  level_list = c(0, 1, 1, 1),
+  str_list = c(
+    "The indicators in this profile use a variety of measures to present the data effectively, these include:", # level 0
+    "Proportion or percentage (%): a way to show a part of a whole amount. For example, if 25 out of 100 people have a certain condition, that would be shown as 25%.", # level 1
+    "Crude rate: a measure that shows the total number of events (like deaths, births, or disease cases) in a population over a specific time period. It's usually expressed per thousands of people to allow for easy comparison.", # level 1
+    "Indirectly standardised ratio (ISR): a way to compare the rate of an event in a population to what would be expected if that population had the same age-specific rates as a standard population. It adjusts for differences in age structure, making comparisons between populations more meaningful. ISRs are often expressed as a ratio or percentage, where a value of 100 (or 1.0) means the observed rate is equal to the expected rate." # level 1
+    ),
+    style = list(
+    fp_text(font.size = 20),
+    fp_text(font.size = 20),
+    fp_text(font.size = 20),
+    fp_text(font.size = 20)
+    )
+  )
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title and content", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
+                 value = text)
   
 ```
 
