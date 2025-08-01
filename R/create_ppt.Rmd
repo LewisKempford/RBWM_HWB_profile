@@ -8,6 +8,7 @@ params:
   summary: TRUE
   geographies: TRUE
   indicator_explained: TRUE
+  contact: TRUE
 
   # People and place
   title_people_and_place: TRUE
@@ -131,6 +132,7 @@ incl_intro <- report_params$introduction
 incl_summary <- report_params$summary
 incl_geographies <- report_params$geographies
 incl_indicator_explained <- report_params$indicator_explained
+incl_contact <- report_params$contact
 
 # People and place
 incl_title_people_and_place<- report_params$title_people_and_place
@@ -444,6 +446,34 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 
+```
+
+```{r contact, eval = incl_contact}
+
+slide_num <- slide_num + 1
+
+title <- paste0("Contact details")
+
+text <- unordered_list(
+  level_list = c(0, 0, 0, 0, 0),
+  str_list = c("For questions or additional information about these profiles, please contact:",
+               "Senior Public Health Analyst",
+               "Public Health",
+               "Royal Borough of Windsor and Maidenhead",
+               "phi@rbwm.gov.uk") # level 0
+  )
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title and content", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
+                 value = text)
+  
 ```
 
 ```{r title_people_and_place, eval = incl_title_people_and_place}
