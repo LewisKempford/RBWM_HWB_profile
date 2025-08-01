@@ -92,6 +92,7 @@ params:
   indicator_measures: TRUE
   lsoa_boundaries: TRUE
   msoa_boundaries: TRUE
+  ward_boundaries: TRUE
 ---
 
 ```{r settings}
@@ -222,6 +223,7 @@ incl_further_info <- report_params$further_info
 incl_indicator_measures <- report_params$indicator_measures
 incl_lsoa_boundaries <- report_params$lsoa_boundaries
 incl_msoa_boundaries <- report_params$msoa_boundaries
+incl_ward_boundaries <- report_params$ward_boundaries
 
 # Create empty data frame for summary table
 summary <- data.frame(indicator = character(), 
@@ -273,6 +275,9 @@ shp_lsoa_rbwm <- shp_lsoa[i, ]
 
 #### MSOAs ####
 shp_msoa <- data_shape_msoa()
+
+### Wards ####
+shp_ward <- data_shape_ward()
 
 #### JHWBS profile dataset ####
 folder_path <- paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/Profiles/JHWBS profile/")
@@ -4599,6 +4604,27 @@ slide_num <- slide_num + 1
 title <- paste0("MSOA boundary map")
 
 map <- map_boundary(shape_file = shp_msoa, areas_to_map = rbwm_msoas)
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title and content", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
+                 value = map$plot, alt_text = map$alt_text)
+
+```
+
+```{r ward_boundaries, eval = incl_ward_boundaries}
+
+slide_num <- slide_num + 1
+
+title <- paste0("Ward boundary map")
+
+map <- map_boundary(shape_file = shp_ward, areas_to_map = rbwm_wards)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "title and content", master = "PHI profiles")
