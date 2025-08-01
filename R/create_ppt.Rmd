@@ -86,6 +86,9 @@ params:
   access_gardenspace: TRUE
   access_public_greenspace: TRUE
   access_secondary_school: TRUE
+  
+  # Further information and resources
+  further_information: TRUE
 ---
 
 ```{r settings}
@@ -210,6 +213,9 @@ incl_fuel_poverty <- report_params$fuel_poverty
 incl_access_gardenspace <- report_params$access_gardenspace
 incl_access_public_greenspace <- report_params$access_public_greenspace
 incl_access_secondary_school <- report_params$access_secondary_school
+
+# Further information and resources
+incl_further_information <- report_params$further_information
 
 
 # Create empty data frame for summary table
@@ -4500,6 +4506,24 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
+```
+
+```{r title_further_info, eval = incl_further_info}
+
+# ---- Further information and resources ----
+slide_num <- slide_num + 1
+
+title <- paste0("Further information and resources")
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+  
 ```
 
 ``` {r finish.code}
