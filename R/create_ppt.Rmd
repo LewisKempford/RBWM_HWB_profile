@@ -90,6 +90,7 @@ params:
   # Further information and resources
   further_info: TRUE
   indicator_measures: TRUE
+  benchmarking: TRUE
   lsoa_boundaries: TRUE
   msoa_boundaries: TRUE
   ward_boundaries: TRUE
@@ -221,6 +222,7 @@ incl_access_secondary_school <- report_params$access_secondary_school
 # Further information and resources
 incl_further_info <- report_params$further_info
 incl_indicator_measures <- report_params$indicator_measures
+incl_benchmarking <- report_params$benchmarking
 incl_lsoa_boundaries <- report_params$lsoa_boundaries
 incl_msoa_boundaries <- report_params$msoa_boundaries
 incl_ward_boundaries <- report_params$ward_boundaries
@@ -4556,6 +4558,41 @@ text <- unordered_list(
     fp_text(font.size = 20),
     fp_text(font.size = 20),
     fp_text(font.size = 20)
+    )
+  )
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title and content", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
+                 value = text)
+
+```
+
+```{r benchmarking, eval = incl_benchmarking}
+
+slide_num <- slide_num + 1
+
+title <- paste0("Benchmarking methods")
+
+text <- unordered_list(
+  level_list = c(1, 1, 1, 1),
+  str_list = c(
+    "RAG comparison (Red, Amber, Green) indicates how well an area is performing compared to a benchmark, typically England. The comparison is created by comparing the area's value to a reference range, which is usually based on confidence intervals. Green shows a value that is better, red to a value that is worse and amber indicates that there is no difference when compared to the benchmark.",
+    "BOB comparison (Blue, Orange, Blue) is used when a value judgement is not appropriate. Light blue indicators a higher value and dark blue indicates a lower value compared to a benchmark, typically England. Similar to the RAG method, a comparison is created by comparing the area's value to a reference range.",
+    "Quintiles are created using a quantiling method and divide data into five equal groups. This creates relative rankings and distribution. Quintiles are often used highlight inequalities between groups or areas. Quintiles are used in this profile when the underlying data is not based on the population, for example households, or survey based data where we do not have access to the weightings",
+    "An indicator is shaded grey where it is not possible to create a compariosn. This could be due to an area having no value or values where counts are below 10."
+    ),
+  style = list(
+    fp_text(font.size = 18),
+    fp_text(font.size = 18),
+    fp_text(font.size = 18),
+    fp_text(font.size = 18)
     )
   )
 
