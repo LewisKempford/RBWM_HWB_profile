@@ -94,6 +94,7 @@ params:
   lsoa_boundaries: TRUE
   msoa_boundaries: TRUE
   ward_boundaries: TRUE
+  accessibility: TRUE
 ---
 
 ```{r settings}
@@ -226,6 +227,7 @@ incl_benchmarking <- report_params$benchmarking
 incl_lsoa_boundaries <- report_params$lsoa_boundaries
 incl_msoa_boundaries <- report_params$msoa_boundaries
 incl_ward_boundaries <- report_params$ward_boundaries
+incl_accessibility <- report_params$accessibility
 
 # Create empty data frame for summary table
 summary <- data.frame(indicator = character(), 
@@ -4673,6 +4675,55 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
                  value = map$plot, alt_text = map$alt_text)
+
+```
+
+```{r accessibility, eval = incl_accessibility}
+
+slide_num <- slide_num + 1
+
+title <- paste0("Accessibility")
+
+text <- unordered_list(
+  level_list = c(1, 1, 1, 2, 2, 2, 1, 2, 2, 2, 2),
+  str_list = c(
+    "All plots include alternative text (alt text) that describes the visual content and includes relevant values where possible.", # level 1
+    "To view the alt text: right-click on the image and select 'View Alt Text' to open the Alt Text pane.", # level 1
+    "Shapes are used alongside colour on plots to show comparisons, ensuring accessibility for users who may have difficulty seeing different colours. For example, a RAG rating (Red, Amber, Green) is commonly used to show how an area's value compares to a benchmark, such as the England average:", # level 1
+    "Green indicates better performance", # level 2
+    "Amber indicates similar performance", # level 2
+    "Red indicates worse performance", # level 2
+    "To support colour accessibility, shapes are also used to represent these ratings:", # level 1
+    "Triangle = better performance", # level 2
+    "Circle = similar performance", # level 2
+    "Triangle pointing downards = worse performance", # level 2
+    "Square = no comparison available" # level 2
+    ),
+  style = list(
+    fp_text(font.size = 18),
+    fp_text(font.size = 18),
+    fp_text(font.size = 18),
+    fp_text(font.size = 18),
+    fp_text(font.size = 18),
+    fp_text(font.size = 18),
+    fp_text(font.size = 18),
+    fp_text(font.size = 18),
+    fp_text(font.size = 18),
+    fp_text(font.size = 18),
+    fp_text(font.size = 18)
+    )
+  )
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title and content", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
+                 value = text)
 
 ```
 
