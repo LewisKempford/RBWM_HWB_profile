@@ -90,6 +90,8 @@ params:
   # Further information and resources
   further_info: TRUE
   indicator_measures: TRUE
+  lsoa_boundaries: TRUE
+  msoa_boundaries: TRUE
 ---
 
 ```{r settings}
@@ -218,7 +220,8 @@ incl_access_secondary_school <- report_params$access_secondary_school
 # Further information and resources
 incl_further_info <- report_params$further_info
 incl_indicator_measures <- report_params$indicator_measures
-
+incl_lsoa_boundaries <- report_params$lsoa_boundaries
+incl_msoa_boundaries <- report_params$msoa_boundaries
 
 # Create empty data frame for summary table
 summary <- data.frame(indicator = character(), 
@@ -226,6 +229,7 @@ summary <- data.frame(indicator = character(),
                       slide = numeric(), stringsAsFactors = FALSE) 
 
 #---- Geography lookups ----
+rbwm_name <- "RBWM"
 rbwm_code <- "E06000040"
 eng_code <- "E92000001"
 
@@ -4560,7 +4564,53 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
                  value = text)
-  
+
+```
+
+```{r lsoa_boundaries, eval = incl_lsoa_boundaries}
+
+slide_num <- slide_num + 1
+
+title <- paste0("LSOA boundary map")
+
+map <- map_boundary(shape_file = shp_lsoa, areas_to_map = rbwm_lsoas, 
+                    include_legend = FALSE)
+text <- paste0("There are ", length(rbwm_lsoas), " LSOAs in ", rbwm_name, ".")
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "two content", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content left"), 
+                 value = map$plot, alt_text = map$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right"), 
+                 value = text)
+
+```
+
+```{r msoa_boundaries, eval = incl_msoa_boundaries}
+
+slide_num <- slide_num + 1
+
+title <- paste0("MSOA boundary map")
+
+map <- map_boundary(shape_file = shp_msoa, areas_to_map = rbwm_msoas)
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title and content", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
+                 value = map$plot, alt_text = map$alt_text)
+
 ```
 
 ``` {r finish.code}
