@@ -95,6 +95,7 @@ params:
   msoa_boundaries: TRUE
   ward_boundaries: TRUE
   accessibility: TRUE
+  references: TRUE
 ---
 
 ```{r settings}
@@ -228,6 +229,7 @@ incl_lsoa_boundaries <- report_params$lsoa_boundaries
 incl_msoa_boundaries <- report_params$msoa_boundaries
 incl_ward_boundaries <- report_params$ward_boundaries
 incl_accessibility <- report_params$accessibility
+incl_references <- report_params$references
 
 # Create empty data frame for summary table
 summary <- data.frame(indicator = character(), 
@@ -4713,6 +4715,28 @@ text <- unordered_list(
     fp_text(font.size = 18)
     )
   )
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title and content", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
+                 value = text)
+
+```
+
+```{r references, eval = incl_references}
+
+slide_num <- slide_num + 1
+
+title <- paste0("References")
+
+text <-paste0("The methodology for each indicator is based on published data and existing measures.\nSources of methodology include Office for Health Improvement and Disparities, Office for National Statistics, and NHS Digital.\nSome indicator values may be different from published figures. This may be due to slight differences in numbers extracted or data being grouped into different time periods.\nOffice for National Statistics licensed under the Open Government Licence v.3.0\nContains OS data \uA9 Crown copyright and database right ", 
+format(Sys.time(), "%Y"), "\n\uA9 Stadia Maps \uA9 OpenMapTiles \uA9 OpenStreetmap \uA9 Stamen Design")
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "title and content", master = "PHI profiles")
