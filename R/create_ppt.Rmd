@@ -4618,8 +4618,4 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"),
 outfile <- paste0("../output/RBWM_JHWBS_profile_", format(version_num, nsmall = 1), ".pptx")
 print(mydoc, target = outfile)
 
-t2 <- Sys.time()
-duration <- difftime(t2, t1, units = "secs")
-# status.log(paste("This took", duration, "seconds"))
-
 ```
