@@ -94,6 +94,7 @@ params:
   lsoa_boundaries: TRUE
   msoa_boundaries: TRUE
   ward_boundaries: TRUE
+  lsoa_ward_map: TRUE
   accessibility: TRUE
   references: TRUE
   resources: TRUE
@@ -229,6 +230,7 @@ incl_benchmarking <- report_params$benchmarking
 incl_lsoa_boundaries <- report_params$lsoa_boundaries
 incl_msoa_boundaries <- report_params$msoa_boundaries
 incl_ward_boundaries <- report_params$ward_boundaries
+incl_lsoa_ward_map <- report_params$lsoa_ward_map
 incl_accessibility <- report_params$accessibility
 incl_references <- report_params$references
 incl_resources <- report_params$resources
@@ -4679,6 +4681,33 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
                  value = map$plot, alt_text = map$alt_text)
+
+```
+
+```{r lsoa_ward_map, eval = incl_lsoa_ward_map}
+
+slide_num <- slide_num + 1
+
+title <- paste0("LSOA to Ward best fit boundaries")
+
+map <- map_boundaries_overlay(base_shape = shp_lsoa_rbwm, 
+                              base_areas_to_map = rbwm_lsoas, 
+                              overlay_shape = shp_ward, 
+                              overlay_areas_to_map = rbwm_wards)
+text <- paste0("There are ", length(rbwm_lsoas), " LSOAs in ", rbwm_name, ".")
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "two content", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content left"), 
+                 value = map$plot, alt_text = map$alt_text)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right"), 
+                 value = text)
 
 ```
 
