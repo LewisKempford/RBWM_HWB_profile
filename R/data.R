@@ -61,7 +61,7 @@ factor_levels_list <- list()
 pop_la <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Population/Population estimates/Local authority/processed_data/ons_la_pop.Rds"))
 
 # ONS lsoa pop estimates
-pop_lsoa <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Population/Population estimates/lsoa/processed data/ons-lsoa-pop.Rds"))
+pop_lsoa <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Population/Population estimates/lsoa/processed_data/ons_lsoa_pop.Rds"))
 
 #### Fingertips data ####
 fingertips_gp <- data_fingertips_gp()
@@ -87,6 +87,44 @@ x$Denominator <- x$Count
 x$IndicatorName <- "LA population estimates"
 x$ShortIndicatorName <- "LA population"
 x$IndicatorID <- abbreviate(x$IndicatorName)
+
+# add remaining dummy cols for rbind
+x <- add_dummy_cols(data = x, stand_data_frame = dataset)
+
+# bind to master dataframe but maintain column order
+x <- x[, names(dataset), drop = FALSE]
+dataset <- rbind(x, dataset)
+
+#### Ethnicity ####
+x <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Census 2021/Ethnicity/LSOA/processed_data/nomis_ethnicity.Rds"))
+
+# only need RBWM, RBWM LSOAs and England
+x <- x[x$AreaCode %in% c(rbwm_lsoas, rbwm_code, eng_code), ]
+
+# make white british or irish White British/Irish
+i <- x$EthnicGroup %in% c("White: English, Welsh, Scottish, Northern Irish or British",
+                          "White: Irish")
+x$EthnicGroup[i] <- "White British/Irish"
+
+# now take all ethnic groups before :
+x$EthnicGroup <- gsub(":.*", "", x$EthnicGroup)
+x$EthnicGroup[x$EthnicGroup == "White"] <- "White other"
+
+# aggregate Count by all columns except Value
+x <- aggregate(Count ~ AreaCode + AreaName + AreaType + Timeperiod + 
+                 EthnicGroup + Denominator, data = x, FUN = sum)
+
+# recreate value with grouped ethnicity
+x$Value <- x$Count / x$Denominator * 100
+
+# make ethnic group column grouping variable
+colnames(x)[colnames(x) == "EthnicGroup"] <- "Group"
+x$GroupingVariable <- "Ethnicity"
+
+# add indicator name and ID
+x$IndicatorName <- "Census ethnicity"
+x$ShortIndicatorName <- "ethnicity"
+x$IndicatorID <- "Eth"
 
 # add remaining dummy cols for rbind
 x <- add_dummy_cols(data = x, stand_data_frame = dataset)
