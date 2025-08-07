@@ -133,6 +133,36 @@ x <- add_dummy_cols(data = x, stand_data_frame = dataset)
 x <- x[, names(dataset), drop = FALSE]
 dataset <- rbind(x, dataset)
 
+#### Main language ####
+x <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Census 2021/Language/Main language/processed_data/nomis_main_language.Rds"))
+
+# only need RBWM, RBWM LSOAs and England
+x <- x[x$AreaCode %in% c(rbwm_code, eng_code), ]
+
+# make ethnic group column grouping variable
+colnames(x)[colnames(x) == "MainLanguage"] <- "Group"
+x$GroupingVariable <- "Main language"
+
+# add indicator name and ID
+x$IndicatorName <- "Census main language"
+x$ShortIndicatorName <- "Main language"
+x$IndicatorID <- "MLang"
+
+# retain top 10 language spoken for windsor and maidenhead
+top_languages <- x[x$AreaCode == rbwm_code, c("Group", "Count")]
+top_languages <- top_languages[order(top_languages$Count, decreasing = TRUE), ]
+top_languages <- top_languages$Group[1:10]
+
+# filter to top 10 languages
+x <- x[x$Group %in% top_languages, ]
+
+# add remaining dummy cols for rbind
+x <- add_dummy_cols(data = x, stand_data_frame = dataset)
+
+# bind to master dataframe but maintain column order
+x <- x[, names(dataset), drop = FALSE]
+dataset <- rbind(x, dataset)
+
 #### Deprivation ####
 # LSOA deprivation and pop for RBWM LSOAs
 x <- data_deprivation_pop(population = pop_lsoa)
