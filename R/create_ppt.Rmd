@@ -13,6 +13,7 @@ params:
   # People and place
   title_people_and_place: TRUE
   population: TRUE
+  ethnicity_language: TRUE
   deprivation: TRUE
 
   # Best start in life
@@ -149,6 +150,7 @@ incl_contact <- report_params$contact
 # People and place
 incl_title_people_and_place<- report_params$title_people_and_place
 incl_population <- report_params$population
+incl_ethnicity_language <- report_params$ethnicity_language
 incl_deprivation <- report_params$deprivation
 
 # Best start in life
@@ -592,6 +594,28 @@ x <- dataset[dataset$IndicatorID == ind_ID, ]
 ethnicity_plot <- plot_grouped_bar(data = x, plot_title = "Ethnicity",
                                    source = "Nomis. 2021 Census.")
 
+# Metadata
+ind_ID <- "MLang"
+ind_sex <- NULL
+ind_age <- NULL
+context <- NULL
+value_type <- "Proportion (%)"
+value_type_short <- "%"
+timeperiod <- NULL
+original_geography <- NULL
+CI_level <- NULL
+benchmarking_method <- NULL
+source <- NULL
+caveats <- NULL
+notes <- NULL
+
+x <- dataset[dataset$IndicatorID == ind_ID, ]
+
+# Outputs
+main_lang_plot <- plot_grouped_bar(data = x, plot_title = "Main language spoken",
+                                   colour_palette = c("grey", "#AA9767"),
+                                   source = "Nomis. 2021 Census.")
+
 # Add slide
 mydoc <- add_slide(mydoc, layout = "two content", master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
@@ -603,7 +627,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content left"), 
                  value = ethnicity_plot$plot, alt_text = ethnicity_plot$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right"), 
-                 value = pop_comp$plot, alt_text = pop_comp$alt_text)
+                 value = main_lang_plot$plot, alt_text = main_lang_plot$alt_text)
 
 ```
 
