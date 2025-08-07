@@ -14,7 +14,8 @@ params:
   title_people_and_place: TRUE
   population: TRUE
   ethnicity_language: TRUE
-  deprivation: TRUE
+  imd: TRUE
+  dep_domains: TRUE
 
   # Best start in life
   title_best_start_in_life: TRUE
@@ -148,7 +149,8 @@ incl_contact <- report_params$contact
 incl_title_people_and_place<- report_params$title_people_and_place
 incl_population <- report_params$population
 incl_ethnicity_language <- report_params$ethnicity_language
-incl_deprivation <- report_params$deprivation
+incl_imd <- report_params$imd
+incl_dep_domains <- report_params$dep_domains
 
 # Best start in life
 incl_title_best_start_in_life <- report_params$title_best_start_in_life
@@ -623,7 +625,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right")
 
 ```
 
-```{r deprivation, eval = incl_deprivation}
+```{r imd, eval = incl_imd}
 
 slide_num <- slide_num + 1
 
@@ -664,6 +666,47 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content left"),
                  value = pop_dep_bar_plot$plot, alt_text = pop_dep_bar_plot$alt_text)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right"), 
                  value = dep_map$plot, alt_text = dep_map$alt_text)
+
+```
+
+```{r dep_domains, eval = incl_dep_domains}
+
+slide_num <- slide_num + 1
+
+# Metadata
+ind_ID <- "IMD"
+ind_sex <- "persons"
+ind_age <- NULL
+title <- paste0("Deprivation domains")
+short_title <- NULL
+context <- NULL
+value_type <- NULL
+value_type_short <- NULL
+timeperiod <- NULL
+original_geography <- NULL
+CI_level <- NULL
+benchmarking_method <- NULL
+source <- NULL
+caveats <- NULL
+notes <- NULL
+
+# plot first eight domains
+x <- x[x$GroupingVariable != "Overall deprivation (IMD)", ]
+domains_map <- map_deprivation_domains(deprivation_data = x,
+                                       lsoa_shape = shp_lsoa,
+                                       lsoas_to_plot = rbwm_lsoas)
+
+# Add slide
+mydoc <- add_slide(mydoc, layout = "title and content", master = "PHI profiles")
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
+                 value = title)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
+                 value = slide_num)
+mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
+                 value = paste0("Version ", format(version_num, nsmall = 1)))
+mydoc <- ph_with(mydoc, 
+                 location = ph_location_label(ph_label = "content"), 
+                 value = domains_map$plot, alt_text = domains_map$alt_text)
 
 ```
 
