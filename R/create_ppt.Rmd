@@ -120,9 +120,6 @@ library(openxlsx)
 options(warn = 1) ## Show warnings as they occur, useful for finding and dealing with them.
 options(scipen = 999) # Turn scientific notion off
 
-# System time
-t1 <- Sys.time()
-
 # ---- PowerPoint template ----
 
 # Open connection to pptx file
@@ -236,11 +233,6 @@ incl_lsoa_ward_map <- report_params$lsoa_ward_map
 incl_accessibility <- report_params$accessibility
 incl_references <- report_params$references
 incl_resources <- report_params$resources
-
-# Create empty data frame for summary table
-summary <- data.frame(indicator = character(), 
-                      comparison = character(), 
-                      slide = numeric(), stringsAsFactors = FALSE) 
 
 #---- Geography lookups ----
 rbwm_name <- "RBWM"
