@@ -555,9 +555,10 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content left"), 
-                 value = pop_pyramid$plot, alt_text = pop_pyramid$alt_text)
+                 value = pop_pyramid$plot, alt_text = pop_pyramid$alt_text,
+                 res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right"), 
-                 value = pop_comp$plot, alt_text = pop_comp$alt_text)
+                 value = pop_comp$plot, alt_text = pop_comp$alt_text, res = 140)
 
 ```
 
@@ -619,9 +620,11 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content left"), 
-                 value = ethnicity_plot$plot, alt_text = ethnicity_plot$alt_text)
+                 value = ethnicity_plot$plot, alt_text = ethnicity_plot$alt_text,
+                 res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right"), 
-                 value = main_lang_plot$plot, alt_text = main_lang_plot$alt_text)
+                 value = main_lang_plot$plot, alt_text = main_lang_plot$alt_text, 
+                 res = 140)
 
 ```
 
@@ -663,9 +666,10 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content left"), 
-                 value = pop_dep_bar_plot$plot, alt_text = pop_dep_bar_plot$alt_text)
+                 value = pop_dep_bar_plot$plot, 
+                 alt_text = pop_dep_bar_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right"), 
-                 value = dep_map$plot, alt_text = dep_map$alt_text)
+                 value = dep_map$plot, alt_text = dep_map$alt_text, res = 140)
 
 ```
 
@@ -706,7 +710,8 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, 
                  location = ph_location_label(ph_label = "content"), 
-                 value = domains_map$plot, alt_text = domains_map$alt_text)
+                 value = domains_map$plot, alt_text = domains_map$alt_text, 
+                 res = 140)
 
 ```
 
@@ -784,13 +789,13 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -851,13 +856,13 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 
 # gotta make font size smaller as too much metadata
 formatted_metadata <- fpar(ftext(metadata, prop = fp_text(font.size = 8)))
@@ -915,15 +920,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -980,15 +985,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -1045,15 +1050,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -1109,15 +1114,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -1172,15 +1177,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 # gotta make font size smaller as too much metadata
 formatted_metadata <- fpar(ftext(metadata, prop = fp_text(font.size = 8)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
@@ -1238,15 +1243,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 # gotta make font size smaller as too much metadata
 formatted_metadata <- fpar(ftext(metadata, prop = fp_text(font.size = 8)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
@@ -1303,15 +1308,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 # gotta make font size smaller as too much metadata
 formatted_metadata <- fpar(ftext(metadata, prop = fp_text(font.size = 8)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
@@ -1368,15 +1373,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 # gotta make font size smaller as too much metadata
 formatted_metadata <- fpar(ftext(metadata, prop = fp_text(font.size = 8)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
@@ -1433,15 +1438,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata)
 
@@ -1517,15 +1522,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -1582,15 +1587,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -1646,15 +1651,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -1709,15 +1714,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -1773,15 +1778,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -1837,15 +1842,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -1905,13 +1910,13 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -1967,15 +1972,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata)
 
@@ -2031,15 +2036,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata)
 
@@ -2095,15 +2100,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata)
 
@@ -2159,15 +2164,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata)
 
@@ -2227,13 +2232,13 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -2289,15 +2294,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata)
 
@@ -2352,15 +2357,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata)
 
@@ -2415,15 +2420,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata)
 
@@ -2482,13 +2487,13 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -2543,15 +2548,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata)
 
@@ -2612,13 +2617,13 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -2679,13 +2684,13 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -2746,13 +2751,13 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 # gotta make font size smaller as too much metadata
 formatted_metadata <- fpar(ftext(metadata, prop = fp_text(font.size = 8)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
@@ -2810,15 +2815,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -2874,15 +2879,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -2938,15 +2943,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3002,15 +3007,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3066,15 +3071,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3130,15 +3135,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3212,15 +3217,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3275,15 +3280,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3339,15 +3344,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3403,15 +3408,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3468,15 +3473,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3536,13 +3541,13 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3602,13 +3607,13 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
                  value = unavailable_note)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3664,15 +3669,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3728,15 +3733,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3792,15 +3797,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3856,15 +3861,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3920,15 +3925,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -3984,15 +3989,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -4048,15 +4053,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -4112,15 +4117,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -4176,15 +4181,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -4240,15 +4245,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -4304,15 +4309,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -4427,15 +4432,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot$plot, alt_text = trend_plot$alt_text)
+                 value = trend_plot$plot, alt_text = trend_plot$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata)
 
@@ -4489,15 +4494,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot, alt_text = trend_plot)
+                 value = trend_plot, alt_text = trend_plot, res = 140, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -4552,15 +4557,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot, alt_text = trend_plot)
+                 value = trend_plot, alt_text = trend_plot, res = 140, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 # gotta make font size smaller as too much metadata
 formatted_metadata <- fpar(ftext(metadata, prop = fp_text(font.size = 8)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
@@ -4616,15 +4621,15 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "overview"), 
-                 value = latest_value$plot, alt_text = latest_value$alt_text)
+                 value = latest_value$plot, alt_text = latest_value$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "latest period"), 
-                 value = latest_period, alt_text = latest_period)
+                 value = latest_period, alt_text = latest_period, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "trend"), 
-                 value = trend_plot, alt_text = trend_plot)
+                 value = trend_plot, alt_text = trend_plot, res = 140, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "compare areas"), 
-                 value = area_comp$plot, alt_text = area_comp$alt_text)
+                 value = area_comp$plot, alt_text = area_comp$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "map"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "metadata"), 
                  value = metadata) 
 
@@ -4737,7 +4742,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content left"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right"), 
                  value = text)
 
@@ -4760,7 +4765,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 
 ```
 
@@ -4781,7 +4786,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 
 ```
 
@@ -4795,7 +4800,22 @@ map <- map_boundaries_overlay(base_shape = shp_lsoa_rbwm,
                               base_areas_to_map = rbwm_lsoas, 
                               overlay_shape = shp_ward, 
                               overlay_areas_to_map = rbwm_wards)
-text <- paste0("There are ", length(rbwm_lsoas), " LSOAs in ", rbwm_name, ".")
+
+text <- unordered_list(
+  level_list = c(1, 1, 1, 1),
+  str_list = c(
+    paste0("There are ", length(rbwm_lsoas), " LSOAs in ", rbwm_name, "."), # level 1
+    paste0("There are ", length(rbwm_wards), " Wards in ", rbwm_name, "."), # level 1
+    paste0("LSOAs do not align exactly with electoral wards in ", rbwm_name, "."), # level 1
+    "Best fit lookups are used when assigning LSOAs to wards."
+    ),
+  style = list(
+    fp_text(font.size = 28),
+    fp_text(font.size = 28),
+    fp_text(font.size = 28),
+    fp_text(font.size = 28)
+    )
+  )
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "two content", master = "PHI profiles")
@@ -4806,7 +4826,7 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"),
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "version"), 
                  value = paste0("Version ", format(version_num, nsmall = 1)))
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content left"), 
-                 value = map$plot, alt_text = map$alt_text)
+                 value = map$plot, alt_text = map$alt_text, res = 140)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "content right"), 
                  value = text)
 
