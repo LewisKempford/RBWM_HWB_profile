@@ -4810,15 +4810,16 @@ text <- unordered_list(
     "Best fit lookups are used when assigning LSOAs to wards."
     ),
   style = list(
-    fp_text(font.size = 28),
-    fp_text(font.size = 28),
-    fp_text(font.size = 28),
-    fp_text(font.size = 28)
+    fp_text(font.size = 18),
+    fp_text(font.size = 18),
+    fp_text(font.size = 18),
+    fp_text(font.size = 18)
     )
   )
 
 # Add slide
-mydoc <- add_slide(mydoc, layout = "two content", master = "PHI profiles")
+mydoc <- add_slide(mydoc, layout = "two content left large", 
+                   master = "PHI profiles")
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "title"),
                  value = title)
 mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "slide number"), 
