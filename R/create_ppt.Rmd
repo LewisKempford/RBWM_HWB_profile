@@ -4796,10 +4796,10 @@ slide_num <- slide_num + 1
 
 title <- paste0("LSOA to Ward best fit boundaries")
 
-map <- map_boundaries_overlay(base_shape = shp_lsoa_rbwm, 
-                              base_areas_to_map = rbwm_lsoas, 
-                              overlay_shape = shp_ward, 
-                              overlay_areas_to_map = rbwm_wards)
+map <- map_boundaries_overlay(base_shape = shp_ward, 
+                              base_areas_to_map = rbwm_wards, 
+                              overlay_shape = shp_lsoa_rbwm, 
+                              overlay_areas_to_map = rbwm_lsoas)
 
 text <- unordered_list(
   level_list = c(1, 1, 1, 1),
