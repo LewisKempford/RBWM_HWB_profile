@@ -1341,7 +1341,7 @@ dataset <- rbind(x, dataset)
 x <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/Access to gardens and public green space in Great Britain/Gardens/processed_data/private_outdoor_space.Rds"))
 
 # create comparison quintiles
-x <- create_comp_quintiles(data = x)
+x <- create_comp_quintiles(data = x, low_is_good = FALSE)
 
 x$IndicatorName <- "Access to gardenspace"
 x$ShortIndicatorName <- "Access to gardenspace"
