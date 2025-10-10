@@ -108,7 +108,7 @@ params:
 setwd(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/projects_git/RBWM_HWB_profile/R"))
 
 # Version number
-version_num <- 0.79
+version_num <- "1.0"
 
 # Load required packages
 library(officer)
@@ -368,7 +368,8 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "text"),
 for (i in seq_along(tables)) {
   # top_pos <- slide_height - 1.25
   location <- ph_location(left = 0.375 + ((i - 1) * 4.25), top = 1.9)
-  my_doc <- ph_with(mydoc, location = location, value = tables[[i]])
+  my_doc <- ph_with(mydoc, location = location, value = tables[[i]], 
+                    alt_text = paste0("Summary table ", i))
 }
 
 ```
@@ -399,7 +400,8 @@ mydoc <- ph_with(mydoc, location = ph_location_label(ph_label = "text"),
 for (i in seq_along(tables)) {
   # top_pos <- slide_height - 1.25
   location <- ph_location(left = 0.375 + ((i - 1) * 4.25), top = 1.9)
-  my_doc <- ph_with(mydoc, location = location, value = tables[[i]])
+  my_doc <- ph_with(mydoc, location = location, value = tables[[i]],
+                    alt_text = paste0("Summary table ", i))
 }
 
 ```
