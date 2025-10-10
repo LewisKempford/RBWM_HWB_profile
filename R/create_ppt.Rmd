@@ -587,6 +587,7 @@ x <- dataset[dataset$IndicatorID == ind_ID, ]
 
 # Outputs
 ethnicity_plot <- plot_grouped_bar(data = x, plot_title = "Ethnicity",
+                                   x_axis = "Percentage of area's population (%)",
                                    source = "Nomis. 2021 Census.")
 
 # Metadata
@@ -608,7 +609,8 @@ x <- dataset[dataset$IndicatorID == ind_ID, ]
 
 # Outputs
 main_lang_plot <- plot_grouped_bar(data = x, plot_title = "Main language spoken",
-                                   colour_palette = c("grey", "#AA9767"),
+                                   x_axis = "Percentage of area's population (%)",
+                                   colour_palette = c("#AA9767", "grey"),
                                    source = "Nomis. 2021 Census.")
 
 # Add slide
@@ -897,9 +899,9 @@ x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID,
 
 latest_value <- plot_latest_value_rag(data = x, value_type = value_type)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
-trend_plot <- plot_trend_rag(data = x, value_type = value_type, 
-                                   show_comp_legend = FALSE, 
-                                   timeperiod_format = "periods")
+trend_plot <- plot_trend_rag(data = x, value_type = value_type,
+                             show_comp_legend = FALSE, 
+                             timeperiod_format = "periods")
 area_comp <- plot_areas_comp(data = x, area_codes = rbwm_msoas,
                              value_type = value_type, show_legend = FALSE)
 map <- map_comp_indicator(data = x, shape_file = shp_msoa, 
@@ -4473,8 +4475,8 @@ x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID,
 latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 area_comp <- plot_areas_quint(data = x, area_codes = rbwm_msoas,
-                                  value_type = value_type_short,
-                                  show_ci = FALSE)
+                              value_type = value_type_short, 
+                              low_is_good = FALSE, show_ci = FALSE)
 map <- map_quintile_indicator(data = x, shape_file = shp_msoa, 
                               areas_to_map = rbwm_msoas)
 trend_plot <- paste0("No trend data available.")
