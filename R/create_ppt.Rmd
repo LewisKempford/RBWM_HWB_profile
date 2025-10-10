@@ -4475,8 +4475,7 @@ x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID,
 latest_value <- plot_latest_value_quint(data = x, value_type = value_type_short)
 latest_period <- paste0("Latest time period: ", max(x$Timeperiod))
 area_comp <- plot_areas_quint(data = x, area_codes = rbwm_msoas,
-                              value_type = value_type_short, 
-                              low_is_good = FALSE, show_ci = FALSE)
+                              value_type = value_type_short, show_ci = FALSE)
 map <- map_quintile_indicator(data = x, shape_file = shp_msoa, 
                               areas_to_map = rbwm_msoas)
 trend_plot <- paste0("No trend data available.")
