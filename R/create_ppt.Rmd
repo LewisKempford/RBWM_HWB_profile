@@ -324,7 +324,7 @@ slide_num <- slide_num + 1
 
 title <- paste0("Introduction")
 
-text <- paste0("This profile provides a summary of the health and wellbeing of the population of the Royal Borough of Windsor and Maidenhead (RBWM).\nIt includes indicators that look across the life course of the population and includes demographic information, deprivation and health outcomes.\nIndicators have been grouped into five thematic areas: People and Place, Best Start in Life, Living Well, Healthy Ageing, and Healthy Place.\nThe profile was created to support the development of RBWM Joint Health and Wellbeing Strategy 2026-2036.")
+text <- paste0("This profile provides a summary of the health and wellbeing of the population of the Royal Borough of Windsor and Maidenhead (RBWM).\nIt includes indicators that look across the life course of the population as well as demographic information, deprivation and health outcomes.\nIndicators have been grouped into five thematic areas: People and Place, Best Start in Life, Living Well, Healthy Ageing, and Healthy Place.\nThe profile was created to support the development of RBWM Joint Health and Wellbeing Strategy 2026-2036.")
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "title and content", master = "PHI profiles")
