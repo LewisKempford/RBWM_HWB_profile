@@ -96,7 +96,7 @@ x <- x[, names(dataset), drop = FALSE]
 dataset <- rbind(x, dataset)
 
 #### Ethnicity ####
-x <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Census 2021/Ethnicity/LSOA/processed_data/nomis_ethnicity.Rds"))
+x <- readRDS(paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/ONS/nomis/Census 2021/Ethnicity/processed_data/nomis_ethnicity.Rds"))
 
 # only need RBWM, RBWM LSOAs and England
 x <- x[x$AreaCode %in% c(rbwm_lsoas, rbwm_code, eng_code), ]
@@ -1444,6 +1444,9 @@ x <- x[, names(dataset), drop = FALSE]
 dataset <- rbind(x, dataset)
 
 #---- Save dataset ----
+# make Windsor and Maidenhead RBWM
+dataset$AreaName[dataset$AreaCode == "E06000040"] <- "RBWM"
+
 # list factor levels with dataset and store in single Rds file
 data_bundle <- list(factor_levels = factor_levels_list, dataset = dataset)
 saveRDS(data_bundle, paste0("C:/Users/", Sys.getenv("username"), "/OneDrive - Royal Borough of Windsor and Maidenhead/PHI - Data and Analytics/Datasets/Profiles/JHWBS profile/JHWBS_profiles_data_bundle_", Sys.Date()))
