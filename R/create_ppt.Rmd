@@ -653,7 +653,7 @@ x <- retrieve_indicator_data(master_df = dataset, indicator_ID = ind_ID,
                              factor_list = factor_list)
 
 # Outputs
-pop_dep_bar_plot <- plot_dep_pop(data = x)
+pop_dep_bar_plot <- plot_dep_pop(data = x, lsoa_codes = rbwm_lsoas)
 dep_map <- map_deprivation(deprivation_data = x, lsoa_shape = shp_lsoa,
                            lsoas_to_plot = rbwm_lsoas)
 
