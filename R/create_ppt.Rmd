@@ -544,7 +544,7 @@ x <- dataset[dataset$IndicatorID == ind_ID, ]
 
 # Outputs
 pop_pyramid <- plot_pop_pyramid(data = x)
-pop_comp <- plot_pop_area_comp_eng(data = x)
+pop_comp <- plot_pop_area_comp(data = x)
 
 # Add slide
 mydoc <- add_slide(mydoc, layout = "two content", master = "PHI profiles")
