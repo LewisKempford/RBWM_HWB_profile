@@ -8,7 +8,7 @@ There is no support provided for getting this running for a different Local Auth
 
 Project can be forked for local use. Not accepting contributions for this project, though if you have discovered a major bug or mistake, please feel free to raise this as an issue.
 
-<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/3b3f12af-bf8d-4919-86e5-51c7c5567a6f" />
+<img width="640" height="360" alt="image" src="https://github.com/user-attachments/assets/306ba1bb-bd68-4c4d-b020-1606a6da15b1" />
 
 ## Getting Started
 
