@@ -1,18 +1,20 @@
-# Local Authority (RBWM in this instance) Health and Wellbeing profile
+# RBWM Health and Wellbeing profile
 
 This Health and Wellbeing profile was created to support RBWM's Health and Wellbeing Strategy 2026 - 2036. This is a simple profile, mainly using publicly available data.
 
-GitHub has mainly been used for version control. The project and code has been made public for others to be able to recreate or use code for their own projects/ pieces of work. 
+GitHub has mainly been used for version control. The project and code has been made public for others to recreate or use code for their own projects/ pieces of work. 
 
 There is no support provided for getting this running for a different Local Authority. Always happy to collaborate, receive suggestions and answer some questions but direct support with getting the code running specifically for you is not possible.
 
+Project can be forked for local use. Not accepting contributions for this project, though if you have discovered a major bug or mistake, please feel free to raise this as an issue.
+
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for local use and development.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+What things you need to have your own version up and running:
 
 ```
 Give examples
@@ -35,30 +37,6 @@ until finished
 ```
 
 End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
