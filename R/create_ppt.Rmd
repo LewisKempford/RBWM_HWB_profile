@@ -113,9 +113,6 @@ version_num <- "1.0"
 # Load required packages
 library(officer)
 library(phiTools)
-library(sf)
-library(plyr)
-library(openxlsx)
 
 # Warning options
 options(warn = 1) ## Show warnings as they occur, useful for finding and dealing with them.
