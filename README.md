@@ -75,6 +75,13 @@ File is used to process Rds create in data.R to output slide deck. Contains a se
 
 File also reads in lookups and shape files for different geography levels.
 
+### Useful links
+
+* [The Open Geography portal from the Office for National Statistics (ONS)](https://geoportal.statistics.gov.uk/) provides free geographical lookups, boundaries in the form of shape files and the National Statistics Postcode file.
+* GP practices from [NHS Digital's GP and GP related data](https://digital.nhs.uk/services/organisation-data-service/data-search-and-export/csv-downloads/gp-and-gp-practice-related-data).
+* [Nomis](https://www.nomisweb.co.uk/) for population estimates and Census 2021 data.
+* [Fingertips public health data collection](https://fingertips.phe.org.uk/) (API also available).
+
 ## Built With
 
 * R
