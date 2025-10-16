@@ -22,7 +22,7 @@ What things you need to have your own version up and running:
 * Ideally an Integrated Development Environment for R (such as RStudio).
 * Microsoft PowerPoint.
 * Data sources you'd like to use.
-* phiTools package. The version used is available as part of this repository.
+* phiTools package. The version used is available as part of each release.
 * [phutils](https://github.com/daudi/phutils).
 * [fingertipsR](https://github.com/ropensci/fingertipsR)
 * [fingertipscharts](https://github.com/dhsc-govuk/fingertipscharts)
