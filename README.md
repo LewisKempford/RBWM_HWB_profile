@@ -22,9 +22,10 @@ What things you need to have your own version up and running:
 * Ideally an Integrated Development Environment for R (such as RStudio).
 * Microsoft PowerPoint.
 * Data sources you'd like to use.
-* phiTools package. The version required is available as part of this repository.
+* phiTools package. The version used is available as part of this repository.
 * [phutils](https://github.com/daudi/phutils).
-* 
+* [fingertipsR](https://github.com/ropensci/fingertipsR)
+* [fingertipscharts](https://github.com/dhsc-govuk/fingertipscharts)
 
 ### Process
 
@@ -35,7 +36,7 @@ Data types include mostly standard Public Health intelligence statistics includi
 
 2. Data Processing
 
-I tend to have datasets downloaded and preprocessed, individually. This allows for use across multiple projects, rather than holding all datasets in a single project and having to replicate this across different projects.
+I tend to individually downloaded and preprocess datasets. This allows for use across multiple projects, rather than holding all datasets in a single project and having to replicate this across different projects.
 
 Data from source is downloaded locally and usually processed into an Rds file or csv file. This sits in a folder named Datasets on SharePoint, but could exist on a OneDrive or a network drive, etc. As long as R can access the location. Using SharePoint, I decided to sync the SharePoint folders to my OneDrive so that I can easily throw R a file path to read files in.
 
@@ -46,7 +47,7 @@ Download data from source to local location -> minimal processing of data (usual
 
 3. Profile Compilation
 
-Indicators are grouped thematically in the create_ppt.Rmd file. Comparisons are made against national benchmarks (e.g. England averages).
+Indicators are grouped thematically in the create_ppt.Rmd script. Comparisons are made against national benchmarks (e.g. England averages). The script takes an empty .pptx file that contains master slides for any slide created in the script. Example .pptx file available in this respository. Slides are created for each indicator and a .pptx is created at the end of the script.
 
 Disclaimer: R markdown (Rmd) file is used for the process of creating the slide deck but it does not actually make much use of an Rmd file. This could be done in an R script but the chunking feature in the Rmd makes for a nice easy layout to use when building in each indicator.
 
@@ -58,9 +59,21 @@ Final output is a PowerPoint presentation.
 
 Project can be forked to local machine using Git or downloaded to local machine via GitHub.
 
-#### Data.R
+#### data.R
 
-This script processes all data and indicators to be used in the profile. The way I tend to use datasets allows for use across multiple projects, rather than holding all datasets in a single project. 
+This script processes all data and indicators to be used in the profile. The way I tend to use datasets allows for use across multiple projects, rather than holding all datasets in a single project.
+
+To run this script you will need to go through it changing geography codes and file location paths.
+
+Script is separated using sections for data required to process indicators and a section for each indicator. 
+
+Creates Rds in the specified path location. This Rds is used in the create_ppt.Rmd script.
+
+#### create_ppt.Rmd
+
+File is used to process Rds create in data.R to output slide deck. Contains a settings chunk and then chunks for each slide created.
+
+File also reads in lookups and shape files for different geography levels.
 
 ## Built With
 
@@ -70,22 +83,19 @@ This script processes all data and indicators to be used in the profile. The way
 
 Not accepting contributions.
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Lewis Kempford** - [CoderLew](https://github.com/CoderLew)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Medway Public Health Intelligence Team (basically a like for like copy of their [profiles](https://www.medway.gov.uk/info/200591/medway_s_joint_strategic_needs_assessment_jsna/1590/area_profiles)
+* [Dr Natalie Goldring](https://github.com/NatalieGoldring)
+
+## Further development
+
+Will continue developing phiTools and if an update is asked for this profile I will likely need to make changes in alignment with any development of phiTools. Will also think about having a settings script of some sort for file paths, etc to help with reproduceability outside of RBWM.
