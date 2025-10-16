@@ -93,7 +93,7 @@ This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the [LICENSE
 
 ## Acknowledgments
 
-* Medway Public Health Intelligence Team (basically a like for like copy of their [profiles](https://www.medway.gov.uk/info/200591/medway_s_joint_strategic_needs_assessment_jsna/1590/area_profiles)
+* Medway Public Health Intelligence Team (basically a like for like copy of their [profiles](https://www.medway.gov.uk/info/200591/medway_s_joint_strategic_needs_assessment_jsna/1590/area_profiles))
 * [Dr Natalie Goldring](https://github.com/NatalieGoldring)
 
 ## Further development
