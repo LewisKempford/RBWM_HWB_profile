@@ -114,8 +114,7 @@ version_num <- "1.0"
 library(officer)
 library(phiTools)
 
-# Warning options
-options(warn = 1) ## Show warnings as they occur, useful for finding and dealing with them.
+options(warn = 1) ## Show warnings
 options(scipen = 999) # Turn scientific notion off
 
 # ---- PowerPoint template ----
@@ -125,10 +124,6 @@ mydoc <- read_pptx(path = paste0("C:/Users/", Sys.getenv("username"), "/OneDrive
 
 # slide number
 slide_num <- 0
-
-## Save the parameters in case we want to use them in a script
-save_params_as <- params$save_params_as
-saveRDS(params, file = save_params_as)
 
 report_params <- params
 
