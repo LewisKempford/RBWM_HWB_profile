@@ -2,7 +2,7 @@
 
 This profile has been created to provide insights of the health and wellbeing of RBWM's residents. This is a simple profile, using publicly available data.
 
-GitHub has been used for version control. The code has been made public for others to recreate or use code for their own repositories, projects, and/or pieces of work. 
+Git has been used for version control with the repository being hosted here on GitHub. The code has been made public for others to recreate or use code for their own repositories, projects, and/or pieces of work. 
 
 No support will be provided for getting this running. Always happy to collaborate, receive suggestions and answer some questions but direct support is not possible.
 
@@ -20,9 +20,11 @@ What things you need to have your own version up and running:
 
 * R
 * Ideally an Integrated Development Environment for R (such as RStudio).
-* Microsoft PowerPoint file (a file used as input and the output).
+* Microsoft PowerPoint.
 * Data sources you'd like to use.
 * phiTools package. The version required is available as part of this repository.
+* [phutils](https://github.com/daudi/phutils).
+* 
 
 ### Process
 
