@@ -47,7 +47,7 @@ Download data from source to local location -> minimal processing of data (usual
 
 3. Profile Compilation
 
-Indicators are grouped thematically in the create_ppt.Rmd script. Comparisons are made against national benchmarks (e.g. England averages). The script takes an empty .pptx file that contains master slides for any slide created in the script. Example .pptx file available in this respository. Slides are created for each indicator and a .pptx is created at the end of the script.
+Indicators are grouped thematically in the create_ppt.Rmd script. Comparisons are made against national benchmarks (e.g. England averages). The script takes an empty .pptx file that contains master slides for any slide created in the script. Example .pptx file available in the releases of the repository. Slides are created for each indicator and a .pptx is created at the end of the script.
 
 Disclaimer: R markdown (Rmd) file is used for the process of creating the slide deck but it does not actually make much use of an Rmd file. This could be done in an R script but the chunking feature in the Rmd makes for a nice easy layout to use when building in each indicator.
 
@@ -57,7 +57,7 @@ Final output is a PowerPoint presentation.
 
 ### Using the scripts
 
-Project can be forked to local machine using Git or downloaded to local machine via GitHub.
+Recommend downloading from releases section of this repository as this also contains .pptx file used as the input to create slide deck.
 
 #### data.R
 
