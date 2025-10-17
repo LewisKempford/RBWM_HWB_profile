@@ -71,9 +71,7 @@ Creates Rds in the specified path location. This Rds is used in the create_ppt.R
 
 #### create_ppt.Rmd
 
-File is used to process Rds create in data.R to output slide deck. Contains a settings chunk and then chunks for each slide created.
-
-File also reads in lookups and shape files for different geography levels.
+File is used to process Rds create in data.R to output slide deck. Contains a settings chunk and then chunks for each slide created. Releases contain the data bundle Rds file for now as data is safe to share. The only thing that will then need changing would be the lookup files and shape files read into the Rmd file. You'll probably want to change the template pptx used too!
 
 ### Useful links
 
