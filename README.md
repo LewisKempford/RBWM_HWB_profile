@@ -90,7 +90,7 @@ Not accepting contributions.
 
 ## Authors
 
-* **Lewis Kempford** - [CoderLew](https://github.com/CoderLew)
+* [**Lewis Kempford**](https://github.com/LewisKempford)
 
 ## License
 
